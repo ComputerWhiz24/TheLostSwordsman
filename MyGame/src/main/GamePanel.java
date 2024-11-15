@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// SCREEN SETTINGS
 	final int originalTileSize= 16; //16X16 character pixels
-	final int scale = 3;
+	final int scale = 3; 
 	
 	public final int tileSize = originalTileSize*scale; //48x48 
 	public final int maxScreenCol = 24;
@@ -176,6 +176,11 @@ public class GamePanel extends JPanel implements Runnable{
 			//DRAW ENTITIES
 			for(int i = 0; i<entityList.size(); i++) {
 				entityList.get(i).draw(g2);
+			}
+			
+			//EMPTY LIST 
+			for(int i = 0; i<entityList.size(); i++) {
+				entityList.remove(i);
 			}
 				
 			ui.draw(g2);
