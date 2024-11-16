@@ -2,6 +2,7 @@ package main;
 
 import entity.NPC_OldMan;
 import entity.NPC_Wizard;
+import monster.MON_GreenSlime;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
@@ -16,9 +17,13 @@ public class AssetSetter {
 	}
 	
 	public void setObject() {
-		gp.obj[0] = new OBJ_Door(gp);
-		gp.obj[0].worldX = gp.tileSize*22;
-		gp.obj[0].worldY  = gp.tileSize*24;
+
+	}
+	
+	public void setMonster() {
+		gp.monster[0] = new MON_GreenSlime(gp);
+		gp.monster[0].worldX = gp.tileSize*23;
+		gp.monster [0].worldY  = gp.tileSize*40;
 	}
 	
 	public void setNPC() {
@@ -27,7 +32,7 @@ public class AssetSetter {
 		gp.npc[0].worldY  = gp.tileSize*21;
 		
 		gp.npc[1] = new NPC_Wizard(gp);
-		gp.npc[1].worldX = gp.tileSize*21;
+		gp.npc[1].worldX = gp.tileSize*23;
 		gp.npc[1].worldY  = gp.tileSize*21;
 	}
 }

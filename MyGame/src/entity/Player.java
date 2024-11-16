@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -114,6 +115,12 @@ public class Player extends Entity{
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			
+			//CHECK MONSTER COLLISION
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			if(monsterIndex != 999) {
+			hitMonster(gp.monster[monsterIndex], monsterIndex);
+			}
+			
 			 // CHECK EVENT
 			gp.eHandler.checkEvent();
 			
@@ -167,6 +174,14 @@ public class Player extends Entity{
 			}
 		}
 		
+		if(hitCooldown == true) {
+			hitCooldownCounter++;
+			if(hitCooldownCounter >= 95) {
+				hitCooldown = false;
+				hitCooldownCounter = 0;
+			}
+			
+		}
 
 	}
 	
@@ -185,9 +200,15 @@ public class Player extends Entity{
 			}
 			keyH.talkPressed = false;
 			}
+	} 
+	public void hitMonster(Entity monster, int monsterIndex) {
+		if(hitCooldown == false ) {
+			life -= monster.damage;
+			hitCooldown = true;
+		}
 	}
 	
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2) { //DRAWING PLAYER
 		//g2.setColor(Color.white);
 		//g2.fillRect(x,y,gp.tileSize,gp.tileSize);
 		
@@ -243,6 +264,15 @@ public class Player extends Entity{
 			break;
 		
 		}
+		
+		//SET 70% TRANSPARENT IF PLAYER IS HIT
+		if(hitCooldown == true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+			if(hitCooldownCounter % 30  == 0)
+				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+		}
 		g2.drawImage(image,screenX,screenY, null);
+		
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
 }

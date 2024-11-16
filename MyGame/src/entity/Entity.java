@@ -22,7 +22,6 @@ public class Entity {
 	
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
@@ -33,10 +32,13 @@ public class Entity {
 	public BufferedImage image,image2,image3;
 	public String name;
 	public boolean collision = false; 
-	
+	public int type; // 0 = player, 1 = NPC, 2 = Monster
+	public double damage;
 	//CHARACTER STATUS
 	public int maxLife;
 	public int life;
+	public boolean hitCooldown = false;
+	public int hitCooldownCounter = 0;
 	
 	
 	public Entity(GamePanel gp) {
@@ -70,9 +72,17 @@ public class Entity {
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this,false);
-		gp.cChecker.checkPlayer(this);
+		gp.cChecker.checkEntity(this, gp.npc);
+		gp.cChecker.checkEntity(this, gp.monster);
+		boolean hitPlayer = gp.cChecker.checkPlayer(this);
 		
-		if(collisionOn == false) {
+		if(this.type == 2 && hitPlayer == true) {
+			if(gp.player.hitCooldown == false) {
+				gp.player.life--;
+				gp.player.hitCooldown = true;
+			}
+		}
+		if(collisionOn == false) { 
 			switch(direction) {
 			case "up":
 				worldY -= speed; break;
