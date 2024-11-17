@@ -251,6 +251,7 @@ public class Player extends Entity{
 				if(spriteNum==2) image= up2;
 			}
 			else if(attacking == true) {
+				tempScreenY = screenY - gp.tileSize;
 				if(spriteNum==1) image = attackUp1;
 				if(spriteNum==2) image= attackUp2;
 			}
@@ -271,6 +272,7 @@ public class Player extends Entity{
 				if(spriteNum==2) image= left2;
 			}
 			else if(attacking == true) {
+				tempScreenX = screenX - gp.tileSize;
 				if(spriteNum==1) image = attackLeft1;
 				if(spriteNum==2) image= attackLeft2;
 			}
@@ -291,6 +293,7 @@ public class Player extends Entity{
 				if(spriteNum==2) image= left2;
 			}
 			else if(attacking == true) {
+				tempScreenX = screenX - gp.tileSize;
 				if(spriteNum==1) image = attackLeft1;
 				if(spriteNum==2) image= attackLeft2;
 			}
@@ -314,7 +317,7 @@ public class Player extends Entity{
 			if(hitCooldownCounter % 30  == 0)
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		g2.drawImage(image,screenX,screenY, null);
+		g2.drawImage(image,tempScreenX,tempScreenY, null);
 		
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
