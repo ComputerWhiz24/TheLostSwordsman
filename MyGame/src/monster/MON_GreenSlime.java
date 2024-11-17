@@ -11,7 +11,7 @@ public class MON_GreenSlime extends Entity{
 		super(gp);
 		
 		type = 2;
-		damage = 0.5;
+		damage = 1;
 		name = "Green Slime";
 		speed = 1;
 		maxLife = 2;

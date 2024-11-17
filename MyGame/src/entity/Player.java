@@ -16,6 +16,7 @@ import main.UtilityTool;
 public class Player extends Entity{
 
 	public int spriteAttackCounter = 0;
+	public boolean dexterity = false;
 	public KeyHandler keyH;
 	public final int screenX,screenY;
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -33,6 +34,9 @@ public class Player extends Entity{
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
+		attackArea.width = 36;
+		attackArea.height = 36;
+		
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
@@ -49,6 +53,7 @@ public class Player extends Entity{
 	//PLAYER STATUS
 		maxLife = 2;
 		life = maxLife;
+		damage = 0.25;
 		
 	}
 	
@@ -131,7 +136,7 @@ public class Player extends Entity{
 			//CHECK MONSTER COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) 
-				hitMonster(gp.monster[monsterIndex], monsterIndex);
+				hitMonster(monsterIndex);
 			
 			
 			 // CHECK EVENT
@@ -202,15 +207,40 @@ public class Player extends Entity{
 		attacking = true;
 		spriteAttackCounter++;
 		
-		if(spriteAttackCounter <= 2) 
+		if(spriteAttackCounter <= 2) //SHORT BUFFER
 			spriteNum = 1;
-		if(spriteAttackCounter  > 2 && spriteAttackCounter <= 25)
+		if(spriteAttackCounter  > 2 && spriteAttackCounter <= 25) { // ATTACK ANIMATION
 			spriteNum = 2;
-		if(spriteAttackCounter > 25) {
+			int currentWorldX = worldX;
+			int currentWorldY = worldY;
+			int solidAreaWidth = solidArea.width; 
+			int solidAreaHeight = solidArea.height;
+			
+			switch(direction) {
+			case "up":   worldY-= attackArea.height; break;
+			case "down": worldY+= attackArea.height; break;
+			case "left": case"downLeft": case "upLeft": worldX-= attackArea.width; break;
+			case "right": case"downRight": case "upRight": worldX+= attackArea.width; break;
+			}
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+			
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			if(monsterIndex != 999)
+				damageMonster(monsterIndex);
+			worldX = currentWorldX;
+			worldY =  currentWorldY;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
+			
+			
+		}
+		if(spriteAttackCounter > 25) { //FINISH ANIMATION 
 			spriteNum = 1;
 			spriteAttackCounter = 0;
 			attacking = false;
 			keyH.attackPressed = false;
+			dexterity = false; 
 		}
 	} 
 	
@@ -230,13 +260,25 @@ public class Player extends Entity{
 			keyH.talkPressed = false;
 			}
 	} 
-	public void hitMonster(Entity monster, int monsterIndex) {
+	public void hitMonster(int monsterIndex) {
 		if(hitCooldown == false ) {
-			life -= monster.damage;
+			life -= gp.monster[monsterIndex].damage;
 			hitCooldown = true;
 		}
 	}
+	public void damageMonster(int index) {
+		if(dexterity==false) {
+			gp.monster[index].life -= this.damage;
+			if(gp.monster[index].life <= 0)
+				gp.monster[index].dying = true; 
+			else
+				System.out.println(gp.monster[index].life);
+			dexterity = true;
+
+			}
+		
 	
+	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
 		//g2.setColor(Color.white);
 		//g2.fillRect(x,y,gp.tileSize,gp.tileSize);

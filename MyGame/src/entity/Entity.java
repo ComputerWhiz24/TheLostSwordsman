@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,33 +15,43 @@ import main.UtilityTool;
 public class Entity {
 
 	GamePanel gp;
-	public int worldX,worldY;
-	public int speed;
 	
+
+	public BufferedImage image,image2,image3;
 	public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2;
 	public BufferedImage attackUp1,attackUp2,attackDown1,attackDown2,attackLeft1,attackLeft2,attackRight1,attackRight2;
-	public String direction = "down";
-	
-	public int spriteCounter = 0;
-	public int spriteNum = 1;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
+	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public boolean collisionOn = false;
-	public int actionLockCounter = 0;
+	public boolean collision = false;  
 	public static String dialogues[] = new String[20];
+		//STATE
+	public int worldX,worldY;
+	public String direction = "down";
+	public int spriteNum = 1;
 	public static int dialogueIndex = 0;
+	public boolean collisionOn = false;
+	boolean attacking = false; 
+	public boolean alive = true; 
+	public boolean dying = false;
+	public boolean hitCooldown = false;
+		//COUNTERS 
+	public int actionLockCounter = 0;
+	public int hitCooldownCounter = 0;
+	public int spriteCounter = 0;
+	int dyingCounter = 0; 
 	
-	public BufferedImage image,image2,image3;
+		//ATTRIBUTES
+	public int speed;
 	public String name;
-	public boolean collision = false; 
 	public int type; // 0 = player, 1 = NPC, 2 = Monster
 	public double damage;
-	//CHARACTER STATUS
-	public int maxLife;
-	public int life;
-	public boolean hitCooldown = false;
-	public int hitCooldownCounter = 0;
-	boolean attacking = false;
+	public double maxLife;
+	public double life;
+
+
+
+
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -172,10 +183,47 @@ public class Entity {
 		
 		}
 	}
-		
+		if(dying == true) {
+			death(g2);
+		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
-}
-
+	}
+	public void death(Graphics2D g2) {
+		int mult = 20;
+		dyingCounter++;
+		if(dyingCounter <= mult) {
+			changeAlpha(g2,0f);
+		}
+		if(dyingCounter > mult && dyingCounter <=mult*2) {
+			changeAlpha(g2,1f);
+		}
+		if(dyingCounter > mult*2 && dyingCounter <=mult*3) {
+			changeAlpha(g2,0f);
+		}
+		if(dyingCounter > mult*3 && dyingCounter <=mult*4) {
+			changeAlpha(g2,1f);
+		}
+		if(dyingCounter > mult*4 && dyingCounter <=mult*5) {
+			changeAlpha(g2,0f);
+		}
+		if(dyingCounter > mult*5 && dyingCounter <=mult*6) {
+			changeAlpha(g2,1f);
+		}
+		if(dyingCounter > mult*6 && dyingCounter <=mult*7) {
+			changeAlpha(g2,0f);
+		}
+		if(dyingCounter > mult*7 && dyingCounter <=mult*8) {
+			changeAlpha(g2,1f);
+		}
+		if(dyingCounter > mult*8) {
+			dying = false;
+			alive = false; 
+		}
+		
+	}
+	public void changeAlpha(Graphics2D g2, float alphaValue) {
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
+	}
 	public BufferedImage setup(String imagePath) {
 		
 		UtilityTool uTool = new UtilityTool();
