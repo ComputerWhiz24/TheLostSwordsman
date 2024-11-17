@@ -64,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
+		this.addMouseListener(keyH); 
 		this.setFocusable(true);
 	}
 	
@@ -190,9 +191,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			//EMPTY LIST 
-			for(int i = 0; i<entityList.size(); i++) {
-				entityList.remove(i);
-			}
+			entityList.clear();
 				
 			ui.draw(g2);
 			

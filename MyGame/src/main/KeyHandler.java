@@ -2,9 +2,11 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class KeyHandler implements KeyListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation; 
+public class KeyHandler implements KeyListener,MouseListener{
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed; 
 	GamePanel gp;
 	boolean checkDrawTime = false;
 
@@ -117,6 +119,38 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D) {
 			rightPressed = false;
 		}
+	
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(gp.gameState == gp.playState) {
+			if (e.getButton() == MouseEvent.BUTTON1)
+				attackPressed = true;
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

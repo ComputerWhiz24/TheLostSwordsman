@@ -22,14 +22,14 @@ public class NPC_Wizard extends Entity{
 		
 	public void getImage() {
 			try {
-			up1 = setup("/npc/wizard_up1");
-			up2 = setup("/npc/wizard_up2");
-			down1 = setup("/npc/wizard_down1");
-			down2 = setup("/npc/wizard_down2");
-			left1 = setup("/npc/wizard_left1");
-			left2 = setup("/npc/wizard_left2");
-			right1 = setup("/npc/wizard_right1");
-			right2  = setup("/npc/wizard_right2");
+			up1 = setupAlternate("/npc/wizard_up1",4,4);
+			up2 = setupAlternate("/npc/wizard_up2",4,4);
+			down1 = setupAlternate("/npc/wizard_down1",4,4);
+			down2 = setupAlternate("/npc/wizard_down2",4,4);
+			left1 = setupAlternate("/npc/wizard_left1",4,4);
+			left2 = setupAlternate("/npc/wizard_left2",4,4);
+			right1 = setupAlternate("/npc/wizard_right1",4,4);
+			right2  = setupAlternate("/npc/wizard_right2",4,4);
 			}catch(Exception e) {
 				System.out.println("Lil bro u messed up");
 		

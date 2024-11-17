@@ -18,6 +18,7 @@ public class Entity {
 	public int speed;
 	
 	public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2;
+	public BufferedImage attackUp1,attackUp2,attackDown1,attackDown2,attackLeft1,attackLeft2,attackRight1,attackRight2;
 	public String direction = "down";
 	
 	public int spriteCounter = 0;
@@ -39,7 +40,7 @@ public class Entity {
 	public int life;
 	public boolean hitCooldown = false;
 	public int hitCooldownCounter = 0;
-	
+	boolean attacking = false;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -190,9 +191,24 @@ public class Entity {
 		return image;
 	
 }
+
+	public BufferedImage setupAlternate(String imagePath, int widthMult, int heightMult) {
+		
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+			image =  uTool.scaledImage(image, gp.tileSize * widthMult, gp.tileSize * heightMult);
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return image;
 	
 	
 	
+	}
 	/*
 	 public boolean collisionOnUp = false;
 	 public boolean collisionOnDown = false;
