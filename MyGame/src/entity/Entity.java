@@ -49,6 +49,12 @@ public class Entity {
 	public double maxLife;
 	public double life;
 
+	//TESTING NEW MOVEMENT
+	public boolean collisionOnUp = false;
+	public boolean collisionOnLeft = false;
+	public boolean collisionOnRight = false;
+	public boolean collisionOnDown = false;
+
 
 
 

@@ -142,7 +142,7 @@ public class Player extends Entity{
 			 // CHECK EVENT
 			gp.eHandler.checkEvent();
 			
-			if(collisionOn == false &&  keyH.talkPressed==false) {
+			if(collisionOn == false && keyH.talkPressed==false) {
 				switch(direction) {
 				case "up":
 					worldY -= speed; break;
@@ -170,15 +170,48 @@ public class Player extends Entity{
 					break;	
 				}
 			}
-			 if(collisionOn==true) {
-				if(direction.equals("upLeft")) {
-					direction = "up";
-					gp.cChecker.checkTile(this);
-					if(collisionOn==false) {
-						worldY -= speed;
-					}
+			else if(collisionOn==true) {
+				gp.cChecker.checkTile(this);
+				 switch(direction) {
+				 case"upLeft":
+						if(collisionOnLeft == false) {
+							worldX-=speed;
+						}
+						else if(collisionOnUp == false) {
+							worldY -= speed;
+						}
+						break;
+					case"upRight":
+						if(collisionOnRight == false) {
+							worldX+=speed;
+						}
+						else if(collisionOnUp == false) {
+							worldY -= speed;
+						}
+						break;
+					case"downLeft":
+						if(collisionOnLeft == false) {
+							worldX-=speed;
+						}
+						else if(collisionOnDown == false) {
+							worldY += speed;
+						}
+						break;
+					case"downRight":
+						if(collisionOnRight == false) {
+							worldX+=speed;
+						}
+						else if(collisionOnDown == false) {
+							worldY += speed;
+						}
+						break;	
+				 }
+					
+					
+					
 				}			//TESTING FOR MOVING ONE DIRECTION IF CAN'T MOVE DIAGNAL
 			}
+	
 			
 			keyH.talkPressed = false; // Talk pressed turns off after checking for collision
 			
@@ -192,7 +225,8 @@ public class Player extends Entity{
 				spriteCounter=0;
 				}
 			}
-		}
+		
+
 		
 		if(hitCooldown == true) {
 			hitCooldownCounter++;

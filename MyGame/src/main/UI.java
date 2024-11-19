@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 
 import java.awt.Color;
@@ -92,9 +93,10 @@ public class UI {
 		int y = gp.tileSize/2;
 		
 		int i = 0;
-		
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		//MAXLIFE
 		while(i < gp.player.maxLife/2) {
+			
 			g2.drawImage(heart_blank, x, y,null);
 			i++;
 			x+= gp.tileSize;
