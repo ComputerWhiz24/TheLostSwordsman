@@ -65,10 +65,8 @@ public class MON_GreenSlime extends Entity{
 		
 		actionLockCounter = 0;
 		direction = gp.player.direction;
-		speed = 3;
-		if(actionLockCounter == 80) {
-			speed = 1;
-		}
+	 
+	
 		
 	}
 
