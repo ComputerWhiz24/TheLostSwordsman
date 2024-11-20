@@ -86,7 +86,7 @@ public class Player extends Entity{
 			playerAttacking();
 		}
 		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
-						
+			
 			if(keyH.upPressed == true) {
 				direction = "up";
 				
@@ -136,7 +136,7 @@ public class Player extends Entity{
 			//CHECK MONSTER COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) 
-				hitMonster(monsterIndex);
+				hitByMonster(monsterIndex);
 			
 			
 			 // CHECK EVENT
@@ -211,7 +211,12 @@ public class Player extends Entity{
 					
 				}			//TESTING FOR MOVING ONE DIRECTION IF CAN'T MOVE DIAGNAL
 			}
-	
+		else {
+			if(!keyH.attackPressed) { // fixed bug where sprite was always walking even if not moving
+			spriteNum = 1;
+			spriteCounter = 0;
+			}
+		}
 			
 			keyH.talkPressed = false; // Talk pressed turns off after checking for collision
 			
@@ -240,7 +245,8 @@ public class Player extends Entity{
 	public void playerAttacking() {
 		attacking = true;
 		spriteAttackCounter++;
-		
+		if(spriteAttackCounter == 1)
+			gp.playSE(7);
 		if(spriteAttackCounter <= 2) //SHORT BUFFER
 			spriteNum = 1;
 		if(spriteAttackCounter  > 2 && spriteAttackCounter <= 25) { // ATTACK ANIMATION
@@ -258,10 +264,10 @@ public class Player extends Entity{
 			}
 			solidArea.width = attackArea.width;
 			solidArea.height = attackArea.height;
-			
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			if(monsterIndex != 999)
+			if(monsterIndex != 999) {
 				damageMonster(monsterIndex);
+			}
 			worldX = currentWorldX;
 			worldY =  currentWorldY;
 			solidArea.width = solidAreaWidth;
@@ -275,6 +281,7 @@ public class Player extends Entity{
 			attacking = false;
 			keyH.attackPressed = false;
 			dexterity = false; 
+	
 		}
 	} 
 	
@@ -294,15 +301,21 @@ public class Player extends Entity{
 			keyH.talkPressed = false;
 			}
 	} 
-	public void hitMonster(int monsterIndex) {
-		if(hitCooldown == false ) {
+	public void hitByMonster(int monsterIndex) {
+		if(hitCooldown == false &&  gp.monster[monsterIndex].dying == false) {
+			gp.playSE(6);
 			life -= gp.monster[monsterIndex].damage;
 			hitCooldown = true;
+			
 		}
 	}
 	public void damageMonster(int index) {
-		if(dexterity==false) {
+		if(dexterity==false && gp.monster[index].life > 0) { // If not already swinging
+			gp.playSE(5);
 			gp.monster[index].life -= this.damage;
+			gp.monster[index].hpBarOn = true;
+			gp.monster[index].hpBarCounter = 0;
+			gp.monster[index].damageReaction();
 			if(gp.monster[index].life <= 0)
 				gp.monster[index].dying = true; 
 			else
@@ -392,6 +405,9 @@ public class Player extends Entity{
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 			if(hitCooldownCounter % 30  == 0)
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+		}
+		if(hitCooldown == false) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		g2.drawImage(image,tempScreenX,tempScreenY, null);
 		

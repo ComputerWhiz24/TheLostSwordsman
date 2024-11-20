@@ -169,6 +169,14 @@ public class CollisionChecker {
 					entity.solidArea.x -=entity.speed; break;
 				case"right":
 					entity.solidArea.x +=entity.speed; break;
+				case"upLeft":
+					entity.solidArea.y -=entity.speed;entity.solidArea.x -=entity.speed; break;
+				case"upRight": 
+					entity.solidArea.y -=entity.speed;	entity.solidArea.x +=entity.speed; break;
+				case"downLeft":
+					entity.solidArea.y +=entity.speed;	entity.solidArea.x -=entity.speed; break;
+				case"downRight":
+					entity.solidArea.y +=entity.speed; entity.solidArea.x +=entity.speed; break;
 				
 				}
 				if(entity.solidArea.intersects(gp.obj[i].solidArea)) {
@@ -216,9 +224,11 @@ public class CollisionChecker {
 					entity.solidArea.x -=entity.speed; break;
 				case"right":
 					entity.solidArea.x +=entity.speed; break;
+			
 				}
 				if(entity.solidArea.intersects(target[i].solidArea) && target[i] != entity) {
 					entity.collisionOn = true;
+					
 					index = i;
 				}
 				entity.solidArea.x = entity.solidAreaDefaultX;
@@ -252,11 +262,20 @@ public class CollisionChecker {
 			entity.solidArea.x -=entity.speed; break;
 		case"right":
 			entity.solidArea.x +=entity.speed; break;
+		case"upLeft":
+			entity.solidArea.y -=entity.speed;entity.solidArea.x -=entity.speed; break;
+		case"upRight": 
+			entity.solidArea.y -=entity.speed;	entity.solidArea.x +=entity.speed; break;
+		case"downLeft":
+			entity.solidArea.y +=entity.speed;	entity.solidArea.x -=entity.speed; break;
+		case"downRight":
+			entity.solidArea.y +=entity.speed; entity.solidArea.x +=entity.speed; break;
 		
 		}
 		if(entity.solidArea.intersects(gp.player.solidArea)) {
 			entity.collisionOn = true;
 			hitPlayer = true;
+			entity.hpBarOn = true;
 		}
 		entity.solidArea.x = entity.solidAreaDefaultX;
 		entity.solidArea.y = entity.solidAreaDefaultY;

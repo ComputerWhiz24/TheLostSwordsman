@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,11 +15,11 @@ import main.UtilityTool;
 
 public class Entity {
 
-	GamePanel gp;
+	public GamePanel gp;
 	
 
 	public BufferedImage image,image2,image3;
-	public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2;
+	public BufferedImage up1,up2,down1, down2,left1,left2,right1,right2;
 	public BufferedImage attackUp1,attackUp2,attackDown1,attackDown2,attackLeft1,attackLeft2,attackRight1,attackRight2;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public Rectangle attackArea = new Rectangle(0,0,0,0);
@@ -35,11 +36,14 @@ public class Entity {
 	public boolean alive = true; 
 	public boolean dying = false;
 	public boolean hitCooldown = false;
+	public boolean hpBarOn = false;
+	
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
 	public int spriteCounter = 0;
 	int dyingCounter = 0; 
+	public int hpBarCounter = 0;  
 	
 		//ATTRIBUTES
 	public int speed;
@@ -64,6 +68,7 @@ public class Entity {
 	}
 	
 	public void setAction() {}
+	public void damageReaction() {}
 	public void speak() {
 		if(dialogues[dialogueIndex] == null) 
 			dialogueIndex = 0; 
@@ -96,6 +101,7 @@ public class Entity {
 		
 		if(this.type == 2 && hitPlayer == true) {
 			if(gp.player.hitCooldown == false) {
+				gp.playSE(6);
 				gp.player.life--;
 				gp.player.hitCooldown = true;
 			}
@@ -186,9 +192,31 @@ public class Entity {
 			if(spriteNum==2)
 				image = right2;
 			break;
-		
 		}
+
+		
+		// MONSTER HP BAR
+		if(type == 2 && hpBarOn == true) {  
+			double oneScale = (double) gp.tileSize/maxLife;
+			double hpBarValue = oneScale * life;
+			
+			g2.setColor(new Color(35,35,35));
+			g2.fillRect(screenX-1, screenY-11, gp.tileSize + 2, 12);
+			
+			g2.setColor(Color.red);
+			g2.fillRect(screenX, screenY - 10, (int) hpBarValue, 10);
+			
+			hpBarCounter++;
+			
+			if(hpBarCounter >= 600) {
+				hpBarCounter = 0;
+				hpBarOn = false;
+			}
+		}
+		
 	}
+		
+			
 		if(dying == true) {
 			death(g2);
 		}
@@ -246,14 +274,14 @@ public class Entity {
 	
 }
 
-	public BufferedImage setupAlternate(String imagePath, int widthMult, int heightMult) {
+	public BufferedImage setupAlternate(String imagePath, double widthMult, double heightMult) {
 		
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
 
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			image =  uTool.scaledImage(image, gp.tileSize * widthMult, gp.tileSize * heightMult);
+			image =  uTool.scaledImage(image,(int) (gp.tileSize * widthMult), (int) (gp.tileSize * heightMult));
 			
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -263,12 +291,6 @@ public class Entity {
 	
 	
 	}
-	/*
-	 public boolean collisionOnUp = false;
-	 public boolean collisionOnDown = false;
-	 public boolean collisionOnLeft = false;
-	 public boolean collisionOnRight = false;
 
-	 */
 	
 }

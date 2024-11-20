@@ -3,6 +3,7 @@ package monster;
 import java.util.Random;
 
 import entity.Entity;
+import entity.Player;
 import main.GamePanel;
 
 public class MON_GreenSlime extends Entity{
@@ -14,7 +15,7 @@ public class MON_GreenSlime extends Entity{
 		damage = 1;
 		name = "Green Slime";
 		speed = 1;
-		maxLife = 0.5;
+		maxLife = 1;
 		life = maxLife;
 		
 		solidArea.x = 3;
@@ -59,6 +60,16 @@ public class MON_GreenSlime extends Entity{
 		
 			actionLockCounter = 0;
 		}
+	}
+	public void damageReaction() {
+		
+		actionLockCounter = 0;
+		direction = gp.player.direction;
+		speed = 3;
+		if(actionLockCounter == 80) {
+			speed = 1;
+		}
+		
 	}
 
 }

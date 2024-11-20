@@ -31,7 +31,7 @@ public class NPC_Wizard extends Entity{
 			right1 = setupAlternate("/npc/wizard_right1",4,4);
 			right2  = setupAlternate("/npc/wizard_right2",4,4);
 			}catch(Exception e) {
-				System.out.println("Lil bro u messed up");
+				e.printStackTrace();
 		
 			}
 	}
@@ -58,20 +58,5 @@ public class NPC_Wizard extends Entity{
 		}
 	}
 
-	public BufferedImage setup(String imagePath) {
-		
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			image =  uTool.scaledImage(image, gp.tileSize, gp.tileSize);
-			
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		return image;
-	
-}
 	
 }
