@@ -30,6 +30,7 @@ public class UI {
 	public String currentDialogue;
 	public int commandNum = 0;
 	public int titleSubState = 0;
+	public int playSubState = 0;
 	
 	BufferedImage heart_full,heart_half,heart_blank;
 	
@@ -72,11 +73,16 @@ public class UI {
 		g2.setColor(Color.white); 
 		
 		if(gp.gameState == gp.titleState) {
-			drawTitleScreen();
+			if(titleSubState == 0)
+				drawOpeningScreen();
+			else if(titleSubState == 1) 
+				drawControlScreen();
 		}
 		
 		if(gp.gameState == gp.playState) {
 			drawPlayerLife();
+			if(playSubState == 1)
+				drawCharacterInfo();
 		}
 		if(gp.gameState == gp.pauseState) {
 			drawPauseScreen();
@@ -113,12 +119,22 @@ public class UI {
 			x+= gp.tileSize;
 		}
 		//LIFE
+	}
+	public void drawCharacterInfo() {
+		// CREATING THE BACKGROUND
+		final int frameX = gp.tileSize*2;
+		final int frameY = (int) (gp.tileSize*1.5);
+		final int frameWidth = gp.tileSize*20;
+		final int frameHeight = gp.tileSize * 14;
+		drawWindow(frameX,frameY,frameWidth,frameHeight);
+		
+		//WRITING TEXT
 		
 		
 	}
 	
-	public void drawTitleScreen() {
-		if(titleSubState == 0) {
+	public void drawOpeningScreen() {
+		
 			
 			//BACKGROUND COLOR
 			g2.setColor(Color.blue);
@@ -181,11 +197,8 @@ public class UI {
 				g2.drawString(">",x-gp.tileSize,y);
 			}
 			
-		}
-		
-		else if(titleSubState == 1) {
-			
-			//CONTROLS SCREEN
+	}
+		public void drawControlScreen() {
 			
 			g2.setColor(Color.blue);
 			g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
@@ -197,9 +210,6 @@ public class UI {
 			int x = getXForCenteredText(text);
 			int y = gp.tileSize*2;
 			g2.drawString(text,x,y);
-			
-				
-			
 			
 			text = "UP:";
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
@@ -251,12 +261,8 @@ public class UI {
 			g2.drawString(text,x,y);
 			text = "ENTER";
 			g2.drawString(text,x+gp.tileSize*7,y);
-			
-			
-			
-			
 		}
-	}
+	
 	
 	public void drawPauseScreen() {
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80));

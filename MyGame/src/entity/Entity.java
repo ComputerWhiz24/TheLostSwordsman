@@ -52,7 +52,26 @@ public class Entity {
 	public double damage;
 	public double maxLife;
 	public double life;
-
+	public int level;
+	public double xp;
+	public int strength;
+	public int attack;
+	public int dexterity; 
+	public int vitality;
+	public int defense;
+	public int intelligence;
+	public int stamina;
+	public int energy;
+	public int nextLevelXp;
+	public int coin;
+	public Entity currentWeapon;
+	public Entity currentShield;
+	public Entity currentSpell;
+	
+	// ITEM ATTRIBUTES
+	public int attackValue;
+	public int defenseValue;
+	
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;
 	public boolean collisionOnLeft = false;

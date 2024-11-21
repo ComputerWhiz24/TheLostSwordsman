@@ -1,4 +1,4 @@
-package entity;
+ package entity;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -12,11 +12,13 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Shield;
+import object.OBJ_Sword;
 
 public class Player extends Entity{
 
 	public int spriteAttackCounter = 0;
-	public boolean dexterity = false;
+	public boolean swinging = false;
 	public KeyHandler keyH;
 	public final int screenX,screenY;
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -54,7 +56,24 @@ public class Player extends Entity{
 		maxLife = 2;
 		life = maxLife;
 		damage = 0.25;
+		level = 0;
+		strength = 0;
+		vitality = 0;
+		dexterity = 0;
+		xp = 0;
+		nextLevelXp = 1;
+		coin = 0;
+		currentWeapon = new OBJ_Sword(gp);
+		currentShield = new OBJ_Shield(gp);
+		getAttack();
+		getDefense();
 		
+	}
+	public int getAttack() {
+		return attack = strength * currentWeapon.attackValue;
+	}
+	public int getDefense() {
+		return defense = vitality * currentShield.defenseValue;
 	}
 	
 	public void getPlayerImage() {
@@ -280,7 +299,7 @@ public class Player extends Entity{
 			spriteAttackCounter = 0;
 			attacking = false;
 			keyH.attackPressed = false;
-			dexterity = false; 
+			swinging = false; 
 	
 		}
 	} 
@@ -310,7 +329,7 @@ public class Player extends Entity{
 		}
 	}
 	public void damageMonster(int index) {
-		if(dexterity==false && gp.monster[index].life > 0) { // If not already swinging
+		if(swinging ==false && gp.monster[index].life > 0) { // If not already swinging
 			gp.playSE(5);
 			gp.monster[index].life -= this.damage;
 			gp.monster[index].hpBarOn = true;
@@ -320,7 +339,7 @@ public class Player extends Entity{
 				gp.monster[index].dying = true; 
 			else
 				System.out.println(gp.monster[index].life);
-			dexterity = true;
+			swinging = true;
 
 			}
 		
