@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.NPC_OldMan;
 import entity.NPC_Wizard;
 import monster.MON_GreenSlime;
@@ -20,14 +21,17 @@ public class AssetSetter {
 
 	}
 	
-	public void setMonster() {
-		gp.monster[0] = new MON_GreenSlime(gp);
-		gp.monster[0].worldX = gp.tileSize*23;
-		gp.monster[0].worldY  = gp.tileSize*40;
+	public void addSlime(int num) {
+
 		
-		gp.monster[1] = new MON_GreenSlime(gp);
-		gp.monster[1].worldX = gp.tileSize*21;
-		gp.monster[1].worldY  = gp.tileSize*40;
+		for(int i = 0; i < num; i++) {
+			gp.monster[i] = new MON_GreenSlime(gp);
+			int randX = (int) (Math.random() * 9) + 20;
+			int randY = (int) (Math.random() * 5)+ 37;
+			gp.monster[i].worldX = gp.tileSize*randX;
+			gp.monster[i].worldY  = gp.tileSize*randY;
+		}
+		
 	}
 	
 	public void setNPC() {

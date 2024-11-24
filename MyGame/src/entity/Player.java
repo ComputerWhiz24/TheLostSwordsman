@@ -37,7 +37,7 @@ public class Player extends Entity{
 		solidAreaDefaultY = solidArea.y;
 		
 		attackArea.width = 36;
-		attackArea.height = 36;
+		attackArea.height = 20;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -61,7 +61,7 @@ public class Player extends Entity{
 		vitality = 0;
 		dexterity = 0;
 		xp = 0;
-		nextLevelXp = 1;
+		nextLevelXp = 5;
 		coin = 0;
 		currentWeapon = new OBJ_Sword(gp);
 		currentShield = new OBJ_Shield(gp);
@@ -69,8 +69,8 @@ public class Player extends Entity{
 		getDefense();
 		
 	}
-	public int getAttack() {
-		return attack = strength * currentWeapon.attackValue;
+	public double getAttack() {
+		return attack = damage * currentWeapon.attackValue;
 	}
 	public int getDefense() {
 		return defense = vitality * currentShield.defenseValue;
@@ -320,30 +320,53 @@ public class Player extends Entity{
 			keyH.talkPressed = false;
 			}
 	} 
-	public void hitByMonster(int monsterIndex) {
-		if(hitCooldown == false &&  gp.monster[monsterIndex].dying == false) {
+	public void hitByMonster(int idx) {
+		if(hitCooldown == false &&  gp.monster[idx].dying == false) {
 			gp.playSE(6);
-			life -= gp.monster[monsterIndex].damage;
+			double monDmg = gp.monster[idx].damage - 0.05*defense; //Defense shields damage from monster
+			life -= monDmg;
 			hitCooldown = true;
-			
+			 
 		}
 	}
-	public void damageMonster(int index) {
-		if(swinging ==false && gp.monster[index].life > 0) { // If not already swinging
+	public void damageMonster(int idx) {
+		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
-			gp.monster[index].life -= this.damage;
-			gp.monster[index].hpBarOn = true;
-			gp.monster[index].hpBarCounter = 0;
-			gp.monster[index].damageReaction();
-			if(gp.monster[index].life <= 0)
-				gp.monster[index].dying = true; 
-			else
-				System.out.println(gp.monster[index].life);
+			Entity mon = gp.monster[idx];
+			double playerDmg = this.damage - 1.0*mon.defenseMult;
+			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
+			mon.hpBarOn = true;
+			mon.hpBarCounter = 0;
+			mon.damageReaction(); 
+			if(mon.life <= 0) {
+				mon.dying = true; 
+				this.xp+=mon.xp;
+				gp.ui.addMessage(mon.xp + " XP Earned");
+				gp.ui.addMessage("Foe Vanquished");
+				levelUp();
+				gp.aSetter.addSlime(1);
+			}else
+				System.out.println(mon.life);
 			swinging = true;
 
 			}
 		
 	
+	}
+	public void respawnMonster() {
+		
+	}
+	public void levelUp() {
+		if(this.xp >=this.nextLevelXp) {
+			gp.ui.addMessage("Level Up!");
+			this.level++; 
+			nextLevelXp = nextLevelXp+5;
+			maxLife+= 0.05;
+			damage += 0.01;
+			getAttack();
+			gp.playSE(4);
+		
+		}
 	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
 		//g2.setColor(Color.white);

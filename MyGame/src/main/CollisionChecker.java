@@ -263,11 +263,11 @@ public class CollisionChecker {
 		case"right":
 			entity.solidArea.x +=entity.speed; break;
 		case"upLeft":
-			entity.solidArea.y -=entity.speed;entity.solidArea.x -=entity.speed; break;
+			entity.solidArea.y -=entity.speed; entity.solidArea.x -=entity.speed; break;
 		case"upRight": 
-			entity.solidArea.y -=entity.speed;	entity.solidArea.x +=entity.speed; break;
+			entity.solidArea.y -=entity.speed; entity.solidArea.x +=entity.speed; break;
 		case"downLeft":
-			entity.solidArea.y +=entity.speed;	entity.solidArea.x -=entity.speed; break;
+			entity.solidArea.y +=entity.speed; entity.solidArea.x -=entity.speed; break;
 		case"downRight":
 			entity.solidArea.y +=entity.speed; entity.solidArea.x +=entity.speed; break;
 		

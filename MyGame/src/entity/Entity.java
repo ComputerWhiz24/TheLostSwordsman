@@ -54,16 +54,18 @@ public class Entity {
 	public double life;
 	public int level;
 	public double xp;
+	public double nextLevelXp;
 	public int strength;
-	public int attack;
 	public int dexterity; 
 	public int vitality;
 	public int defense;
+	public double defenseMult;
 	public int intelligence;
 	public int stamina;
-	public int energy;
-	public int nextLevelXp;
+	public double mana;
+	
 	public int coin;
+	public double attack;
 	public Entity currentWeapon;
 	public Entity currentShield;
 	public Entity currentSpell;
@@ -119,11 +121,7 @@ public class Entity {
 		boolean hitPlayer = gp.cChecker.checkPlayer(this);
 		
 		if(this.type == 2 && hitPlayer == true) {
-			if(gp.player.hitCooldown == false) {
-				gp.playSE(6);
-				gp.player.life--;
-				gp.player.hitCooldown = true;
-			}
+			damagePlayer(this);
 		}
 		if(collisionOn == false) { 
 			switch(direction) {
@@ -148,7 +146,14 @@ public class Entity {
 				
 			}
 		}
-	
+	public void damagePlayer(Entity mon) {
+		if(gp.player.hitCooldown == false) {
+			gp.playSE(6);
+			double monDmg = mon.damage - 0.05*gp.player.defense; //Defense shields damage from monster with some multiplier
+			gp.player.life -= monDmg;
+			gp.player.hitCooldown = true;
+		}
+	}
 	
 	public void draw(Graphics2D g2) {
 		
