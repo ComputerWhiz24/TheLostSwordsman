@@ -21,6 +21,7 @@ public class AssetSetter {
 
 	}
 	
+<<<<<<< HEAD
 	public void addSlimes(int num) {
 		
 		for(int i = 0; i < num; i++) {
@@ -39,6 +40,19 @@ public class AssetSetter {
 			int randY = (int) (Math.random() * 5)+ 37;
 			gp.monster[idx].worldX = gp.tileSize*randX;
 			gp.monster[idx].worldY  = gp.tileSize*randY;
+=======
+	public void addSlime(int num) {
+
+		
+		for(int i = 0; i < num; i++) {
+			gp.monster[i] = new MON_GreenSlime(gp);
+			int randX = (int) (Math.random() * 9) + 20;
+			int randY = (int) (Math.random() * 5)+ 37;
+			gp.monster[i].worldX = gp.tileSize*randX;
+			gp.monster[i].worldY  = gp.tileSize*randY;
+		}
+		
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 	}
 		
 	

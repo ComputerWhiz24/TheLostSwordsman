@@ -340,12 +340,19 @@ public class Player extends Entity{
 			mon.damageReaction(); 
 			if(mon.life <= 0) {
 				mon.dying = true; 
+<<<<<<< HEAD
 				respawnMonster(idx);
+=======
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 				this.xp+=mon.xp;
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();
+<<<<<<< HEAD
 				
+=======
+				gp.aSetter.addSlime(1);
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 			}else
 				System.out.println(mon.life);
 			swinging = true;
@@ -354,6 +361,12 @@ public class Player extends Entity{
 		
 	
 	}
+<<<<<<< HEAD
+=======
+	public void respawnMonster() {
+		
+	}
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 	public void levelUp() {
 		if(this.xp >=this.nextLevelXp) {
 			gp.ui.addMessage("Level Up!");

@@ -84,7 +84,11 @@ public class UI {
 		if(gp.gameState == gp.playState) {
 			drawPlayerLife();
 			drawMessage();
+<<<<<<< HEAD
 			if(playSubState == 1) {
+=======
+			if(playSubState == 1)
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 				drawCharacterInfo();
 				drawInventory();
 			}
@@ -180,6 +184,7 @@ public class UI {
 	
 		g2.setColor(Color.white);
 		g2.setFont(g2.getFont().deriveFont(32F));
+<<<<<<< HEAD
 		
 		int textX = frameX + (int) frameWidth/2 + gp.tileSize/2;
 		int textY = frameY + gp.tileSize + (int) frameHeight/6 ;
@@ -210,6 +215,89 @@ public class UI {
 		textY = frameY + gp.tileSize + (int) frameHeight/6;
 		String value = "";
 		DecimalFormat df = new DecimalFormat("#.00");
+=======
+		
+		int textX = frameX + (int) frameWidth/2 + gp.tileSize/2;
+		int textY = frameY + gp.tileSize + (int) frameHeight/6 ;
+		final float lineHeight = (40);
+		
+		//STATS
+		g2.drawString("Level: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Life: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Strength: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Vitality: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Dexterity: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Defense: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Gold: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("XP: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("XP Until Next Level: ",textX,textY);
+		textY += lineHeight;
+		g2.drawString("Damage Power: ",textX,textY);
+		textY += lineHeight;
+		
+		// STAT VALUES
+		int tailX = (frameX + frameWidth - 30);
+		textY = frameY + gp.tileSize + (int) frameHeight/6;
+		String value = "";
+		value = String.valueOf(gp.player.level);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.strength);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.vitality);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.dexterity);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.defense);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.coin);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.xp);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.nextLevelXp);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY); 
+		textY += lineHeight;
+		
+		value = String.valueOf(gp.player.attack);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY); 
+		textY += lineHeight;
+	}
+>>>>>>> 5f49b0fdfb4cbcb0fa02d0264aa3eb12690f1e2b
 	
 		
 		
