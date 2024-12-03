@@ -289,7 +289,7 @@ public class UI {
 		
 		//DRAW CURSOR
 		g2.setColor(Color.white);
-		g2.setStroke(new BasicStroke(3));
+		g2.setStroke(new BasicStroke(2));
 		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
 		
 		
