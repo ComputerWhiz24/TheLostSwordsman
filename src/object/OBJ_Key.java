@@ -15,8 +15,8 @@ public class OBJ_Key extends Entity{
 		super(gp);
 		
 		name = "key";
-		down1 = setup("/objects/key.png");
-		
+		down1 = setup("/objects/key");
+		description = "[" + name + "]\nA weird, random key.. I wonder what it's used for.";
 		}
 	}
 

@@ -6,12 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Key;
 import object.OBJ_Shield;
 import object.OBJ_Sword;
 
@@ -21,6 +23,8 @@ public class Player extends Entity{
 	public boolean swinging = false;
 	public KeyHandler keyH;
 	public final int screenX,screenY;
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public int inventorySize = 222;
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		super(gp);
@@ -42,7 +46,7 @@ public class Player extends Entity{
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
-		
+		setItems();
 	}
 	
 	public void setDefaultValues() {
@@ -68,6 +72,66 @@ public class Player extends Entity{
 		getAttack();
 		getDefense();
 		
+	}
+	public void setItems() {
+		inventory.add(currentWeapon);
+		inventory.add(currentShield);
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
 	}
 	public double getAttack() {
 		return attack = damage * currentWeapon.attackValue;

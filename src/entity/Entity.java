@@ -73,6 +73,7 @@ public class Entity {
 	// ITEM ATTRIBUTES
 	public int attackValue;
 	public int defenseValue;
+	public String description = "";
 	
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;

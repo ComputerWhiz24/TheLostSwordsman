@@ -281,17 +281,35 @@ public class UI {
 		
 		int slotX = slotXStart;
 		int slotY = slotYStart;
+		int slotSize = gp.tileSize;
+		//DRAW INVENTORY ITEMS
+		int split = cols - 1;
+		for(int i = 0; i <gp.player.inventory.size(); i++) {
+			
+			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			slotX+=slotSize;
+			
+			if((i + 1) % split == 0) {
+				slotX = slotXStart;
+				slotY+= gp.tileSize;
+			}
+		}
 		
-		int cursorX = slotXStart + gp.tileSize * slotCol;
-		int cursorY = slotYStart + gp.tileSize * slotRow;
+		int cursorX = slotXStart + slotSize * slotCol;
+		int cursorY = slotYStart + slotSize * slotRow;
 		int cursorWidth = gp.tileSize;
 		int cursorHeight = gp.tileSize;
-		
 		//DRAW CURSOR
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke(2));
 		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
 		
+	}
+	public void drawItemInfo() {
+		int dFrameX;
+		int dFrameY;
+		int dFrameWidth;
+		int dFrameHeight;
 		
 	}
 	public void drawOpeningScreen() {

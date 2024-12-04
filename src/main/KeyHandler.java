@@ -94,11 +94,14 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.eHandler.heal();
 			}
 		}
-		else if(gp.ui.playSubState == 1) {
+		else if(gp.ui.playSubState == 1) { //Inventory
 			if(code == KeyEvent.VK_C  || code == KeyEvent.VK_ESCAPE) 
 				gp.ui.playSubState = 0;
+			if(code == KeyEvent.VK_F) {
+				gp.ui.drawItemInfo();
+			}
 		}
-		else if(gp.ui.playSubState == 2) {
+		else if(gp.ui.playSubState == 2) { //Character info
 			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE) 
 				gp.ui.playSubState = 0;
 		}
