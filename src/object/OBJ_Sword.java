@@ -11,7 +11,7 @@ public class OBJ_Sword extends Entity{
 		name = "Normal Sword";
 		down1 = setup("/objects/sword_normal");
 		attackValue = 1;
-		description = "[" + name + "]\nA basic, yet trusty sword.";
+		description = "[" + name + "]\nA basic, yet \ntrusty sword.";
 	}
 
 }

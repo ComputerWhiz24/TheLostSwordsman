@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,healPressed; 
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc; 
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -97,13 +97,18 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.ui.playSubState == 1) { //Inventory
 			if(code == KeyEvent.VK_C  || code == KeyEvent.VK_ESCAPE) 
 				gp.ui.playSubState = 0;
-			if(code == KeyEvent.VK_F) {
-				gp.ui.drawItemInfo();
-			}
 		}
 		else if(gp.ui.playSubState == 2) { //Character info
 			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE) 
 				gp.ui.playSubState = 0;
+			if(code == KeyEvent.VK_F) {
+				if(showDesc == true) {
+					showDesc = false;
+				}
+				else if(showDesc == false) {
+					showDesc = true;
+				}
+			}
 		}
 		if(code == KeyEvent.VK_W) {
 			upPressed = true;

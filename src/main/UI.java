@@ -304,13 +304,33 @@ public class UI {
 		g2.setStroke(new BasicStroke(2));
 		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
 		
-	}
-	public void drawItemInfo() {
-		int dFrameX;
-		int dFrameY;
-		int dFrameWidth;
-		int dFrameHeight;
 		
+		//DESC FRAME IF USER PRESSES F
+		if(gp.keyH.showDesc) {
+			int dFrameX = cursorX + gp.tileSize;
+			int dFrameY = cursorY;
+			int dFrameWidth = gp.tileSize*4;
+			int dFrameHeight = (int) ((int) dFrameWidth * 1.5);
+			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
+		//DRAW TEXT
+			int textX = dFrameX + 2;
+			int textY = dFrameY + 40;
+			g2.setFont(g2.getFont().deriveFont(28F));
+			
+			int itemIdx = getItemIndex();
+			if(itemIdx < gp.player.inventory.size()) {
+				for(String line: gp.player.inventory.get(itemIdx).description.split("\n")) {
+					g2.drawString(line, textX+10, textY);
+					textY +=38;
+				}
+		
+			}
+		}
+		
+	}
+	public int getItemIndex() {
+		int itemIndex = slotCol + (slotRow * 21);
+		return itemIndex;
 	}
 	public void drawOpeningScreen() {
 		
