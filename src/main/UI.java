@@ -8,18 +8,23 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_Key;
 
 
-public class UI {
+public class UI extends JFrame implements MouseListener{
 
 	GamePanel gp;
 	Font maruMonica  ;
@@ -268,6 +273,7 @@ public class UI {
 	public void drawInventory() {
 		cols = 22;
 		rows = 11;
+	
 		//FRAME
 		int frameWidth = gp.tileSize*cols;
 		int frameHeight = gp.tileSize*rows;
@@ -282,6 +288,8 @@ public class UI {
 		int slotX = slotXStart;
 		int slotY = slotYStart;
 		int slotSize = gp.tileSize;
+		JLabel label = new JLabel();
+		label.setBounds(getBounds());
 		//DRAW INVENTORY ITEMS
 		int split = cols - 1;
 		for(int i = 0; i <gp.player.inventory.size(); i++) {
@@ -536,5 +544,35 @@ public class UI {
 		int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = tailX - length;
 		return x;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
