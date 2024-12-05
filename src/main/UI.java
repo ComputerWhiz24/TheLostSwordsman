@@ -325,6 +325,21 @@ public class UI {
 				}
 		
 			}
+		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
+			if(gp.player.inventory.get(getItemIndex())!= null) {
+			int dFrameX = cursorX + gp.tileSize;
+			int dFrameY = cursorY;
+			int dFrameWidth = (int) (gp.tileSize*2+10);
+			int dFrameHeight = (int) (gp.tileSize*1.5);
+			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
+			
+			int textX = dFrameX + 2;
+			int textY = dFrameY + 40;
+			g2.setFont(g2.getFont().deriveFont(14F));
+			g2.drawString("Show more: F", textX+10, textY);
+			}
+			
+			
 		}
 		
 	}
