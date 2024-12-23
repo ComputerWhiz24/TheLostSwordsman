@@ -37,6 +37,7 @@ public class UI extends JFrame implements MouseListener{
 	public int commandNum = 0;
 	public int titleSubState = 0;
 	public int playSubState = 0;
+	public int pauseSubState = 0;
 	public int slotCol = 0;
 	public int slotRow = 0;
 	
@@ -315,7 +316,6 @@ public class UI extends JFrame implements MouseListener{
 		
 		//DESC FRAME IF USER PRESSES F
 		if(gp.keyH.showDesc) {
-			gp.gameState = gp.pauseState;
 			int dFrameX = cursorX + gp.tileSize;
 			int dFrameY = cursorY;
 			int dFrameWidth = gp.tileSize*8;
@@ -492,12 +492,18 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(text,x+gp.tileSize*7,y);
 		}
 	public void drawPauseScreen() {
+		if(pauseSubState == 0) {
+		
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80));
 		String text = "PAUSED";
 		int x,y;
 		x = getXForCenteredText(text);
 		y = gp.screenHeight/2;
 		g2.drawString(text, x, y);
+		}
+		else if(pauseSubState == 1) {
+		// PAUSE GAME, ADD INFO
+		}
 		
 	}
 	public void drawDialogueScreen() {

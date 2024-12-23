@@ -123,7 +123,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				else if(showDesc == false) {
 					showDesc = true;
 					gp.gameState = gp.pauseState;
-
 				}
 			}
 		}

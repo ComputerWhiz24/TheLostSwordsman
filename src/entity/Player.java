@@ -168,10 +168,6 @@ public class Player extends Entity{
 		if(keyH.attackPressed) {
 			playerAttacking();
 		}
-		// if in inventory and you press f, switch to pause state
-		if(keyH.showDesc == true) {
-			showDesc();
-		}
 		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
 			
 			if(keyH.upPressed == true) {
@@ -377,9 +373,6 @@ public class Player extends Entity{
 		if(i != 999) { 
 			
 		}
-		
-	}
-	public void showDesc() {
 		
 	}
 	public void interactNPC(int i) {
