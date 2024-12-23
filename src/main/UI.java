@@ -309,24 +309,26 @@ public class UI extends JFrame implements MouseListener{
 		int cursorHeight = gp.tileSize;
 		//DRAW CURSOR
 		g2.setColor(Color.white);
-		g2.setStroke(new BasicStroke(2));
+		g2.setStroke(new BasicStroke(1));
 		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
 		
 		
 		//DESC FRAME IF USER PRESSES F
 		if(gp.keyH.showDesc) {
+			gp.gameState = gp.pauseState;
 			int dFrameX = cursorX + gp.tileSize;
 			int dFrameY = cursorY;
-			int dFrameWidth = gp.tileSize*4;
+			int dFrameWidth = gp.tileSize*8;
 			int dFrameHeight = (int) ((int) dFrameWidth * 1.5);
 			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
 		//DRAW TEXT
 			int textX = dFrameX + 2;
 			int textY = dFrameY + 40;
-			g2.setFont(g2.getFont().deriveFont(28F));
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 			
 			int itemIdx = getItemIndex();
 			if(itemIdx < gp.player.inventory.size()) {
+				g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 				for(String line: gp.player.inventory.get(itemIdx).description.split("\n")) {
 					g2.drawString(line, textX+10, textY);
 					textY +=38;
@@ -334,17 +336,22 @@ public class UI extends JFrame implements MouseListener{
 		
 			}
 		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
-			if(gp.player.inventory.get(getItemIndex())!= null) {
-			int dFrameX = cursorX + gp.tileSize;
-			int dFrameY = cursorY;
-			int dFrameWidth = (int) (gp.tileSize*2+10);
-			int dFrameHeight = (int) (gp.tileSize*1.5);
-			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
-			
-			int textX = dFrameX + 2;
-			int textY = dFrameY + 40;
-			g2.setFont(g2.getFont().deriveFont(14F));
-			g2.drawString("Show more: F", textX+10, textY);
+			if (gp.player.inventory.get(getItemIndex()) != null) {
+			    int dFrameX = cursorX + gp.tileSize;
+			    int dFrameY = cursorY;
+			    int dFrameWidth = (int) (gp.tileSize * 2);
+			    int dFrameHeight = (int) (gp.tileSize);
+
+			 
+			    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
+			    g2.fillRect(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+			    // Draw the text inside the rectangle
+			    int textX = dFrameX + 10; // Adjust padding
+			    int textY = dFrameY + 40;
+			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
+			    g2.setColor(Color.WHITE); // Set text color
+			    g2.drawString("Show more: F", textX, textY);
 			}
 			
 			

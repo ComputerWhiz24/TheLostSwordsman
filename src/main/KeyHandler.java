@@ -118,9 +118,12 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_F) {
 				if(showDesc == true) {
 					showDesc = false;
+				
 				}
 				else if(showDesc == false) {
 					showDesc = true;
+					gp.gameState = gp.pauseState;
+
 				}
 			}
 		}
