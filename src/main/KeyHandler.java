@@ -118,12 +118,14 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_F) {
 				if(showDesc == true) {
 					showDesc = false;
-				
+					gp.ui.pauseSubState = 0;
 				}
 				else if(showDesc == false) {
 					showDesc = true;
 					gp.gameState = gp.pauseState;
+					gp.ui.pauseSubState = 1;
 				}
+				
 			}
 		}
 		if(code == KeyEvent.VK_W) {
@@ -142,6 +144,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	public void pauseState(int code) {
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.playState;
+			gp.ui.pauseSubState = 0;
+		}
+		if (gp.ui.pauseSubState == 1) {
 			
 		}
 	}

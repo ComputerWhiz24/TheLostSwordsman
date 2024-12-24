@@ -316,25 +316,8 @@ public class UI extends JFrame implements MouseListener{
 		
 		//DESC FRAME IF USER PRESSES F
 		if(gp.keyH.showDesc) {
-			int dFrameX = cursorX + gp.tileSize;
-			int dFrameY = cursorY;
-			int dFrameWidth = gp.tileSize*8;
-			int dFrameHeight = (int) ((int) dFrameWidth * 1.5);
-			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
-		//DRAW TEXT
-			int textX = dFrameX + 2;
-			int textY = dFrameY + 40;
-			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
-			
-			int itemIdx = getItemIndex();
-			if(itemIdx < gp.player.inventory.size()) {
-				g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
-				for(String line: gp.player.inventory.get(itemIdx).description.split("\n")) {
-					g2.drawString(line, textX+10, textY);
-					textY +=38;
-				}
 		
-			}
+			drawPauseScreen();
 		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
 			if (gp.player.inventory.get(getItemIndex()) != null) {
 			    int dFrameX = cursorX + gp.tileSize;
@@ -502,7 +485,41 @@ public class UI extends JFrame implements MouseListener{
 		g2.drawString(text, x, y);
 		}
 		else if(pauseSubState == 1) {
-		// PAUSE GAME, ADD INFO
+			cols = 22;
+			rows = 11;
+		
+			//FRAME
+			int frameWidth = gp.tileSize*cols;
+			int frameHeight = gp.tileSize*rows;
+			int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
+			int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+			slotXStart = frameX + 20;
+			slotYStart = frameY + 20;
+			
+			int slotX = slotXStart;
+			int slotY = slotYStart;
+			int slotSize = gp.tileSize;
+			int cursorX = slotXStart + slotSize * slotCol;
+			int cursorY = slotYStart + slotSize * slotRow;
+		
+			int dFrameX = cursorX + gp.tileSize;
+			int dFrameY = cursorY;
+			int dFrameWidth = gp.tileSize*8;
+			int dFrameHeight = (int) ((int) dFrameWidth * 1.5);
+			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
+		//DRAW TEXT
+			int textX = dFrameX + 2;
+			int textY = dFrameY + 40;
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+			
+			int itemIdx = getItemIndex();
+			if(itemIdx < gp.player.inventory.size()) {
+				g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+				for(String line: gp.player.inventory.get(itemIdx).description.split("\n")) {
+					g2.drawString(line, textX+10, textY);
+					textY +=38;
+				}
+			}
 		}
 		
 	}
