@@ -30,7 +30,7 @@ public class TileManager {
 	
 	public void getTileImage() {
 		
-			setup(0,"grass", false);
+			setup(0,"Grass2", false);
 			setup(1,"wall", true);
 			setup(2,"water", true);
 			setup(3,"earth", false);

@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.NPC_OldMan;
+import entity.NPC_Shopkeeper;
 import entity.NPC_Wizard;
 import monster.MON_GreenSlime;
 import object.OBJ_Boots;
@@ -22,7 +23,7 @@ public class AssetSetter {
 	}
 	public void addSlimes(int num) {
 		
-		for(int i = 0; i < num; i++) {
+		for(int i = 0; i < num; i++) { // only works if slime is only monster
 			gp.monster[i] = new MON_GreenSlime(gp);
 			int randX = (int) (Math.random() * 9) + 20;
 			int randY = (int) (Math.random() * 5)+ 37;
@@ -40,7 +41,7 @@ public class AssetSetter {
 			gp.monster[idx].worldY  = gp.tileSize*randY;
 	}
 	public void setNPC() {
-		gp.npc[0] = new NPC_OldMan(gp);
+		gp.npc[0] = new NPC_Shopkeeper(gp);
 		gp.npc[0].worldX = gp.tileSize*21;
 		gp.npc[0].worldY  = gp.tileSize*21;
 		
