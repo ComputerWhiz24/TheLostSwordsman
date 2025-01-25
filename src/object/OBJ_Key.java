@@ -16,7 +16,7 @@ public class OBJ_Key extends Entity{
 		
 		name = "key";
 		down1 = setup("/objects/key");
-		description = "[" + name + "]\nA weird, \nrandom key..\nI wonder what\nit's used for.";
+		description = "[" + name + "]\nA weird, random key..\nI wonder what\nit's used for.";
 		}
 	}
 

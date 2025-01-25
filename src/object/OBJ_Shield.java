@@ -11,7 +11,7 @@ public class OBJ_Shield extends Entity{
 		name = "Wood Shield";
 		down1 = setup("/objects/shield_wood");
 		defenseValue = 1;
-		description = "[" + name + "]\nA basic, yet\ntrusty shield.";
+		description = "[" + name + "]\nA basic, yet trusty\nshield.";
 	}
 
 }

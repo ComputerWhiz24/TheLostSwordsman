@@ -493,19 +493,44 @@ public class UI extends JFrame implements MouseListener{
 			int frameHeight = gp.tileSize*rows;
 			int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
 			int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+			drawWindow(frameX,frameY,frameWidth,frameHeight);
+			
+			//SLOT
 			slotXStart = frameX + 20;
 			slotYStart = frameY + 20;
 			
 			int slotX = slotXStart;
 			int slotY = slotYStart;
 			int slotSize = gp.tileSize;
+			JLabel label = new JLabel();
+			label.setBounds(getBounds());
+			//DRAW INVENTORY ITEMS
+			int split = cols - 1;
+			for(int i = 0; i <gp.player.inventory.size(); i++) {
+				
+				g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+				slotX+=slotSize;
+				
+				if((i + 1) % split == 0) {
+					slotX = slotXStart;
+					slotY+= gp.tileSize;
+				}
+			}
+			
 			int cursorX = slotXStart + slotSize * slotCol;
 			int cursorY = slotYStart + slotSize * slotRow;
-		
+			int cursorWidth = gp.tileSize;
+			int cursorHeight = gp.tileSize;
+			//DRAW CURSOR
+			g2.setColor(Color.white);
+			g2.setStroke(new BasicStroke(1));
+			g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
+			
+			//DESCRIPTION FRAME
 			int dFrameX = cursorX + gp.tileSize;
 			int dFrameY = cursorY;
-			int dFrameWidth = gp.tileSize*8;
-			int dFrameHeight = (int) ((int) dFrameWidth * 1.5);
+			int dFrameWidth = gp.tileSize*6;
+			int dFrameHeight = gp.tileSize*3+30;
 			drawWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
 		//DRAW TEXT
 			int textX = dFrameX + 2;

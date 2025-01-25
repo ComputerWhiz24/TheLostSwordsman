@@ -103,10 +103,13 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.ui.playSubState = 0;
 			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT)
 				showDesc = false;
+				gp.playSE(8);
 			if(code == KeyEvent.VK_UP){
+				if(gp.ui.slotRow!=0)
 				gp.ui.slotRow--;
 			}
 			if(code == KeyEvent.VK_DOWN){
+				if(gp.ui.slotRow!=11)
 				gp.ui.slotRow++;
 			}
 			if(code == KeyEvent.VK_RIGHT){
@@ -142,12 +145,18 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void pauseState(int code) {
-		if(code == KeyEvent.VK_ESCAPE) {
-			gp.gameState = gp.playState;
-			gp.ui.pauseSubState = 0;
+		if (gp.ui.pauseSubState == 0) {
+			if(code == KeyEvent.VK_ESCAPE) {
+				gp.gameState = gp.playState;
+				gp.ui.pauseSubState = 0;
+			}
 		}
 		if (gp.ui.pauseSubState == 1) {
-			
+			if(code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_F ) {
+				gp.gameState = gp.playState;
+				gp.ui.pauseSubState = 0;
+				showDesc=false;
+			}
 		}
 	}
 	public void dialogueState(int code) {
