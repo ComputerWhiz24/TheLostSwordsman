@@ -443,6 +443,8 @@ public class Player extends Entity{
 	}
 	public void levelUp() {
 
+
+
 		if(this.xp >=this.nextLevelXp) {
 			gp.ui.addMessage("Level Up!");
 			this.level++; 
@@ -453,6 +455,34 @@ public class Player extends Entity{
 			gp.playSE(4);
 		
 		}
+	}
+	public void selectItem() {
+		int idx = gp.ui.getItemIndex();
+		if(idx < inventory.size()) {
+			Entity selectedItem = inventory.get(idx);
+			switch(selectedItem.type) {
+			case type_sword:
+			case type_axe:
+				if(currentWeapon == selectedItem) {
+					currentWeapon = null;
+				} else {
+				currentWeapon = selectedItem;
+				attack = getAttack();
+				}
+				break;
+			case type_shield:
+				if(currentShield == selectedItem) {
+					currentShield = null;
+				} else {
+				currentShield = selectedItem;
+				defense = getDefense();
+				break;
+				}
+			case type_consumable:
+				break;
+			}
+		}
+		
 	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
 

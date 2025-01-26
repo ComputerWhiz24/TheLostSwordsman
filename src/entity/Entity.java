@@ -48,7 +48,7 @@ public class Entity {
 		//ATTRIBUTES
 	public int speed;
 	public String name;
-	public int type; // 0 = player, 1 = NPC, 2 = Monster
+
 	public double damage;
 	public double maxLife;
 	public double life;
@@ -74,6 +74,14 @@ public class Entity {
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
+	public int type; // 0 = player, 1 = NPC, 2 = Monster
+	public final int type_player = 0;
+	public final int type_npc = 1;
+	public final int type_monster = 2;
+	public final int type_sword = 3;
+	public final int type_axe = 4;
+	public final int type_shield = 5;
+	public final int type_consumable = 6;
 	
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;
@@ -112,6 +120,7 @@ public class Entity {
 		}
 	}
 	public void update() {
+
 		setAction();
 		
 		collisionOn = false;
@@ -121,7 +130,7 @@ public class Entity {
 		gp.cChecker.checkEntity(this, gp.monster);
 		boolean hitPlayer = gp.cChecker.checkPlayer(this);
 		
-		if(this.type == 2 && hitPlayer == true) {
+		if(this.type == type_monster && hitPlayer == true) {
 			damagePlayer(this);
 		}
 		if(collisionOn == false) { 
@@ -148,6 +157,7 @@ public class Entity {
 			}
 		}
 	public void damagePlayer(Entity mon) {
+
 		if(gp.player.hitCooldown == false) {
 			gp.playSE(6);
 			double monDmg = mon.damage - 0.05*gp.player.defense; //Defense shields damage from monster with some multiplier

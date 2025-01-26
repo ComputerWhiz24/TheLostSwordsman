@@ -119,6 +119,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_LEFT){
 				gp.ui.slotCol--;
 			}
+			if(code == KeyEvent.VK_E) {
+				gp.player.selectItem();
+			}
 			if(code == KeyEvent.VK_F) {
 				if(showDesc == true) {
 					showDesc = false;

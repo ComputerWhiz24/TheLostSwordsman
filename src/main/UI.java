@@ -145,11 +145,13 @@ public class UI extends JFrame implements MouseListener{
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
 		
 		for(int i = 0; i < message.size(); i++) {
+			
+		
 			if(message.get(i)!=null) {
 				g2.setColor(Color.black);
 				g2.drawString(message.get(i), messageX+2, messageY+2 );
 				g2.setColor(Color.white);
-				g2.drawString(message.get(i), messageX, messageY);
+			 	g2.drawString(message.get(i), messageX, messageY);
 				
 				int counter = messageCounter.get(i)+1; //messageCounter++
 				messageCounter.set(i, counter);
@@ -295,6 +297,13 @@ public class UI extends JFrame implements MouseListener{
 		int split = cols - 1;
 		for(int i = 0; i <gp.player.inventory.size(); i++) {
 			
+			//EQUIP CURSOR
+			if(gp.player.inventory.get(i) == gp.player.currentWeapon ||
+					gp.player.inventory.get(i) == gp.player.currentShield) {
+				g2.setColor(new Color(240,190,90));
+				g2.fillRoundRect(slotX, slotY, gp.tileSize,gp.tileSize,10,10);
+			}
+			
 			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
 			slotX+=slotSize;
 			
@@ -331,10 +340,22 @@ public class UI extends JFrame implements MouseListener{
 
 			    // Draw the text inside the rectangle
 			    int textX = dFrameX + 10; // Adjust padding
-			    int textY = dFrameY + 40;
+			    int textY = dFrameY + 10;
 			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
 			    g2.setColor(Color.WHITE); // Set text color
-			    g2.drawString("Show more: F", textX, textY);
+			    g2.drawString("Show more: F\n", textX, textY);
+		
+			    // if a sword,axe, or shield, display press e to equip
+			    if(gp.player.inventory.get(getItemIndex()).type == gp.player.type_sword ||
+			    		gp.player.inventory.get(getItemIndex()).type == gp.player.type_axe ||
+			    		gp.player.inventory.get(getItemIndex()).type == gp.player.type_shield) {
+				    if(gp.player.inventory.get(getItemIndex()) == gp.player.currentWeapon ||
+								gp.player.inventory.get(getItemIndex()) == gp.player.currentShield) {
+				    	g2.drawString("Unequip: E\n", textX, textY+30);
+				    } else {
+				    	g2.drawString("Equip: E\n", textX, textY+30);
+				    }
+			    }
 			}
 			
 			
@@ -476,7 +497,7 @@ public class UI extends JFrame implements MouseListener{
 		}
 	public void drawPauseScreen() {
 		if(pauseSubState == 0) {
-		
+		//NORMAL PAUSE STATE
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80));
 		String text = "PAUSED";
 		int x,y;
@@ -484,7 +505,7 @@ public class UI extends JFrame implements MouseListener{
 		y = gp.screenHeight/2;
 		g2.drawString(text, x, y);
 		}
-		else if(pauseSubState == 1) {
+		else if(pauseSubState == 1) { //SHOW ITEM DESCRIPTION
 			cols = 22;
 			rows = 11;
 		

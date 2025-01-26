@@ -14,6 +14,7 @@ public class OBJ_Sword extends Entity{
 		description = "[" + name + "]\nA basic, yet trusty\nsword.";
 		attackArea.width = 36;
 		attackArea.height = 25;
+		type = type_sword;
 	}
 
 }
