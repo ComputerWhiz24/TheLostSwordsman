@@ -6,6 +6,7 @@ import entity.NPC_Shopkeeper;
 import entity.NPC_Wizard;
 import monster.MON_GreenSlime;
 import object.OBJ_Axe;
+import object.OBJ_BlueShield;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
@@ -35,6 +36,10 @@ public class AssetSetter {
 		i++;
 		gp.obj[i] = new OBJ_Axe(gp);
 		gp.obj[i].worldX = gp.tileSize*33;
+		gp.obj[i].worldY  = gp.tileSize*21;
+		i++;
+		gp.obj[i] = new OBJ_BlueShield(gp);
+		gp.obj[i].worldX = gp.tileSize*35;
 		gp.obj[i].worldY  = gp.tileSize*21;
 		i++;
 	}

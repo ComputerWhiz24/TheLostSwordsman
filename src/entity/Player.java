@@ -139,6 +139,7 @@ public class Player extends Entity{
 		inventory.add(new OBJ_Key(gp));
 	}
 	public double getAttack() {
+
 		attackArea = currentWeapon.attackArea;
 		return attack = damage * currentWeapon.attackValue;
 		
@@ -147,22 +148,8 @@ public class Player extends Entity{
 		return defense = vitality * currentShield.defenseValue;
 	}
 	
-	public void getPlayerImage() {
-
-
-
-		
-		up1 = setup("/player/boy_up_1");
-		up2 = setup("/player/boy_up_2");
-		down1 = setup("/player/boy_down_1");
-		down2 = setup("/player/boy_down_2");
-		left1 = setup("/player/boy_left_1");
-		left2 = setup("/player/boy_left_2");
-		right1 = setup("/player/boy_right_1");
-		right2  = setup("/player/boy_right_2");
-	}
 	public void getPlayerAttackImage() {
-		
+		if(currentWeapon.type == type_sword) {
 		attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);
 		attackUp2 = setupAlternate("/player/boy_attack_up_2",1,2);
 		attackDown1 = setupAlternate("/player/boy_attack_down_1",1,2);
@@ -171,6 +158,17 @@ public class Player extends Entity{
 		attackLeft2 = setupAlternate("/player/boy_attack_left_2",2,1);
 		attackRight1 = setupAlternate("/player/boy_attack_right_1",2,1);
 		attackRight2 = setupAlternate("/player/boy_attack_right_2",2,1);
+		}else if(currentWeapon.type == type_axe) {
+			attackUp1 = setupAlternate("/player/boy_axe_up_1",1,2);
+			attackUp2 = setupAlternate("/player/boy_axe_up_2",1,2);
+			attackDown1 = setupAlternate("/player/boy_axe_down_1",1,2);
+			attackDown2 = setupAlternate("/player/boy_axe_down_2",1,2);
+			attackLeft1 = setupAlternate("/player/boy_axe_left_1",2,1);
+			attackLeft2 = setupAlternate("/player/boy_axe_left_2",2,1);
+			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
+			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
+		}
+		
 	}
 	
 	public void update() { 
@@ -338,6 +336,7 @@ public class Player extends Entity{
 	}
 	
 	public void playerAttacking() {
+
 		attacking = true;
 		spriteAttackCounter++;
 		if(spriteAttackCounter == 1)
@@ -417,10 +416,11 @@ public class Player extends Entity{
 	}
 	public void damageMonster(int idx) {
 
+
 		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			Entity mon = gp.monster[idx];
-			double playerDmg = this.damage - 1.0*mon.defenseMult;
+			double playerDmg = this.attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
 			mon.hpBarOn = true;
 			mon.hpBarCounter = 0;
@@ -457,6 +457,7 @@ public class Player extends Entity{
 		}
 	}
 	public void selectItem() {
+
 		int idx = gp.ui.getItemIndex();
 		if(idx < inventory.size()) {
 			Entity selectedItem = inventory.get(idx);
@@ -465,9 +466,11 @@ public class Player extends Entity{
 			case type_axe:
 				if(currentWeapon == selectedItem) {
 					currentWeapon = null;
+				
 				} else {
 				currentWeapon = selectedItem;
 				attack = getAttack();
+				getPlayerAttackImage();
 				}
 				break;
 			case type_shield:
@@ -571,5 +574,17 @@ public class Player extends Entity{
 		g2.drawImage(image,tempScreenX,tempScreenY, null);
 		
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+	}
+	public void getPlayerImage() {
+
+		
+		up1 = setup("/player/boy_up_1");
+		up2 = setup("/player/boy_up_2");
+		down1 = setup("/player/boy_down_1");
+		down2 = setup("/player/boy_down_2");
+		left1 = setup("/player/boy_left_1");
+		left2 = setup("/player/boy_left_2");
+		right1 = setup("/player/boy_right_1");
+		right2  = setup("/player/boy_right_2");
 	}
 }
