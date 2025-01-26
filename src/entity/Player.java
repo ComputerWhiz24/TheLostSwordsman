@@ -25,7 +25,10 @@ public class Player extends Entity{
 	public final int screenX,screenY;
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public int inventorySize = 222;
+	
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
+
 		
 		super(gp);
 		
@@ -39,9 +42,9 @@ public class Player extends Entity{
 		// 48 - 30 - 12 = 10
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		
-		attackArea.width = 36;
-		attackArea.height = 20;
+		//ATTACK AREA
+//		attackArea.width = 36;
+//		attackArea.height = 20;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -50,6 +53,8 @@ public class Player extends Entity{
 	}
 	
 	public void setDefaultValues() {
+
+
 		
 		worldX = gp.tileSize*24;
 		worldY = gp.tileSize*24;
@@ -134,13 +139,18 @@ public class Player extends Entity{
 		inventory.add(new OBJ_Key(gp));
 	}
 	public double getAttack() {
+		attackArea = currentWeapon.attackArea;
 		return attack = damage * currentWeapon.attackValue;
+		
 	}
 	public int getDefense() {
 		return defense = vitality * currentShield.defenseValue;
 	}
 	
 	public void getPlayerImage() {
+
+
+
 		
 		up1 = setup("/player/boy_up_1");
 		up2 = setup("/player/boy_up_2");
@@ -164,6 +174,8 @@ public class Player extends Entity{
 	}
 	
 	public void update() { 
+
+
 		
 		if(keyH.attackPressed) {
 			playerAttacking();
@@ -371,7 +383,17 @@ public class Player extends Entity{
 	public void pickUpObject(int i) {
 		
 		if(i != 999) { 
-			
+			String text;
+			if(inventory.size() != inventorySize) {
+				inventory.add(gp.obj[i]);
+				gp.playSE(1);
+				
+			}
+			else {
+				text = "Inventory full";
+				gp.ui.addMessage(text);
+			}
+			gp.obj[i] = null;
 		}
 		
 	}
@@ -394,6 +416,7 @@ public class Player extends Entity{
 		}
 	}
 	public void damageMonster(int idx) {
+
 		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			Entity mon = gp.monster[idx];
@@ -419,6 +442,7 @@ public class Player extends Entity{
 	
 	}
 	public void levelUp() {
+
 		if(this.xp >=this.nextLevelXp) {
 			gp.ui.addMessage("Level Up!");
 			this.level++; 
@@ -431,6 +455,7 @@ public class Player extends Entity{
 		}
 	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
+
 		//g2.setColor(Color.white);
 		//g2.fillRect(x,y,gp.tileSize,gp.tileSize);
 		BufferedImage image = null;

@@ -101,9 +101,10 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.ui.playSubState == 2) { //Inventory
 			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE) 
 				gp.ui.playSubState = 0;
-			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT)
+			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) {
 				showDesc = false;
 				gp.playSE(8);
+			}
 			if(code == KeyEvent.VK_UP){
 				if(gp.ui.slotRow!=0)
 				gp.ui.slotRow--;
