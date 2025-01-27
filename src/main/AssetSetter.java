@@ -11,6 +11,7 @@ import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Key;
+import object.OBJ_RedPotion;
 
 public class AssetSetter {
 
@@ -40,6 +41,10 @@ public class AssetSetter {
 		i++;
 		gp.obj[i] = new OBJ_BlueShield(gp);
 		gp.obj[i].worldX = gp.tileSize*35;
+		gp.obj[i].worldY  = gp.tileSize*21;
+		i++;
+		gp.obj[i] = new OBJ_RedPotion(gp);
+		gp.obj[i].worldX = gp.tileSize*37;
 		gp.obj[i].worldY  = gp.tileSize*21;
 		i++;
 	}

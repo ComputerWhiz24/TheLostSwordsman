@@ -119,6 +119,7 @@ public class Entity {
 				 
 		}
 	}
+	public void use(Entity entity) {} // Will override in player class
 	public void update() {
 
 		setAction();

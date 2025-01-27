@@ -12,7 +12,7 @@ public class OBJ_Axe extends Entity{
 		attackValue = 2;
 		attackArea.width = 30;
 		attackArea.height = 20;
-		description = "A fine beginner axe";
+		description = "[Woodercutter's Axe]\nA fine beginner axe";
 		type = type_axe;
 	}
 

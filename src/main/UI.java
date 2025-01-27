@@ -344,17 +344,19 @@ public class UI extends JFrame implements MouseListener{
 			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
 			    g2.setColor(Color.WHITE); // Set text color
 			    g2.drawString("Show more: F\n", textX, textY);
-		
+			    Entity currentItem = gp.player.inventory.get(getItemIndex());
 			    // if a sword,axe, or shield, display press e to equip
-			    if(gp.player.inventory.get(getItemIndex()).type == gp.player.type_sword ||
-			    		gp.player.inventory.get(getItemIndex()).type == gp.player.type_axe ||
-			    		gp.player.inventory.get(getItemIndex()).type == gp.player.type_shield) {
-				    if(gp.player.inventory.get(getItemIndex()) == gp.player.currentWeapon ||
-								gp.player.inventory.get(getItemIndex()) == gp.player.currentShield) {
+			    if(currentItem.type == gp.player.type_sword ||
+			    		currentItem.type == gp.player.type_axe ||
+			    				currentItem.type == gp.player.type_shield) {
+				    if(currentItem == gp.player.currentWeapon ||
+				    		currentItem == gp.player.currentShield) {
 				    	g2.drawString("Unequip: E\n", textX, textY+30);
 				    } else {
 				    	g2.drawString("Equip: E\n", textX, textY+30);
 				    }
+			    } else if (currentItem.type == gp.player.type_consumable) {
+			     	g2.drawString("Consume: E\n", textX, textY+30);
 			    }
 			}
 			

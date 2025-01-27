@@ -479,9 +479,11 @@ public class Player extends Entity{
 				} else {
 				currentShield = selectedItem;
 				defense = getDefense();
-				break;
 				}
+				break;
 			case type_consumable:
+				selectedItem.use(this);
+				inventory.remove(idx-5);
 				break;
 			}
 		}
