@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield;
 import object.OBJ_Sword;
@@ -74,6 +75,7 @@ public class Player extends Entity{
 		coin = 0;
 		currentWeapon = new OBJ_Sword(gp);
 		currentShield = new OBJ_Shield(gp);
+		projectile = new OBJ_Fireball(gp);
 		getAttack();
 		getDefense();
 		
@@ -172,6 +174,7 @@ public class Player extends Entity{
 	}
 	
 	public void update() { 
+
 
 
 		
@@ -310,7 +313,11 @@ public class Player extends Entity{
 			spriteCounter = 0;
 			}
 		}
+		if(gp.keyH.shootSpell && projectile.alive == false) { //If shoot spell is true, shoot fireball
+			projectile.set(worldX,worldY,direction,true,this);
 			
+			gp.projectileList.add(projectile);
+		}
 			keyH.talkPressed = false; // Talk pressed turns off after checking for collision
 			
 			if(keyH.attackPressed == false) {

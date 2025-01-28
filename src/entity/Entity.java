@@ -63,17 +63,20 @@ public class Entity {
 	public int intelligence;
 	public int stamina;
 	public double mana;
+	public int maxMana;
 	
 	public int coin;
 	public double attack;
 	public Entity currentWeapon;
 	public Entity currentShield;
 	public Entity currentSpell;
+	public Projectile projectile;
 	
 	// ITEM ATTRIBUTES
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
+	public int spellCost;
 	public int type; // 0 = player, 1 = NPC, 2 = Monster
 	public final int type_player = 0;
 	public final int type_npc = 1;
@@ -82,7 +85,7 @@ public class Entity {
 	public final int type_axe = 4;
 	public final int type_shield = 5;
 	public final int type_consumable = 6;
-	
+
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;
 	public boolean collisionOnLeft = false;

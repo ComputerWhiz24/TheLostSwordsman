@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc; 
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc,shootSpell;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -93,6 +93,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_Q) {
 				gp.eHandler.heal();
 			}
+			if(code == KeyEvent.VK_R) {
+				shootSpell = true;
+			}
 		}
 		else if(gp.ui.playSubState == 1) { //Character info
 			if(code == KeyEvent.VK_C  || code == KeyEvent.VK_ESCAPE) 
@@ -174,6 +177,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+
 		
 		int code = e.getKeyCode();
 		
@@ -189,6 +193,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 		if(code == KeyEvent.VK_D) {
 			rightPressed = false;
+		}
+		if(code == KeyEvent.VK_R) {
+			shootSpell = false;
 		}
 	
 	}
