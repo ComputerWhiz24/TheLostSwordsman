@@ -313,23 +313,27 @@ public class Player extends Entity{
 			spriteCounter = 0;
 			}
 		}
-		if(gp.keyH.shootSpell && projectile.alive == false) { //If shoot spell is true, shoot fireball
+		if(gp.keyH.shootSpell && projectile.alive == false && projectileCooldown == 180) { //If shoot spell is true, shoot fireball
 			projectile.set(worldX,worldY,direction,true,this);
-			
 			gp.projectileList.add(projectile);
+			projectileCooldown = 30; 
+			gp.playSE(9);
 		}
-			keyH.talkPressed = false; // Talk pressed turns off after checking for collision
+		keyH.talkPressed = false; // Talk pressed turns off after checking for collision
 			
-			if(keyH.attackPressed == false) {
-				spriteCounter++;
-				if(spriteCounter > 11) {
-					if(spriteNum==1)
-						spriteNum=2;
-					else if(spriteNum==2)
-						spriteNum=1;	
-				spriteCounter=0;
-				}
+		if(keyH.attackPressed == false) {
+			spriteCounter++;
+			if(spriteCounter > 11) {
+				if(spriteNum==1)
+					spriteNum=2;
+				else if(spriteNum==2)
+					spriteNum=1;	
+			spriteCounter=0;
 			}
+		}
+		if(projectileCooldown < 180) {
+			projectileCooldown++;
+		}
 		
 
 		
@@ -367,7 +371,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) {
-				damageMonster(monsterIndex);
+				damageMonster(monsterIndex,attack);
 			}
 			worldX = currentWorldX;
 			worldY =  currentWorldY;
@@ -421,10 +425,37 @@ public class Player extends Entity{
 			 
 		}
 	}
-	public void damageMonster(int idx) {
+	public void damageMonster(int idx, double attack) {
 
 
 		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
+			gp.playSE(5);
+			Entity mon = gp.monster[idx];
+			double playerDmg = this.attack - 1.0*mon.defenseMult;
+			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
+			mon.hpBarOn = true;
+			mon.hpBarCounter = 0;
+			mon.damageReaction(); 
+			if(mon.life <= 0) {
+				mon.dying = true; 
+				respawnMonster(idx);
+				this.xp+=mon.xp;
+				gp.ui.addMessage(mon.xp + " XP Earned");
+				gp.ui.addMessage("Foe Vanquished");
+				levelUp();
+				
+			}else
+				System.out.println(mon.life);
+			swinging = true;
+
+			}
+		
+	
+	}
+	public void shootMonster(int idx, double attack) {
+
+
+		if(gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			Entity mon = gp.monster[idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;

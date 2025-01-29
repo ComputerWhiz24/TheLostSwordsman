@@ -18,6 +18,17 @@ public class Projectile extends Entity{
 		this.life = this.maxLife;
 	}
 	public void update() {
+		if(user == gp.player) {
+			int monsterIdx = gp.cChecker.checkEntity(this, gp.monster);
+			if(monsterIdx != 999) {
+				gp.player.shootMonster(monsterIdx,attack);
+				alive = false;
+			}
+			
+			
+		} else {
+			
+		}
 		
 		switch(direction) {
 		case"up":

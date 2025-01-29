@@ -44,7 +44,7 @@ public class Entity {
 	public int spriteCounter = 0;
 	int dyingCounter = 0; 
 	public int hpBarCounter = 0;  
-	
+	public int projectileCooldown;
 		//ATTRIBUTES
 	public int speed;
 	public String name;
