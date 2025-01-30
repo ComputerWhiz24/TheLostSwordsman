@@ -5,6 +5,7 @@ import java.util.Random;
 import entity.Entity;
 import entity.Player;
 import main.GamePanel;
+import object.OBJ_Rock;
 
 public class MON_GreenSlime extends Entity{
 
@@ -15,7 +16,8 @@ public class MON_GreenSlime extends Entity{
 		xp = 1;
 		damage = 1;
 		speed = 1;
-		 
+		projectile = new OBJ_Rock(gp); 
+		
 		maxLife = 1;
 		life = maxLife;
 		attack = 4;
@@ -46,9 +48,9 @@ public class MON_GreenSlime extends Entity{
 	public void setAction() {
 		
 		actionLockCounter++;
-		
+				
 		if(actionLockCounter == 80) {
-			
+				
 			Random random = new Random();
 			int i = random.nextInt(100)+1; //Random number from 1 to 100
 			
@@ -62,6 +64,14 @@ public class MON_GreenSlime extends Entity{
 				direction = "right";
 		
 			actionLockCounter = 0;
+			
+		
+		}
+		int i = new Random().nextInt(100)+1;
+		if(i >99 && projectile.alive == false && projectileCooldown > 30) {
+			projectile.set(worldX,worldY,direction,true,this);
+			gp.projectileList.add(projectile);
+			projectileCooldown = 0;
 		}
 	}
 	public void damageReaction() {

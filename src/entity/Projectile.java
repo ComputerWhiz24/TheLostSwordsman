@@ -27,7 +27,11 @@ public class Projectile extends Entity{
 			
 			
 		} else {
-			
+			boolean hitPlayer = gp.cChecker.checkPlayer(this);
+			if(gp.player.hitCooldown == false && hitPlayer == true) {
+				damagePlayer(this);
+				alive = false; 
+			}
 		}
 		
 		switch(direction) {

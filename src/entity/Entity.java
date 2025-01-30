@@ -153,13 +153,16 @@ public class Entity {
 		spriteCounter++;
 		if(spriteCounter > 11) {
 			if(spriteNum==1)
-					spriteNum=2;
+				spriteNum=2;
 			else if(spriteNum==2)
-					spriteNum=1;	
+				spriteNum=1;	
 			spriteCounter=0;
 				
-			}
 		}
+		if(projectileCooldown < 180) {
+			projectileCooldown++;
+		}
+	}
 	public void damagePlayer(Entity mon) {
 
 		if(gp.player.hitCooldown == false) {
