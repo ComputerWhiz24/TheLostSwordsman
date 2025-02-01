@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.OBJ_ManaCrystal;
 
 
 public class UI extends JFrame implements MouseListener{
@@ -46,7 +47,7 @@ public class UI extends JFrame implements MouseListener{
 	public int slotXStart;
 	public int slotYStart;
 	
-	BufferedImage heart_full,heart_half,heart_blank;
+	BufferedImage heart_full,heart_half,heart_blank,crystal_full,crystal_blank;
 	
 	
 	double playTime;
@@ -69,7 +70,9 @@ public class UI extends JFrame implements MouseListener{
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3; 
-		 
+		Entity crystal = new OBJ_ManaCrystal(gp);
+		crystal_full = crystal.image;
+		crystal_blank = crystal.image2;
 	}   
 	 
 	public void addMessage(String text) {
@@ -129,6 +132,7 @@ public class UI extends JFrame implements MouseListener{
 		x = gp.tileSize/2;
 		y = gp.tileSize/2;
 		i = 0;
+		// CURRENT LIFE
 		while(i < gp.player.life) {
 			g2.drawImage(heart_half, x, y,null);
 			i++;
@@ -137,7 +141,24 @@ public class UI extends JFrame implements MouseListener{
 			i++;
 			x+= gp.tileSize;
 		}
-		//LIFE
+		// MAX MANA
+		 x = gp.tileSize/2;
+		 y = gp.tileSize*2;
+		 i = 0;
+		 while(i < gp.player.maxMana/20) {
+			 g2.drawImage(crystal_blank, x, y, null);
+			 i++;
+			 x += 35;
+			 }
+		 // CURRENT MANA
+		 x = gp.tileSize/2;
+		 y = gp.tileSize*2;
+		 i = 0;
+		 while(i < gp.player.mana/20) {
+			 g2.drawImage(crystal_full, x, y, null);
+			 i++;
+			 x += 35;
+			 }
 	}
 	public void drawMessage() {
 		int messageX = gp.tileSize;
