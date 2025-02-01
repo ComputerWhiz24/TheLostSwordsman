@@ -172,7 +172,12 @@ public class Entity {
 			gp.player.hitCooldown = true;
 		}
 	}
-	
+	public void shootPlayer(double attack) {
+		gp.playSE(6);
+		double monDmg = attack;
+		gp.player.life -= monDmg;
+		gp.player.hitCooldown = true;
+	}
 	public void draw(Graphics2D g2) {
 		
 		BufferedImage image = null;

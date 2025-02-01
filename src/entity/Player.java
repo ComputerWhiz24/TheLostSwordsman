@@ -460,7 +460,7 @@ public class Player extends Entity{
 		if(gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			Entity mon = gp.monster[idx];
-			double playerDmg = this.attack - 1.0*mon.defenseMult;
+			double playerDmg = attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
 			mon.hpBarOn = true;
 			mon.hpBarCounter = 0;

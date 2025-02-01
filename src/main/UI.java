@@ -246,7 +246,7 @@ public class UI extends JFrame implements MouseListener{
 		textY = frameY + gp.tileSize + (int) frameHeight/6;
 		String value = "";
 		DecimalFormat df = new DecimalFormat("#.00");
-	
+		String roundedAttack = df.format(gp.player.attack);
 		
 		
 		value = String.valueOf(gp.player.level);
@@ -289,7 +289,7 @@ public class UI extends JFrame implements MouseListener{
 		g2.drawString(value, textX, textY); 
 		textY += lineHeight;
 		
-		value = String.valueOf(gp.player.attack);
+		value = roundedAttack;
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY); 
 		textY += lineHeight;
