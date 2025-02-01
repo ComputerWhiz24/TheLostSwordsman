@@ -74,4 +74,10 @@ public class Projectile extends Entity{
 		}
 		spriteCounter = 0;
 	}
+	public boolean hasMana(Entity user) {
+		// WILL BE OVERRIDEN BY CHILDREN
+		boolean haveMana = false;
+		return haveMana;
+	}
+	public void subtractMana(Entity user) {}
 }

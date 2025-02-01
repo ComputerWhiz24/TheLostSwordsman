@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -27,5 +28,19 @@ public class OBJ_Fireball extends Projectile{
 		left2 = setup("/projectile/fireball_left_2");
 		right1 = setup("/projectile/fireball_right_1");
 		right2  = setup("/projectile/fireball_right_2");
+	}
+	public boolean hasMana(Entity user) {
+		 
+		boolean haveMana;
+		if(user.mana>=spellCost) {
+			haveMana = true;
+		}
+		else {
+			haveMana = false;
+		}
+		return haveMana;
+	}
+	public void subtractMana(Entity user) {
+		user.mana -= spellCost;
 	}
 }

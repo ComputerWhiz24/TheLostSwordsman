@@ -89,58 +89,6 @@ public class Player extends Entity{
 		inventory.add(new OBJ_Key(gp));
 		inventory.add(new OBJ_Key(gp));
 		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
 	}
 	public double getAttack() {
 
@@ -315,8 +263,16 @@ public class Player extends Entity{
 			spriteCounter = 0;
 			}
 		}
-		if(gp.keyH.shootSpell && projectile.alive == false && projectileCooldown == 180) { //If shoot spell is true, shoot fireball
+		if(gp.keyH.shootSpell && projectile.alive == false && projectileCooldown == 180 && projectile.hasMana(this)) { //If shoot spell is true, shoot fireball
+			
+			// SET COORDINATES, DIRECTION, AND USER
+			
 			projectile.set(worldX,worldY,direction,true,this);
+			
+			//SUBTRACT MAMA
+			projectile.subtractMana(this);
+			
+			// ADD TO LIST
 			gp.projectileList.add(projectile);
 			projectileCooldown = 30; 
 			gp.playSE(9);
@@ -482,8 +438,6 @@ public class Player extends Entity{
 	
 	}
 	public void levelUp() {
-
-
 
 		if(this.xp >=this.nextLevelXp) {
 			gp.ui.addMessage("Level Up!");

@@ -226,6 +226,8 @@ public class UI extends JFrame implements MouseListener{
 		textY += lineHeight;
 		g2.drawString("Life: ",textX,textY);
 		textY += lineHeight;
+		g2.drawString("Mana: ",textX,textY);
+		textY += lineHeight;
 		g2.drawString("Strength: ",textX,textY);
 		textY += lineHeight;
 		g2.drawString("Vitality: ",textX,textY);
@@ -255,6 +257,11 @@ public class UI extends JFrame implements MouseListener{
 		textY += lineHeight;
 		 
 		value = df.format(gp.player.life) + "/" + df.format(gp.player.maxLife);
+		textX = getXForAlignRight(value,tailX);
+		g2.drawString(value, textX, textY);
+		textY += lineHeight;
+		
+		value = df.format(gp.player.mana) + "/" + df.format(gp.player.maxMana);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
