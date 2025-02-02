@@ -77,7 +77,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	}
 	public void playState(int code) {
 		
-		if(gp.ui.playSubState == 0) {
+		if(gp.ui.playSubState == 0) {	// PLAYING GAME
 			if(code == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.pauseState;
 			}
