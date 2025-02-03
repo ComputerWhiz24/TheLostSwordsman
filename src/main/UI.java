@@ -612,12 +612,16 @@ public class UI extends JFrame implements MouseListener{
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 		x += gp.tileSize;
 		y +=  gp.tileSize;
+		currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
 		for(String line: currentDialogue.split("\n")) {
 			g2.drawString(line, x, y);
 			y+= 40;
 		}
 		// PRESS ENTER TO CONTINUE CONVERSATION 
-
+		if(gp.keyH.continueConversation == true && Entity.dialogueIndex<Entity.currentDialogue.length) {
+			Entity.dialogueIndex++;
+		}
+		gp.keyH.continueConversation = false;
 
 	}
 	public void drawWindow(int x, int y, int width, int height) {

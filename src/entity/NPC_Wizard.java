@@ -67,15 +67,12 @@ public class NPC_Wizard extends Entity{
 		wizardDialogue[3] = "Well, good luck";
 	}
 	public void speak() {
-		for(int i =0; i< wizardDialogue.length; i++) {
-			currentDialogue[i] = wizardDialogue[i];
-		}
-		if(currentDialogue[dialogueIndex] == null) {
-			gp.gameState = gp.playState; 
+	
+	
+		if(dialogueIndex >= wizardDialogue.length) {
 			dialogueIndex = 0;
-		}
-		gp.ui.currentDialogue = currentDialogue[dialogueIndex];
-			
+		} 
+		currentDialogue = wizardDialogue;
 		
 			switch(gp.player.direction) {
 				case"up":

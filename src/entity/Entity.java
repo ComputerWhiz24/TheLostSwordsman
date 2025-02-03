@@ -26,7 +26,7 @@ public class Entity {
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collision = false;  
 	public static Entity currentSpeaker = new Entity(gp);
-	public static String[] currentDialogue;
+	public static String[] currentDialogue = new String[20];
 		//STATE
 	public int worldX,worldY;
 	public String direction = "down";

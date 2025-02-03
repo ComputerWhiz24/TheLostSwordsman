@@ -62,13 +62,11 @@ public class NPC_Shopkeeper extends Entity{
 			shopkeeperDialogue[0] = "Looking to buy or sell somethin' little man?";
 		}
 		public void speak() {
-			for(int i =0; i< shopkeeperDialogue.length; i++) {
-				currentDialogue[i] = shopkeeperDialogue[i];
+		
+			if(dialogueIndex >= shopkeeperDialogue.length) {
+				dialogueIndex = 0;
 			}
-			
-			if(currentDialogue[dialogueIndex] == null) 
-				gp.gameState = gp.playState; 
-			gp.ui.currentDialogue = currentDialogue[dialogueIndex];
+			currentDialogue = shopkeeperDialogue;
 			
 	
 			switch(gp.player.direction) {
