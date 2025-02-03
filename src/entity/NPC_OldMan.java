@@ -57,12 +57,10 @@ public class NPC_OldMan extends Entity{
 	}
 	
 	public void setDialogue() {
-		dialogues[0] = "Hello there, young sir";
-		dialogues[1] = "Looking for the island treasures?";
-		dialogues[2] = "I used to be a great wizard but now.... I'm a little too\nold for adventures";
-		dialogues[3] = "Well, good luck";
+	
 	}
 	public void speak() {
 		super.speak();
+		
 	}
 }

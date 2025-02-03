@@ -617,13 +617,7 @@ public class UI extends JFrame implements MouseListener{
 			y+= 40;
 		}
 		// PRESS ENTER TO CONTINUE CONVERSATION 
-		if(gp.keyH.continueConversation == true) {
-			Entity.dialogueIndex++;
-			if(Entity.dialogues[Entity.dialogueIndex] == null)
-				gp.gameState = gp.playState; 
-			gp.ui.currentDialogue = Entity.dialogues[Entity.dialogueIndex];
-		}
-		gp.keyH.continueConversation = false;
+
 
 	}
 	public void drawWindow(int x, int y, int width, int height) {

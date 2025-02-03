@@ -9,13 +9,16 @@ import main.UtilityTool;
 	
 public class NPC_Shopkeeper extends Entity{
 
+	public static String[] shopkeeperDialogue = new String[1];
 		public NPC_Shopkeeper(GamePanel gp) {
 			super(gp);
 			
+		
 			direction = "down";
 			speed = 1;
 			getImage();
 			setDialogue();
+			
 		}
 			
 		public void getImage() {
@@ -56,9 +59,32 @@ public class NPC_Shopkeeper extends Entity{
 			}
 		}
 		public void setDialogue() {
-			dialogues[5] = "Looking to buy or sell somethin' little man?";
+			shopkeeperDialogue[0] = "Looking to buy or sell somethin' little man?";
 		}
 		public void speak() {
-			super.speak();
+			for(int i =0; i< shopkeeperDialogue.length; i++) {
+				currentDialogue[i] = shopkeeperDialogue[i];
+			}
+			
+			if(currentDialogue[dialogueIndex] == null) 
+				gp.gameState = gp.playState; 
+			gp.ui.currentDialogue = currentDialogue[dialogueIndex];
+			
+	
+			switch(gp.player.direction) {
+				case"up":
+					direction = "down";
+					break;
+				case"down":
+					direction = "up";
+					break;
+				case"left":
+					direction = "right";
+					break;
+				case"right":
+					direction = "left";
+					break;
+					 
+			}
 		}
 	}

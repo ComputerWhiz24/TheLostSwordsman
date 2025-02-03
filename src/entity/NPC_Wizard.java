@@ -13,6 +13,7 @@ import main.UtilityTool;
 
 public class NPC_Wizard extends Entity{
 
+	public static String[] wizardDialogue = new String[4];
 	public NPC_Wizard(GamePanel gp) {
 		super(gp);
 		
@@ -60,12 +61,36 @@ public class NPC_Wizard extends Entity{
 		}
 	}
 	public void setDialogue() {
-		dialogues[0] = "Hello there, young sir";
-		dialogues[1] = "Looking for the island treasures?";
-		dialogues[2] = "I used to be a great wizard but now.... I'm a little too\nold for adventures";
-		dialogues[3] = "Well, good luck";
+		wizardDialogue[0] = "Hello there, young sir";
+		wizardDialogue[1] = "Looking for the island treasures?";
+		wizardDialogue[2] = "I used to be a great wizard but now.... I'm a little too\nold for adventures";
+		wizardDialogue[3] = "Well, good luck";
 	}
 	public void speak() {
-		super.speak();
-	}
+		for(int i =0; i< wizardDialogue.length; i++) {
+			currentDialogue[i] = wizardDialogue[i];
+		}
+		if(currentDialogue[dialogueIndex] == null) {
+			gp.gameState = gp.playState; 
+			dialogueIndex = 0;
+		}
+		gp.ui.currentDialogue = currentDialogue[dialogueIndex];
+			
+		
+			switch(gp.player.direction) {
+				case"up":
+					direction = "down";
+					break;
+				case"down":
+					direction = "up";
+					break;
+				case"left":
+					direction = "right";
+					break;
+				case"right":
+					direction = "left";
+					break;
+					 
+			}
+		}
 }

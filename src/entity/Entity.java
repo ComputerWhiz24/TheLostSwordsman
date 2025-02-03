@@ -15,7 +15,7 @@ import main.UtilityTool;
 
 public class Entity {
 
-	public GamePanel gp;
+	public static GamePanel gp;
 	
 
 	public BufferedImage image,image2,image3;
@@ -25,7 +25,8 @@ public class Entity {
 	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collision = false;  
-	public static String dialogues[] = new String[20];
+	public static Entity currentSpeaker = new Entity(gp);
+	public static String[] currentDialogue;
 		//STATE
 	public int worldX,worldY;
 	public String direction = "down";
@@ -102,26 +103,7 @@ public class Entity {
 	
 	public void setAction() {}
 	public void damageReaction() {}
-	public void speak() {
-		if(dialogues[dialogueIndex] == null) 
-			dialogueIndex = 0; 
-		gp.ui.currentDialogue = dialogues[dialogueIndex];
-		switch(gp.player.direction) {
-			case"up":
-				direction = "down";
-				break;
-			case"down":
-				direction = "up";
-				break;
-			case"left":
-				direction = "right";
-				break;
-			case"right":
-				direction = "left";
-				break;
-				 
-		}
-	}
+	public void speak() {} // Will override in NPC subclasses
 	public void use(Entity entity) {} // Will override in player class
 	public void update() {
 
