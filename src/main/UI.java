@@ -618,8 +618,12 @@ public class UI extends JFrame implements MouseListener{
 			y+= 40;
 		}
 		// PRESS ENTER TO CONTINUE CONVERSATION 
-		if(gp.keyH.continueConversation == true && Entity.dialogueIndex<Entity.currentDialogue.length) {
+		if(gp.keyH.continueConversation == true) {
 			Entity.dialogueIndex++;
+		}
+		if(Entity.dialogueIndex>=Entity.currentDialogue.length) {
+			Entity.dialogueIndex = 0;
+			gp.gameState = gp.playState;
 		}
 		gp.keyH.continueConversation = false;
 
