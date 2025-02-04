@@ -86,6 +86,7 @@ public class Entity {
 	public final int type_axe = 4;
 	public final int type_shield = 5;
 	public final int type_consumable = 6;
+	public final int type_collectible = 7;
 
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;
@@ -249,7 +250,7 @@ public class Entity {
 		if(dying == true) {
 			death(g2);
 		}
-		g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
+		g2.drawImage(image, screenX, screenY,null);
 	}
 	public void death(Graphics2D g2) {
 		int mult = 20;

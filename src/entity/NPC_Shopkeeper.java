@@ -23,14 +23,14 @@ public class NPC_Shopkeeper extends Entity{
 			
 		public void getImage() {
 				try {
-				up1 = setupAlternate("/npc/shopkeeper5",1,1);
-				up2 = setupAlternate("/npc/shopkeeper6",1,1);
-				down1 = setupAlternate("/npc/shopkeeper1",1,1);
-				down2 = setupAlternate("/npc/shopkeeper2",1,1);
-				left1 = setupAlternate("/npc/shopkeeper3",1,1);
-				left2 = setupAlternate("/npc/shopkeeper4",1,1);
-				right1 = setupAlternate("/npc/shopkeeper7",1,1);
-				right2  = setupAlternate("/npc/shopkeeper8",1,1);
+				up1 = setupAlternate("/npc/shopkeeper5",1.5,1.5);
+				up2 = setupAlternate("/npc/shopkeeper6",1.5,1.5);
+				down1 = setupAlternate("/npc/shopkeeper1",1.5,1.5);
+				down2 = setupAlternate("/npc/shopkeeper2",1.5,1.5);
+				left1 = setupAlternate("/npc/shopkeeper3",1.5,1.5);
+				left2 = setupAlternate("/npc/shopkeeper4",1.5,1.5);
+				right1 = setupAlternate("/npc/shopkeeper7",1.5,1.5);
+				right2  = setupAlternate("/npc/shopkeeper8",1.5,1.5);
 				}catch(Exception e) {
 					e.printStackTrace();
 			
