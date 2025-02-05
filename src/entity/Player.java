@@ -350,18 +350,26 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		
+	
 		if(i != 999) { 
-			String text;
-			if(inventory.size() != inventorySize) {
-				inventory.add(gp.obj[i]);
-				gp.playSE(1);
-				
+			//	COLLECTIBLE ITEMS
+			if(gp.obj[i].type == type_collectible) {
+				 gp.obj[i].use(this);
+				 gp.obj[i] = null; 
+			} else {
+				// INVENTORY ITEMS
+				String text;
+				if(inventory.size() != inventorySize) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(1);
+					
+				}
+				else {
+					text = "Inventory full";
+					gp.ui.addMessage(text);
+				}
+				gp.obj[i] = null;
 			}
-			else {
-				text = "Inventory full";
-				gp.ui.addMessage(text);
-			}
-			gp.obj[i] = null;
 		}
 		
 	}
@@ -398,7 +406,10 @@ public class Player extends Entity{
 			if(mon.life <= 0) {
 				mon.dying = true; 
 				respawnMonster(idx);
+				int gold = (int) (Math.random() *5 + 1);
 				this.xp+=mon.xp;
+				this.coin += gold;
+				gp.ui.addMessage(gold + " Gold Earned");
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();

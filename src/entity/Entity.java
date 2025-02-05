@@ -74,6 +74,7 @@ public class Entity {
 	public Projectile projectile;
 	
 	// ITEM ATTRIBUTES
+	public int value;
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";

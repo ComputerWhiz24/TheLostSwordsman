@@ -5,10 +5,11 @@ import main.GamePanel;
 
 public class OBJ_RedPotion extends Entity{
 	GamePanel gp;
-	int value = 5;
+	
 	public OBJ_RedPotion(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
+		value = 5; 
 		name = "Red Potion";
 		type = type_consumable;
 		down1 = setup("/objects/potion_red");
