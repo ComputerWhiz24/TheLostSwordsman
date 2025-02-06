@@ -405,8 +405,9 @@ public class Player extends Entity{
 			mon.damageReaction(); 
 			if(mon.life <= 0) {
 				mon.dying = true; 
+				mon.checkDrop();
 				respawnMonster(idx);
-				int gold = (int) (Math.random() *5 + 1);
+				int gold = (int) ((Math.random() *5) + 1);
 				this.xp+=mon.xp;
 				this.coin += gold;
 				gp.ui.addMessage(gold + " Gold Earned");

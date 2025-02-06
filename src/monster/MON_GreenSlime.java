@@ -5,6 +5,9 @@ import java.util.Random;
 import entity.Entity;
 import entity.Player;
 import main.GamePanel;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
 public class MON_GreenSlime extends Entity{
@@ -78,9 +81,19 @@ public class MON_GreenSlime extends Entity{
 		
 		actionLockCounter = 0;
 		direction = gp.player.direction;
-	 
-	
+	}
+	public void checkDrop() {
+		// RANDOM CHANCE
+		int i = new Random().nextInt(300) + 1;
 		
+		// SET SLIME DROP
+		if(i <= 100) {
+			dropItem(new OBJ_Coin_Bronze(gp));
+		} else if (i>100 && i <= 200) {
+			dropItem(new OBJ_Heart(gp));
+		} else if (i>200 && i <= 300) {
+			dropItem(new OBJ_ManaCrystal(gp));
+		}
 	}
 
 }

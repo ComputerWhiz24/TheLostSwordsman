@@ -119,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable{
 			//PLAYER
 			player.update();
 			//NPC
-			for(int i = 0; i<npc.length;i++) {
+			for(int i = 0; i<npc .length;i++) {
 				if(npc[i] != null) {
 					npc[i].update();
 				}
@@ -128,8 +128,9 @@ public class GamePanel extends JPanel implements Runnable{
 				if(monster[i] != null) {
 					if(monster[i].alive && !monster[i].dying) 
 						monster[i].update();
-					if(!monster[i].alive)
+					if(!monster[i].alive) {
 						monster[i] = null;
+					}
 				} 
 			}
 			for(int i = 0; i<projectileList.size();i++) {
