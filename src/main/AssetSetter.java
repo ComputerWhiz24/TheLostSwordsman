@@ -13,9 +13,11 @@ import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Key;
 import object.OBJ_RedPotion;
+import tile_interactive.IT_DryTree;
 
 public class AssetSetter {
-
+	// X = 23 IS MIDDLE OF MAP... ASETTER STARTS AT 0 BUT MAP STARTS AT 1
+	// Y STARTS AT 0
 	GamePanel gp;
 
 	public AssetSetter(GamePanel gp) {
@@ -76,5 +78,23 @@ public class AssetSetter {
 		gp.npc[1] = new NPC_Wizard(gp);
 		gp.npc[1].worldX = gp.tileSize*23;
 		gp.npc[1].worldY  = gp.tileSize*21;
+	}
+	public void setInteractiveTile() {
+		int i = 0;
+		
+		gp.iTile[i] = new IT_DryTree(gp,26,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,27,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,28,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,29,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,30,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,31,7);
+		i++;
+		gp.iTile[i] = new IT_DryTree(gp,32,7);
+		i++;
 	}
 }

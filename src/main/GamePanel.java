@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
+import tile_interactive.InteractiveTile;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -48,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity obj[] = new Entity[10];
 	public Entity npc[] = new Entity[10];
 	public Entity monster[] = new Entity[20];
+	public InteractiveTile iTile[] = new InteractiveTile[50];
 	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList  = new ArrayList<>();
 	Thread gameThread;
@@ -75,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.addSlimes(5);
+		aSetter.setInteractiveTile();
 		gameState = titleState;
 	}
 	
@@ -118,12 +121,13 @@ public class GamePanel extends JPanel implements Runnable{
 		if(gameState == playState) {
 			//PLAYER
 			player.update();
-			//NPC
+			//UPDATES NPCS
 			for(int i = 0; i<npc .length;i++) {
 				if(npc[i] != null) {
 					npc[i].update();
 				}
 			}
+			// UPDATE MONSTERS 
 			for(int i = 0; i<monster.length;i++) {
 				if(monster[i] != null) {
 					if(monster[i].alive && !monster[i].dying) 
@@ -133,6 +137,7 @@ public class GamePanel extends JPanel implements Runnable{
 					}
 				} 
 			}
+			// UPDATE PROJECTILES
 			for(int i = 0; i<projectileList.size();i++) {
 				if(projectileList.get(i) != null) {
 					if(projectileList.get(i).alive) 
@@ -140,6 +145,12 @@ public class GamePanel extends JPanel implements Runnable{
 					if(!projectileList.get(i).alive)
 						projectileList.remove(i);
 				} 
+			}
+			// UPDATE STATUS OF INTERACTIVE TILES
+			for(int i = 0; i < iTile.length; i++) {
+				if(iTile[i] != null) {
+					iTile[i].update();
+				}
 			}
 		}
 		if(gameState == pauseState) {
@@ -156,7 +167,7 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		long drawStart = 0;
 		
-		// DEBUG
+		// DEBUG 
 		if(keyH.checkDrawTime == true) {
 		drawStart = System.nanoTime();
 		}
@@ -168,6 +179,13 @@ public class GamePanel extends JPanel implements Runnable{
 		} else {
 		
 			tileM.draw(g2);
+			
+			// DRAWING INTERACTIVE TILES (BREAKABLE)
+			for(int i = 0; i < iTile.length; i++) {
+				if(iTile[i] != null) {
+					iTile[i].draw(g2);
+				}
+			}
 			
 			//ADD ALL ENTITIES TO ENTITYLIST
 			entityList.add(player);
