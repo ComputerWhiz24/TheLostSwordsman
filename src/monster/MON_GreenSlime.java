@@ -84,15 +84,11 @@ public class MON_GreenSlime extends Entity{
 	}
 	public void checkDrop() {
 		// RANDOM CHANCE
-		int i = new Random().nextInt(300) + 1;
+		int i = new Random().nextInt(100) + 1;
 		
 		// SET SLIME DROP
 		if(i <= 100) {
 			dropItem(new OBJ_Coin_Bronze(gp));
-		} else if (i>100 && i <= 200) {
-			dropItem(new OBJ_Heart(gp));
-		} else if (i>200 && i <= 300) {
-			dropItem(new OBJ_ManaCrystal(gp));
 		}
 	}
 

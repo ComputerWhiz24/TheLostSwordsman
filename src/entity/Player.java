@@ -436,7 +436,11 @@ public class Player extends Entity{
 			mon.damageReaction(); 
 			if(mon.life <= 0) {
 				mon.dying = true; 
+				mon.checkDrop();
 				respawnMonster(idx);
+				int gold = (int) ((Math.random() *5) + 1);
+				this.coin += gold;
+				gp.ui.addMessage(gold + " Gold Earned");
 				this.xp+=mon.xp;
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
