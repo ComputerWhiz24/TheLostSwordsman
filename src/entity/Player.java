@@ -181,9 +181,12 @@ public class Player extends Entity{
 			
 			//CHECK MONSTER COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			if(monsterIndex != 999) 
+			if(monsterIndex != 999) {
 				hitByMonster(monsterIndex);
+			}
+			// CHECK INTERACTIVE TILE COLLISION
 			
+			gp.cChecker.checkEntity(this, gp.iTile);
 			
 			 // CHECK EVENT
 			gp.eHandler.checkEvent();
@@ -331,6 +334,9 @@ public class Player extends Entity{
 			if(monsterIndex != 999) {
 				damageMonster(monsterIndex,attack);
 			}
+			int iTileIdx = gp.cChecker.checkEntity(this,gp.iTile);
+			damageTile(iTileIdx);
+			
 			worldX = currentWorldX;
 			worldY =  currentWorldY;
 			solidArea.width = solidAreaWidth;
@@ -422,6 +428,11 @@ public class Player extends Entity{
 			}
 		
 	
+	}
+	public void damageTile(int tileIdx) {
+		if(tileIdx!=999 && gp.iTile[tileIdx].destructible) {
+			gp.iTile[tileIdx] = null;
+		}
 	}
 	public void shootMonster(int idx, double attack) {
 

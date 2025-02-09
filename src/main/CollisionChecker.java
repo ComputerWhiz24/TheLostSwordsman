@@ -200,7 +200,7 @@ public class CollisionChecker {
 		return index;
 	}
 	
-	// NPC OR MONSTER COLLISION
+	// NPC OR MONSTER COLLISION OR INTERACTIVE TILE COLLISION
 	public int checkEntity(Entity entity, Entity[] target) {
 		int index = 999;
 		
@@ -213,7 +213,7 @@ public class CollisionChecker {
 				
 				target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
 				target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
-				
+			
 				switch(entity.direction) {
 				
 				case"up":
@@ -224,6 +224,14 @@ public class CollisionChecker {
 					entity.solidArea.x -=entity.speed; break;
 				case"right":
 					entity.solidArea.x +=entity.speed; break;
+				case"upLeft":
+					entity.solidArea.y -=entity.speed; entity.solidArea.x -=entity.speed; break;
+				case"upRight": 
+					entity.solidArea.y -=entity.speed; entity.solidArea.x +=entity.speed; break;
+				case"downLeft":
+					entity.solidArea.y +=entity.speed; entity.solidArea.x -=entity.speed; break;
+				case"downRight":
+					entity.solidArea.y +=entity.speed; entity.solidArea.x +=entity.speed; break;
 			
 				}
 				if(entity.solidArea.intersects(target[i].solidArea) && target[i] != entity) {
