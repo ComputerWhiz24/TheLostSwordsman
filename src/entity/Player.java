@@ -17,6 +17,7 @@ import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield;
 import object.OBJ_Sword;
+import tile_interactive.InteractiveTile;
 
 public class Player extends Entity{
 
@@ -430,10 +431,25 @@ public class Player extends Entity{
 	
 	}
 	public void damageTile(int tileIdx) {
-		if(tileIdx!=999 && gp.iTile[tileIdx].destructible && gp.iTile[tileIdx].isCorrectItem(this)) {
-			gp.iTile[tileIdx] = null;
-		}
+			if(tileIdx != 999 && gp.iTile[tileIdx].destructible && gp.iTile[tileIdx].isCorrectItem(this)) {
+				if(!swinging) {
+					System.out.println(gp.iTile[tileIdx].life);
+					gp.iTile[tileIdx].life--;
+					if(gp.iTile[tileIdx].life == 2) {
+						gp.iTile[tileIdx].image = down1;
+					}
+					else if (gp.iTile[tileIdx].life == 1) {
+						gp.iTile[tileIdx].image = down2;
+					}else if(gp.iTile[tileIdx].life == 0){
+						gp.iTile[tileIdx]= null;
+					}
+				}
+
+			swinging = true;
+			}
 	}
+	
+
 	public void shootMonster(int idx, double attack) {
 
 
@@ -460,7 +476,6 @@ public class Player extends Entity{
 			}else
 				System.out.println(mon.life);
 			swinging = true;
-
 			}
 		
 	

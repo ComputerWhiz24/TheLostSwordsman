@@ -94,10 +94,6 @@ public class Entity {
 	public boolean collisionOnLeft = false;
 	public boolean collisionOnRight = false;
 	public boolean collisionOnDown = false;
-
-
-
-
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -303,6 +299,7 @@ public class Entity {
 	public void changeAlpha(Graphics2D g2, float alphaValue) {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 	}
+	
 	public BufferedImage setup(String imagePath) {
 		
 		UtilityTool uTool = new UtilityTool();
@@ -317,8 +314,7 @@ public class Entity {
 		}
 		return image;
 	
-}
-
+	}
 	public BufferedImage setupAlternate(String imagePath, double widthMult, double heightMult) {
 		
 		UtilityTool uTool = new UtilityTool();
