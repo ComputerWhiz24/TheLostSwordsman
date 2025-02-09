@@ -430,7 +430,7 @@ public class Player extends Entity{
 	
 	}
 	public void damageTile(int tileIdx) {
-		if(tileIdx!=999 && gp.iTile[tileIdx].destructible) {
+		if(tileIdx!=999 && gp.iTile[tileIdx].destructible && gp.iTile[tileIdx].isCorrectItem(this)) {
 			gp.iTile[tileIdx] = null;
 		}
 	}
