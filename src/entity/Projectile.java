@@ -22,12 +22,14 @@ public class Projectile extends Entity{
 			int monsterIdx = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIdx != 999) {
 				gp.player.shootMonster(monsterIdx,attack);
+				generateParticle(user.projectile,gp.monster[monsterIdx]);
 				alive = false;
 			}
 		} else {
 			boolean hitPlayer = gp.cChecker.checkPlayer(this);
 			if(gp.player.hitCooldown == false && hitPlayer == true) {
 				shootPlayer(this.attack);
+				generateParticle(user.projectile,gp.player);
 				alive = false; 
 			}
 		}

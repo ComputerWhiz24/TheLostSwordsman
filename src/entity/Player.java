@@ -416,6 +416,8 @@ public class Player extends Entity{
 				if(!swinging) {
 					System.out.println(gp.iTile[tileIdx].life);
 					gp.iTile[tileIdx].life--;
+					generateParticle(gp.iTile[tileIdx], gp.iTile[tileIdx]);
+					gp.playSE(10);
 				}
 				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE
 				if(gp.iTile[tileIdx].life == 2) {

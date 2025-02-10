@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,6 +35,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
 	
+	// FULLSCREEN
+	int screenWidth2 = screenWidth;
+	int screenHeight2 = screenHeight;
+	BufferedImage tempScreen;
+	Graphics2D g2;
+	
 	//FPS
 	int FPS= 60;
 	
@@ -50,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity npc[] = new Entity[10];
 	public Entity monster[] = new Entity[20];
 	public InteractiveTile iTile[] = new InteractiveTile[50];
-	public ArrayList<Entity> particleList = new ArrayList<>();
+	public ArrayList<Entity> particleList = new ArrayList<>(); 
 	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList  = new ArrayList<>();
 	Thread gameThread;
@@ -80,6 +87,9 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.addSlimes(5);
 		aSetter.setInteractiveTile();
 		gameState = titleState;
+		
+		tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
+		g2 = (Graphics2D) tempScreen.getGraphics();
 	}
 	
 	public void startGameThread() {
@@ -147,6 +157,14 @@ public class GamePanel extends JPanel implements Runnable{
 						projectileList.remove(i);
 				} 
 			}
+			for(int i = 0; i<particleList.size();i++) {
+				if(particleList.get(i) != null) {
+					if(particleList.get(i).alive)  
+						particleList.get(i).update();
+					if(!particleList.get(i).alive)
+						particleList.remove(i);
+				} 
+			}
 			// UPDATE STATUS OF INTERACTIVE TILES
 			for(int i = 0; i < iTile.length; i++) {
 				if(iTile[i] != null) {
@@ -160,12 +178,80 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		
 	}
-	
+	public void drawToTempScreen() {
+		//TITLE SCREEN
+				if(gameState == titleState) {
+					ui.draw(g2);
+					
+				} else {
+				
+					tileM.draw(g2);
+					
+					// DRAWING INTERACTIVE TILES (BREAKABLE)
+					for(int i = 0; i < iTile.length; i++) {
+						if(iTile[i] != null) {
+							iTile[i].draw(g2);
+						}
+					}
+					
+					//ADD ALL ENTITIES TO ENTITYLIST
+					entityList.add(player);
+					
+					for(int i = 0; i < npc.length;i++) {
+						if(npc[i] != null) {
+							entityList.add(npc[i]);
+						}
+					}
+					for(int i = 0; i < obj.length;i++) {
+						if(obj[i] != null) {
+							entityList.add(obj[i]);
+						}
+					}
+					for(int i = 0; i < monster.length;i++) {
+						if(monster[i] != null) {
+							entityList.add(monster[i]);
+						}
+					}
+					for(int i = 0; i < projectileList.size();i++) {
+						if(projectileList.get(i)!= null) {
+							entityList.add(projectileList.get(i));
+						}
+					}
+					for(int i = 0; i < particleList.size();i++) {
+						if(particleList.get(i)!= null) {
+							entityList.add(particleList.get(i));
+						}
+					}
+					
+					//SORT
+					Collections.sort(entityList, new Comparator<Entity>() {
+
+						@Override
+						public int compare(Entity e1, Entity e2) {
+							int result = Integer.compare(e1.worldY, e2.worldY);
+							return result;
+						}
+						
+					});
+						
+					
+					//DRAW ENTITIES
+					for(int i = 0; i<entityList.size(); i++) {
+						entityList.get(i).draw(g2);
+					}
+					
+					//EMPTY LIST 
+					entityList.clear();
+						
+					ui.draw(g2);
+					
+				}
+	}
 	public void paintComponent(Graphics g) {
 		 
 		super.paintComponent(g);
 		
-		Graphics2D g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D)g; // DIFFERENT G2 THAN THE FULLSCREEN G2
 		long drawStart = 0;
 		
 		// DEBUG 
@@ -209,6 +295,11 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i = 0; i < projectileList.size();i++) {
 				if(projectileList.get(i)!= null) {
 					entityList.add(projectileList.get(i));
+				}
+			}
+			for(int i = 0; i < particleList.size();i++) {
+				if(particleList.get(i)!= null) {
+					entityList.add(particleList.get(i));
 				}
 			}
 			
