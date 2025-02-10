@@ -181,7 +181,6 @@ public class UI extends JFrame implements MouseListener{
 				if(messageCounter.get(i) > 180) {
 					message.remove(i);
 					messageCounter.remove(i);
-					
 				}
 			}
 		}

@@ -17,7 +17,6 @@ public class Entity {
 
 	public static GamePanel gp;
 	
-
 	public BufferedImage image,image2,image3;
 	public BufferedImage up1,up2,down1, down2,left1,left2,right1,right2;
 	public BufferedImage attackUp1,attackUp2,attackDown1,attackDown2,attackLeft1,attackLeft2,attackRight1,attackRight2;
@@ -38,7 +37,6 @@ public class Entity {
 	public boolean dying = false;
 	public boolean hitCooldown = false;
 	public boolean hpBarOn = false;
-	
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -98,7 +96,6 @@ public class Entity {
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-	
 	public void setAction() {}
 	public void damageReaction() {}
 	public void speak() {} // Will override in NPC subclasses
@@ -122,7 +119,8 @@ public class Entity {
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this,false);
 		gp.cChecker.checkEntity(this, gp.npc);
-		gp.cChecker.checkEntity(this, gp.monster);
+		gp.cChecker.checkEntity(this, gp.monster); 
+		gp.cChecker.checkEntity(this, gp.iTile);
 		boolean hitPlayer = gp.cChecker.checkPlayer(this);
 		
 		if(this.type == type_monster && hitPlayer == true) {
@@ -140,7 +138,6 @@ public class Entity {
 				worldX += speed; break;	
 			}
 		}
-				
 		spriteCounter++;
 		if(spriteCounter > 11) {
 			if(spriteNum==1)
@@ -178,7 +175,7 @@ public class Entity {
 		
 		if(worldX  + gp.tileSize > gp.player.worldX - gp.player.screenX &&
 		   worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-		   worldY  + gp.tileSize> gp.player.worldY - gp.player.screenY &&
+		   worldY  + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 		   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 		
 		switch(direction) {
@@ -231,7 +228,6 @@ public class Entity {
 				image = right2;
 			break;
 		}
-
 		
 		// MONSTER HP BAR
 		if(type == 2 && hpBarOn == true) {  
@@ -251,10 +247,7 @@ public class Entity {
 				hpBarOn = false;
 			}
 		}
-		
 	}
-		
-			
 		if(dying == true) {
 			death(g2);
 		}
@@ -328,10 +321,6 @@ public class Entity {
 			e.printStackTrace();
 		}
 		return image;
-	
-	
-	
 	}
 
-	
 }

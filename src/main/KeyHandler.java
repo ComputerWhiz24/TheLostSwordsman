@@ -178,9 +178,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		
 		int code = e.getKeyCode();
-		
 		
 		if(code == KeyEvent.VK_W) {
 			upPressed = false;
@@ -197,7 +195,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(code == KeyEvent.VK_R) {
 			shootSpell = false;
 		}
-	
 	}
 
 	@Override

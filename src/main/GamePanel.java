@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity npc[] = new Entity[10];
 	public Entity monster[] = new Entity[20];
 	public InteractiveTile iTile[] = new InteractiveTile[50];
+	public ArrayList<Entity> particleList = new ArrayList<>();
 	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList  = new ArrayList<>();
 	Thread gameThread;
@@ -119,9 +120,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		if(gameState == playState) {
-			//PLAYER
+			// PLAYER
 			player.update();
-			//UPDATES NPCS
+			// UPDATES NPCS
 			for(int i = 0; i<npc .length;i++) {
 				if(npc[i] != null) {
 					npc[i].update();
@@ -135,7 +136,7 @@ public class GamePanel extends JPanel implements Runnable{
 					if(!monster[i].alive) {
 						monster[i] = null;
 					}
-				} 
+				}
 			}
 			// UPDATE PROJECTILES
 			for(int i = 0; i<projectileList.size();i++) {

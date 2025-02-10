@@ -24,8 +24,6 @@ public class Projectile extends Entity{
 				gp.player.shootMonster(monsterIdx,attack);
 				alive = false;
 			}
-			
-			
 		} else {
 			boolean hitPlayer = gp.cChecker.checkPlayer(this);
 			if(gp.player.hitCooldown == false && hitPlayer == true) {

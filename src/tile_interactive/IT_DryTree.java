@@ -15,6 +15,7 @@ public class IT_DryTree extends InteractiveTile{
 		life = 2;
 		down1 = setup("/tiles_interactive/drytree");
 		down2 = setup("/tiles_interactive/trunk");
+		
 		destructible = true;
 	}
 

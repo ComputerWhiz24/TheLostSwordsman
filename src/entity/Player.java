@@ -31,7 +31,6 @@ public class Player extends Entity{
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 
-		
 		super(gp);
 		
 		this.keyH = keyH;
@@ -56,8 +55,6 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 
-
-		
 		worldX = gp.tileSize*24;
 		worldY = gp.tileSize*24;
 		speed = 4;
@@ -95,7 +92,6 @@ public class Player extends Entity{
 
 		attackArea = currentWeapon.attackArea;
 		return attack = damage * currentWeapon.attackValue;
-		
 	}
 	public int getDefense() {
 		return defense = vitality * currentShield.defenseValue;
@@ -103,14 +99,14 @@ public class Player extends Entity{
 	
 	public void getPlayerAttackImage() {
 		if(currentWeapon.type == type_sword) {
-		attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);
-		attackUp2 = setupAlternate("/player/boy_attack_up_2",1,2);
-		attackDown1 = setupAlternate("/player/boy_attack_down_1",1,2);
-		attackDown2 = setupAlternate("/player/boy_attack_down_2",1,2);
-		attackLeft1 = setupAlternate("/player/boy_attack_left_1",2,1);
-		attackLeft2 = setupAlternate("/player/boy_attack_left_2",2,1);
-		attackRight1 = setupAlternate("/player/boy_attack_right_1",2,1);
-		attackRight2 = setupAlternate("/player/boy_attack_right_2",2,1);
+			attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);
+			attackUp2 = setupAlternate("/player/boy_attack_up_2",1,2);
+			attackDown1 = setupAlternate("/player/boy_attack_down_1",1,2);
+			attackDown2 = setupAlternate("/player/boy_attack_down_2",1,2);
+			attackLeft1 = setupAlternate("/player/boy_attack_left_1",2,1);
+			attackLeft2 = setupAlternate("/player/boy_attack_left_2",2,1);
+			attackRight1 = setupAlternate("/player/boy_attack_right_1",2,1);
+			attackRight2 = setupAlternate("/player/boy_attack_right_2",2,1);
 		}else if(currentWeapon.type == type_axe) {
 			attackUp1 = setupAlternate("/player/boy_axe_up_1",1,2);
 			attackUp2 = setupAlternate("/player/boy_axe_up_2",1,2);
@@ -121,14 +117,10 @@ public class Player extends Entity{
 			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
 			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
 		}
-		
 	}
 	
 	public void update() { 
 
-
-
-		
 		if(keyH.attackPressed) {
 			playerAttacking();
 		}
@@ -166,7 +158,6 @@ public class Player extends Entity{
 				if(keyH.downPressed == true) 
 					direction = "downRight";	
 			}
-		
 			
 			// TILE COLLISION
 			collisionOn=false;
@@ -256,9 +247,7 @@ public class Player extends Entity{
 						}
 						break;	
 				 }
-					
-					
-					
+							
 				}			//TESTING FOR MOVING ONE DIRECTION IF CAN'T MOVE DIAGNAL
 			}
 		else {
@@ -296,8 +285,6 @@ public class Player extends Entity{
 		if(projectileCooldown < 180) {
 			projectileCooldown++;
 		}
-		
-
 		
 		if(hitCooldown == true) {
 			hitCooldownCounter++;
@@ -342,8 +329,6 @@ public class Player extends Entity{
 			worldY =  currentWorldY;
 			solidArea.width = solidAreaWidth;
 			solidArea.height = solidAreaHeight;
-			
-			
 		}
 		if(spriteAttackCounter > 25) { //FINISH ANIMATION 
 			spriteNum = 1;
@@ -356,8 +341,7 @@ public class Player extends Entity{
 	} 
 	
 	public void pickUpObject(int i) {
-		
-	
+
 		if(i != 999) { 
 			//	COLLECTIBLE ITEMS
 			if(gp.obj[i].type == type_collectible) {
@@ -378,7 +362,6 @@ public class Player extends Entity{
 				gp.obj[i] = null;
 			}
 		}
-		
 	}
 	public void interactNPC(int i) {
 		if(i != 999) { 
@@ -396,11 +379,9 @@ public class Player extends Entity{
 			double monDmg = gp.monster[idx].damage - 0.05*defense; //Defense shields damage from monster
 			life -= monDmg;
 			hitCooldown = true;
-			 
 		}
 	}
 	public void damageMonster(int idx, double attack) {
-
 
 		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
@@ -422,37 +403,34 @@ public class Player extends Entity{
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();
 				
-			}else
+			}else {
 				System.out.println(mon.life);
+			}
 			swinging = true;
 
 			}
-		
-	
 	}
 	public void damageTile(int tileIdx) {
+		// IF TILE IS DESTRUCTIBLE AND THE WEAPON TYPE IS COMPATIBLE, DECREASE LIFE BY 1
 			if(tileIdx != 999 && gp.iTile[tileIdx].destructible && gp.iTile[tileIdx].isCorrectItem(this)) {
 				if(!swinging) {
 					System.out.println(gp.iTile[tileIdx].life);
 					gp.iTile[tileIdx].life--;
-					if(gp.iTile[tileIdx].life == 2) {
-						gp.iTile[tileIdx].image = down1;
-					}
-					else if (gp.iTile[tileIdx].life == 1) {
-						gp.iTile[tileIdx].image = down2;
-					}else if(gp.iTile[tileIdx].life == 0){
-						gp.iTile[tileIdx]= null;
-					}
 				}
-
+				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE
+				if(gp.iTile[tileIdx].life == 2) {
+					gp.iTile[tileIdx].image = down1;
+				}
+				else if(gp.iTile[tileIdx].life == 1) {
+					gp.iTile[tileIdx].image = down2;
+				}else if(gp.iTile[tileIdx].life == 0) {
+					gp.iTile[tileIdx]= null;
+				}
 			swinging = true;
 			}
 	}
-	
-
 	public void shootMonster(int idx, double attack) {
-
-
+		
 		if(gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			Entity mon = gp.monster[idx];
@@ -472,13 +450,11 @@ public class Player extends Entity{
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();
-				
-			}else
+			}else {
 				System.out.println(mon.life);
+			}
 			swinging = true;
 			}
-		
-	
 	}
 	public void levelUp() {
 
@@ -490,7 +466,6 @@ public class Player extends Entity{
 			damage += 0.01;
 			getAttack();
 			gp.playSE(4);
-		
 		}
 	}
 	public void selectItem() {
@@ -503,7 +478,6 @@ public class Player extends Entity{
 			case type_axe:
 				if(currentWeapon == selectedItem) {
 					currentWeapon = null;
-				
 				} else {
 				currentWeapon = selectedItem;
 				attack = getAttack();
@@ -598,25 +572,21 @@ public class Player extends Entity{
 				if(spriteNum==2) image= attackRight2;
 			}
 			break;
-		
 		}
-		
+
 		//SET 70% TRANSPARENT IF PLAYER IS HIT
 		if(hitCooldown == true) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
-			if(hitCooldownCounter % 30  == 0)
+			if(hitCooldownCounter % 30  == 0) 
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		if(hitCooldown == false) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		g2.drawImage(image,tempScreenX,tempScreenY, null);
-		
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
 	public void getPlayerImage() {
-
-		
 		up1 = setup("/player/boy_up_1");
 		up2 = setup("/player/boy_up_2");
 		down1 = setup("/player/boy_down_1");
