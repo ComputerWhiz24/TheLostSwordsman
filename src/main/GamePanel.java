@@ -89,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable{
 		gameState = titleState;
 		
 		tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
-		g2 = (Graphics2D) tempScreen.getGraphics();
+		g2 = (Graphics2D)tempScreen.getGraphics();
 	}
 	
 	public void startGameThread() {
@@ -119,11 +119,11 @@ public class GamePanel extends JPanel implements Runnable{
 				
 				// DRAW THE SCREEN WITH THE UPDATED INFORMATION
 				repaint();
+				drawToTempScreen();
+				drawToScreen();
 				
 				delta--;
 			}
-			
-			
 		}	
 	}
 	
@@ -246,6 +246,12 @@ public class GamePanel extends JPanel implements Runnable{
 					ui.draw(g2);
 					
 				}
+	}
+	public void drawToScreen() {
+		Graphics g = getGraphics();
+		g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+		g.dispose();
+		
 	}
 	public void paintComponent(Graphics g) {
 		 
