@@ -119,8 +119,8 @@ public class GamePanel extends JPanel implements Runnable{
 				
 				// DRAW THE SCREEN WITH THE UPDATED INFORMATION
 				repaint();
-				drawToTempScreen();
-				drawToScreen();
+//				drawToTempScreen();
+//				drawToScreen();
 				
 				delta--;
 			}

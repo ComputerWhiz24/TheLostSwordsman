@@ -39,6 +39,7 @@ public class UI extends JFrame implements MouseListener{
 	public int titleSubState = 0;
 	public int playSubState = 0;
 	public int pauseSubState = 0;
+	public int optionsSubState = 0;
 	public int slotCol = 0;
 	public int slotRow = 0;
 	
@@ -111,8 +112,7 @@ public class UI extends JFrame implements MouseListener{
 			drawPlayerLife();
 		}
 		if(gp.gameState == gp.dialogueState) {
-			drawDialogueScreen();
-			drawPlayerLife();
+			 
 		}
 
 	}
@@ -525,14 +525,23 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(text,x+gp.tileSize*7,y);
 		}
 	public void drawPauseScreen() {
-		if(pauseSubState == 0) {
-		//NORMAL PAUSE STATE
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80));
-		String text = "PAUSED";
-		int x,y;
-		x = getXForCenteredText(text);
-		y = gp.screenHeight/2;
-		g2.drawString(text, x, y);
+		if(pauseSubState == 0) { 	// OPTIONS MENU
+			//NORMAL PAUSE STATE
+			g2.setFont(g2.getFont().deriveFont(32F));
+			g2.setColor(Color.white);
+			
+			int frameWidth = gp.tileSize*12;
+			int frameHeight = gp.tileSize*14;
+			int frameX = (int) gp.tileSize*6; 
+			int frameY = (int) gp.tileSize*2;
+			drawWindow(frameX,frameY,frameWidth,frameHeight);
+			
+			switch(optionsSubState){
+			case 0: options_top(frameX,frameY); break;
+			case 1: break;
+			case 2: break;
+			}
+			
 		}
 		else if(pauseSubState == 1) { //SHOW ITEM DESCRIPTION
 			cols = 22;
@@ -596,6 +605,8 @@ public class UI extends JFrame implements MouseListener{
 				}
 			}
 		}
+	}
+	public void options_top(int frameX, int frameY) {
 		
 	}
 	public void drawDialogueScreen() {
@@ -620,7 +631,7 @@ public class UI extends JFrame implements MouseListener{
 		if(gp.keyH.continueConversation == true) {
 			Entity.dialogueIndex++;
 		}
-		if(Entity.dialogueIndex>=Entity.currentDialogue.length) {
+		if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
 			Entity.dialogueIndex = 0;
 			gp.gameState = gp.playState;
 		}
