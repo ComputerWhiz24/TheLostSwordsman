@@ -249,52 +249,61 @@ public class UI extends JFrame implements MouseListener{
 		DecimalFormat df = new DecimalFormat("#.00");
 		String roundedAttack = df.format(gp.player.attack);
 		
-		
+		// LEVEL
 		value = String.valueOf(gp.player.level);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		 
+		// LIFE
 		value = df.format(gp.player.life) + "/" + df.format(gp.player.maxLife);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// MANA
 		value = df.format(gp.player.mana) + "/" + df.format(gp.player.maxMana);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// STRENGTH
 		value = String.valueOf(gp.player.strength);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// VITALITY
 		value = String.valueOf(gp.player.vitality);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// DEXTERITY
 		value = String.valueOf(gp.player.dexterity);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// DEFENSE
 		value = String.valueOf(gp.player.defense);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// GOLD
 		value = String.valueOf(gp.player.coin);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		// XP UNTIL LEVEL UP
 		value = String.valueOf(gp.player.xp + "/" + gp.player.nextLevelXp);
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY); 
 		textY += lineHeight;
 		
+		// ATTACK POWER
 		value = roundedAttack;
 		textX = getXForAlignRight(value,tailX);
 		g2.drawString(value, textX, textY); 
