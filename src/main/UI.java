@@ -630,20 +630,20 @@ public class UI extends JFrame implements MouseListener{
 		g2.setFont(g2.getFont().deriveFont(48F));
 		textX = frameX+gp.tileSize;
 		textY += gp.tileSize*2.5;
-		g2.drawString("Fullscreen:", textX, textY);
+		g2.drawString("Fullscreen", textX, textY);
 		
 		// MUSIC 
 		textY += gp.tileSize*2;
-		g2.drawString("Music:", textX, textY);
+		g2.drawString("Music", textX, textY);
 		// SE
 		textY += gp.tileSize*2;
-		g2.drawString("SE:", textX, textY);
+		g2.drawString("SE", textX, textY);
 		// CONTROL
 		textY += gp.tileSize*2;
-		g2.drawString("Control:", textX, textY);
+		g2.drawString("Control", textX, textY);
 		// GAME
 		textY += gp.tileSize*2;
-		g2.drawString("End Game:", textX, textY);
+		g2.drawString("End Game", textX, textY);
 	}
 	public void drawDialogueScreen() {
 		

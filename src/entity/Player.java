@@ -418,18 +418,22 @@ public class Player extends Entity{
 					gp.iTile[tileIdx].life--;
 					generateParticle(gp.iTile[tileIdx], gp.iTile[tileIdx]);
 					gp.playSE(10);
+					damageTileHelper(tileIdx);
 				}
 				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE
-				if(gp.iTile[tileIdx].life == 2) {
-					gp.iTile[tileIdx].image = down1;
-				}
-				else if(gp.iTile[tileIdx].life == 1) {
-					gp.iTile[tileIdx].image = down2;
-				}else if(gp.iTile[tileIdx].life == 0) {
-					gp.iTile[tileIdx]= null;
-				}
+			
 			swinging = true;
 			}
+	}
+	public void damageTileHelper(int tileIdx) {
+		if(gp.iTile[tileIdx].life == 2) {
+			gp.iTile[tileIdx].image = down1;
+		}
+		else if(gp.iTile[tileIdx].life == 1) {
+			gp.iTile[tileIdx].image = down2;
+		}else if(gp.iTile[tileIdx].life == 0) {
+			gp.iTile[tileIdx]= null;
+		}
 	}
 	public void shootMonster(int idx, double attack) {
 		
