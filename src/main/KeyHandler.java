@@ -157,6 +157,22 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.gameState = gp.playState;
 				gp.ui.pauseSubState = 0;
 			}
+			int maxCommandNum = 5;
+			
+			if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+				gp.ui.commandNum++;
+				gp.playSE(8);
+				if(gp.ui.commandNum > maxCommandNum) {
+					gp.ui.commandNum = 0;
+				}
+			}
+			if(code == KeyEvent.VK_UP|| code == KeyEvent.VK_W) {
+				gp.ui.commandNum--;
+				gp.playSE(8);
+				if(gp.ui.commandNum < 0) {
+					gp.ui.commandNum = maxCommandNum ;
+				}
+			}
 		}
 		if (gp.ui.pauseSubState == 1) {
 			if(code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_F ) {
