@@ -631,36 +631,57 @@ public class UI extends JFrame implements MouseListener{
 		textX = frameX+gp.tileSize;
 		textY += gp.tileSize*2;
 		g2.drawString("Fullscreen", textX, textY);
+		
+		// CURSOR
 		if(commandNum == 0) {
 			g2.drawString(">", textX-25, textY);
 		}
+		// CHECKBOX
+		BasicStroke rightStroke = new BasicStroke(4);
+		int rightTextX = (int) (textX+gp.tileSize*6.5);
+		int size = 36;
+		g2.drawRect(rightTextX,textY-32,size,size);
+		
+		
 		// MUSIC 
 		textY += gp.tileSize*1.5;
 		g2.drawString("Music", textX, textY);
+		// CURSOR
 		if(commandNum == 1) {
 			g2.drawString(">", textX-25, textY);
 		}
+		// VOLUME BAR
+		
+		
 		// SE
 		textY += gp.tileSize*1.5;
 		g2.drawString("SE", textX, textY);
+		
+		// CURSOR
 		if(commandNum == 2) {
 			g2.drawString(">", textX-25, textY);
 		}
 		// CONTROL
 		textY += gp.tileSize*1.5;
 		g2.drawString("Controls", textX, textY);
+		
+		// CURSOR
 		if(commandNum == 3) {
 			g2.drawString(">", textX-25, textY);
 		}
 		// GAME
 		textY += gp.tileSize*1.5;
 		g2.drawString("End Game", textX, textY);
+		
+		// CURSOR
 		if(commandNum == 4) {
 			g2.drawString(">", textX-25, textY);
 		}
 		// BACK
 		textY += gp.tileSize*2.5;
 		g2.drawString("Back", textX, textY);
+		
+		// CURSOR
 		if(commandNum == 5) {
 			g2.drawString(">", textX-25, textY);
 		}
