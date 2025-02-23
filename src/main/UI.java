@@ -551,6 +551,8 @@ public class UI extends JFrame implements MouseListener{
 			case 2: break;
 			}
 			
+			gp.keyH.enterPressed = false;
+			
 		}
 		else if(pauseSubState == 1) { //SHOW ITEM DESCRIPTION
 			cols = 22;
@@ -635,19 +637,28 @@ public class UI extends JFrame implements MouseListener{
 		// CURSOR
 		if(commandNum == 0) {
 			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed) {
+				if(gp.fullScreen){
+					gp.fullScreen = false;
+				} else {
+					gp.fullScreen = true;
+				}
+			}
 		}
 		// CHECKBOX
 		BasicStroke rightStroke = new BasicStroke(4);
 		int rightTextX = (int) (textX+gp.tileSize*6.5);
 		int fullscreenBox = 36;
 		g2.drawRect(rightTextX,textY-32,fullscreenBox,fullscreenBox);
-		
+		if(gp.fullScreen) {
+			g2.fillRect(rightTextX,textY-32,fullscreenBox,fullscreenBox); 
+		}
 		
 		// MUSIC 
 		textY += gp.tileSize*1.5;
 		g2.drawString("Music", textX, textY);
-		// CURSOR
-		if(commandNum == 1) {
+		
+		if(commandNum == 1) { // CURSOR
 			g2.drawString(">", textX-25, textY);
 		}
 		// VOLUME BAR
@@ -657,32 +668,28 @@ public class UI extends JFrame implements MouseListener{
 		textY += gp.tileSize*1.5;
 		g2.drawString("SE", textX, textY);
 		
-		// CURSOR
-		if(commandNum == 2) {
+		if(commandNum == 2) { // CURSOR
 			g2.drawString(">", textX-25, textY);
-		}
+		} 
 		// CONTROL
 		textY += gp.tileSize*1.5;
 		g2.drawString("Controls", textX, textY);
-		
-		// CURSOR
-		if(commandNum == 3) {
+	
+		if(commandNum == 3) { // CURSOR
 			g2.drawString(">", textX-25, textY);
 		}
 		// GAME
 		textY += gp.tileSize*1.5;
 		g2.drawString("End Game", textX, textY);
 		
-		// CURSOR
-		if(commandNum == 4) {
+		if(commandNum == 4) { // CURSOR
 			g2.drawString(">", textX-25, textY);
 		}
 		// BACK
 		textY += gp.tileSize*2.5;
 		g2.drawString("Back", textX, textY);
 		
-		// CURSOR
-		if(commandNum == 5) {
+		if(commandNum == 5) { // CURSOR 
 			g2.drawString(">", textX-25, textY);
 		}
 		

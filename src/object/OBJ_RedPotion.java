@@ -23,6 +23,5 @@ public class OBJ_RedPotion extends Entity{
 				gp.player.life = gp.player.maxLife;
 			}
 		}
-
 	}
 }

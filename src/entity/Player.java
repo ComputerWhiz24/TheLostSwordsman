@@ -401,13 +401,11 @@ public class Player extends Entity{
 				gp.ui.addMessage(gold + " Gold Earned");
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
-				levelUp();
-				
+				levelUp();	
 			}else {
 				System.out.println(mon.life);
 			}
 			swinging = true;
-
 			}
 	}
 	public void damageTile(int tileIdx) {
@@ -421,7 +419,6 @@ public class Player extends Entity{
 					damageTileHelper(tileIdx);
 				}
 				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE
-			
 			swinging = true;
 			}
 	}

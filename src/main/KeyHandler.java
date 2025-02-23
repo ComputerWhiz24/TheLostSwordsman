@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc,shootSpell;
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc,shootSpell, enterPressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -156,6 +156,29 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.playState;
 				gp.ui.pauseSubState = 0;
+			}
+			if(code == KeyEvent.VK_ENTER) {
+				enterPressed = true;
+				switch(gp.ui.commandNum) {
+				case 0:
+					
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					 
+					break;
+				case 5:
+				
+					break;
+				}
 			}
 			int maxCommandNum = 5;
 			
