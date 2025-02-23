@@ -639,8 +639,8 @@ public class UI extends JFrame implements MouseListener{
 		// CHECKBOX
 		BasicStroke rightStroke = new BasicStroke(4);
 		int rightTextX = (int) (textX+gp.tileSize*6.5);
-		int size = 36;
-		g2.drawRect(rightTextX,textY-32,size,size);
+		int fullscreenBox = 36;
+		g2.drawRect(rightTextX,textY-32,fullscreenBox,fullscreenBox);
 		
 		
 		// MUSIC 
@@ -651,7 +651,7 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(">", textX-25, textY);
 		}
 		// VOLUME BAR
-		
+		g2.drawRect(rightTextX, textY-30, 160, 30);	
 		
 		// SE
 		textY += gp.tileSize*1.5;
