@@ -21,8 +21,8 @@ public class Projectile extends Entity{
 		if(user == gp.player) {
 			int monsterIdx = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIdx != 999) {
-				gp.player.shootMonster(monsterIdx,attack);
 				generateParticle(user.projectile,gp.monster[monsterIdx]);
+				gp.player.shootMonster(monsterIdx,attack);
 				alive = false;
 			}
 		} else {

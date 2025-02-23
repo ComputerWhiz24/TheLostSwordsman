@@ -112,7 +112,7 @@ public class UI extends JFrame implements MouseListener{
 			drawPlayerLife();
 		}
 		if(gp.gameState == gp.dialogueState) {
-			 
+			 drawDialogueScreen();
 		}
 
 	}
