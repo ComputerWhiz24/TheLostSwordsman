@@ -163,14 +163,38 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				enterPressed = true;
 			}
 			int maxCommandNum = 5;
-			if(gp.ui.optionsSubState == 1) {
+
 				if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
-					gp.ui.commandNum = 0;
+					if(gp.ui.optionsSubState == 0) {
+						if(gp.music.volumeScale > 0 && gp.ui.commandNum == 1) {
+							gp.music.volumeScale--;
+							gp.playSE(8);
+						}
+						else if(gp.se.volumeScale>0 && gp.ui.commandNum == 2)  {
+							gp.se.volumeScale--;
+							gp.playSE(8);
+						}
+					}
+					else if(gp.ui.optionsSubState == 1) {
+						gp.ui.commandNum = 0;
+					}
 				}
 				if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
-					gp.ui.commandNum = 1;
+					if(gp.ui.optionsSubState == 0) {
+						if(gp.music.volumeScale<5 && gp.ui.commandNum == 1)  {
+							gp.music.volumeScale++;
+							gp.playSE(8);
+						}
+						if(gp.se.volumeScale<5 && gp.ui.commandNum == 2)  {
+							gp.se.volumeScale++;
+							gp.playSE(8);
+						}
+					}
+					else if(gp.ui.optionsSubState == 1) {
+						gp.ui.commandNum = 1;
+					}
 				}
-			} else {
+		
 			if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
 				gp.ui.commandNum++;
 				gp.playSE(8);
@@ -184,7 +208,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				if(gp.ui.commandNum < 0) {
 					gp.ui.commandNum = maxCommandNum ;
 				}
-			}
 			}
 		}
 		if (gp.ui.pauseSubState == 1) {
