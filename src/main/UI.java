@@ -547,7 +547,7 @@ public class UI extends JFrame implements MouseListener{
 			
 			switch(optionsSubState){
 			case 0: options_top(frameX,frameY); break;
-			case 1: break;
+			case 1: fullscreenToggle(frameX,frameY);break;
 			case 2: break;
 			}
 			
@@ -643,6 +643,7 @@ public class UI extends JFrame implements MouseListener{
 				} else {
 					gp.fullScreen = true;
 				}
+				optionsSubState = 1;
 			}
 		}
 		// CHECKBOX
@@ -692,8 +693,39 @@ public class UI extends JFrame implements MouseListener{
 		if(commandNum == 5) { // CURSOR 
 			g2.drawString(">", textX-25, textY);
 		}
+	}
+	public void fullscreenToggle(int frameX, int frameY) {
+		int textX = (int) (frameX + gp.tileSize*1.8);
+		int textY = frameY + gp.tileSize*3;
 		
+		currentDialogue = "Changes will save after game reset";
 		
+		for(String line: currentDialogue.split("\n")) {
+			g2.drawString(line,textX,textY);
+			textY+= 40;
+		}
+		// RETURN
+		textY += gp.tileSize*2.5;
+		textX+=gp.tileSize*1.8;
+		if(commandNum == 0) {
+			g2.setColor(Color.yellow);
+			g2.drawString("Return", textX, textY);
+			textX+=gp.tileSize*2.5;
+			g2.setColor(Color.white);
+			g2.drawString("Quit Game", textX, textY);
+			if(gp.keyH.enterPressed) {
+				optionsSubState = 0;
+			}
+		}else if(commandNum == 1) {
+			g2.setColor(Color.white);
+			g2.drawString("Return", textX, textY);
+			textX+=gp.tileSize*2.5;
+			g2.setColor(Color.yellow);
+			g2.drawString("Quit Game", textX, textY);
+			if(gp.keyH.enterPressed) {
+			}
+		}
+	
 	}
 	public void drawDialogueScreen() {
 		
