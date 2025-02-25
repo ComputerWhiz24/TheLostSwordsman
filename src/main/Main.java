@@ -13,6 +13,12 @@ public class Main {
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
+		
+		gamePanel.config.loadConfig();
+		if(gamePanel.fullScreen) {
+			// add logic to make full screen 
+		}
+		
 		window.pack();
 		
 		window.setTitle("2D Adventure");

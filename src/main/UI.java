@@ -703,6 +703,8 @@ public class UI extends JFrame implements MouseListener{
 				System.exit(0); 
 			}
 		}
+		
+		gp.config.saveConfig();
 	}
 	public void options_fullscreenToggle(int frameX, int frameY) {
 		int textX = (int) (frameX + gp.tileSize*1.8);

@@ -62,7 +62,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList  = new ArrayList<>();
 	Thread gameThread;
-	
+	public Config config = new Config(this);
+	 
 	
 	// GAME STATE 
 	public int gameState;
