@@ -470,6 +470,7 @@ public class UI extends JFrame implements MouseListener{
 			
 	}
 	public void drawControlScreen() {
+
 			
 			g2.setColor(Color.blue);
 			g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
@@ -547,8 +548,7 @@ public class UI extends JFrame implements MouseListener{
 			
 			switch(optionsSubState){
 			case 0: options_top(frameX,frameY); break;
-			case 1: fullscreenToggle(frameX,frameY);break;
-			case 2: break;
+			case 1: options_fullscreenToggle(frameX,frameY);break;
 			}
 			
 			gp.keyH.enterPressed = false;
@@ -663,38 +663,48 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(">", textX-25, textY);
 		}
 		// VOLUME BAR
-		g2.drawRect(rightTextX, textY-30, 160, 30);	
+		g2.drawRect(rightTextX, textY-30, 160, 30);	 
+		int volumeWidth = (int)(160.0 / 5.0 * gp.music.volumeScale);
+		g2.fillRect(rightTextX, textY-30, volumeWidth, 24); 
 		
-		// SE
+		// SOUND EFFECT
 		textY += gp.tileSize*1.5;
 		g2.drawString("SE", textX, textY);
 		
 		if(commandNum == 2) { // CURSOR
 			g2.drawString(">", textX-25, textY);
 		} 
-		// CONTROL
-		textY += gp.tileSize*1.5;
-		g2.drawString("Controls", textX, textY);
-	
-		if(commandNum == 3) { // CURSOR
-			g2.drawString(">", textX-25, textY);
-		}
-		// GAME
-		textY += gp.tileSize*1.5;
-		g2.drawString("End Game", textX, textY);
-		
-		if(commandNum == 4) { // CURSOR
-			g2.drawString(">", textX-25, textY);
-		}
+		// SOUND EFFECT BAR
+		g2.drawRect(rightTextX, textY-30 , 160, 30);	 
+		volumeWidth = (int)(160.0 / 5.0 * gp.se.volumeScale);
+		g2.fillRect(rightTextX, textY-30, volumeWidth, 24); 
+
 		// BACK
 		textY += gp.tileSize*2.5;
 		g2.drawString("Back", textX, textY);
 		
-		if(commandNum == 5) { // CURSOR 
+		if(commandNum == 3) { // CURSOR 
 			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed) {
+				gp.gameState = gp.playState;
+				pauseSubState = 0;
+				optionsSubState = 0;
+				commandNum = 0;
+			}
+		}
+		
+		// GAME
+		textY += gp.tileSize*2.5;
+		g2.drawString("End Game", (int) (textX+gp.tileSize*3.2), textY);
+		
+		if(commandNum == 4) { // CURSOR
+			g2.drawString(">", (int) ((textX+gp.tileSize*3.2)-25), textY);
+			if(gp.keyH.enterPressed) {
+				System.exit(0); 
+			}
 		}
 	}
-	public void fullscreenToggle(int frameX, int frameY) {
+	public void options_fullscreenToggle(int frameX, int frameY) {
 		int textX = (int) (frameX + gp.tileSize*1.8);
 		int textY = frameY + gp.tileSize*3;
 		
@@ -726,6 +736,12 @@ public class UI extends JFrame implements MouseListener{
 			}
 		}
 	
+	}
+	public void options_control(int frameX, int frameY) {
+		int textX;
+		int textY;
+		
+		
 	}
 	public void drawDialogueScreen() {
 		

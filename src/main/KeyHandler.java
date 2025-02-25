@@ -87,7 +87,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_C) {
 				gp.gameState = gp.ui.playSubState = 1;
 			}
-			if(code == KeyEvent.VK_I) {
+			if(code == KeyEvent.VK_I || code == KeyEvent.VK_TAB) {
 				 gp.ui.playSubState = 2;
 			}
 			if(code == KeyEvent.VK_Q) {
@@ -102,7 +102,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.ui.playSubState = 0;
 		}
 		else if(gp.ui.playSubState == 2) { //Inventory
-			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE) 
+			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_TAB) 
 				gp.ui.playSubState = 0;
 			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) {
 				showDesc = false;
@@ -162,12 +162,13 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_ENTER) {
 				enterPressed = true;
 			}
-			int maxCommandNum = 5;
+			int maxCommandNum = 4;
 
 				if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
 					if(gp.ui.optionsSubState == 0) {
 						if(gp.music.volumeScale > 0 && gp.ui.commandNum == 1) {
 							gp.music.volumeScale--;
+							gp.music.checkVolume();
 							gp.playSE(8);
 						}
 						else if(gp.se.volumeScale>0 && gp.ui.commandNum == 2)  {
@@ -183,10 +184,11 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 					if(gp.ui.optionsSubState == 0) {
 						if(gp.music.volumeScale<5 && gp.ui.commandNum == 1)  {
 							gp.music.volumeScale++;
+							gp.music.checkVolume();
 							gp.playSE(8);
 						}
 						if(gp.se.volumeScale<5 && gp.ui.commandNum == 2)  {
-							gp.se.volumeScale++;
+							gp.se.volumeScale++;  
 							gp.playSE(8);
 						}
 					}
