@@ -70,6 +70,9 @@ public class AssetSetter {
 			gp.monster[idx].worldX = gp.tileSize*randX;
 			gp.monster[idx].worldY  = gp.tileSize*randY;
 	}
+	public void setMonster() {
+		addSlimes(5);
+	}
 	public void setNPC() {
 		gp.npc[0] = new NPC_Shopkeeper(gp);
 		gp.npc[0].worldX = gp.tileSize*21;

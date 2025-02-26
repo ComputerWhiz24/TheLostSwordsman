@@ -38,6 +38,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.gameState == gp.dialogueState) {
 			dialogueState(code);
 		}
+		else if(gp.gameState == gp.gameOverState) {
+			gameOverState(code);
+		}
 	}
 	
 	public void titleState(int code) {
@@ -243,7 +246,32 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			}
 		}
 	}
-
+	public void gameOverState(int code) {
+		int maxCommandNum = 1;
+		if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+			gp.ui.commandNum++;
+			gp.playSE(8);
+			if(gp.ui.commandNum > maxCommandNum) {
+				gp.ui.commandNum = 0;
+			}
+		}
+		if(code == KeyEvent.VK_UP|| code == KeyEvent.VK_W) {
+			gp.ui.commandNum--;
+			gp.playSE(8);
+			if(gp.ui.commandNum < 0) {
+				gp.ui.commandNum = maxCommandNum ;
+			}
+		}
+		if(code == KeyEvent.VK_ENTER) {
+			if(gp.ui.commandNum == 0) {
+				gp.gameState = gp.playState;
+				gp.retry(); 
+			} else if (gp.ui.commandNum == 1) {
+				gp.gameState = gp.titleState;
+				gp.restart();
+			}
+		}
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 

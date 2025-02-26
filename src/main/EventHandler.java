@@ -99,7 +99,6 @@ public class EventHandler {
 		gp.gameState = gameState;
 		gp.player.life -= 1;
 		inRange = true;
-		System.out.println("Lose heart");
 		
 	//	 eventRect[col][row].eventDone = true;  EVENT ONLY HAPPENS ONCE
 	}
