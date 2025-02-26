@@ -144,6 +144,7 @@ public class Entity {
 	}
 	public void update() {
 
+
 		setAction();
 		
 		collisionOn = false;

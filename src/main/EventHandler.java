@@ -94,15 +94,18 @@ public class EventHandler {
 	}
 	
 	public void loseHalfHeart(int col, int row, int gameState) {
-	
-		 gp.gameState = gameState;
-		 gp.ui.currentDialogue = "OWW, what was that?? Weird?";
-		 gp.player.life -= 1;
-		 inRange = true;
+		gp.ui.talkWorld = true;
+		gp.ui.currentDialogue = "OWW, what was that?? Weird?";
+		gp.gameState = gameState;
+		gp.player.life -= 1;
+		inRange = true;
+		System.out.println("Lose heart");
+		
 	//	 eventRect[col][row].eventDone = true;  EVENT ONLY HAPPENS ONCE
 	}
 	public void fullHP(int col, int row, int gameState) {
-	
+		gp.ui.talkWorld = true;
+		gp.ui.talkNPC = false;
 		gp.gameState = gameState;
 		gp.ui.currentDialogue = "Suddenly you feel a lot better...?";
 		gp.player.life = gp.player.maxLife;

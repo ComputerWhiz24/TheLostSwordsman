@@ -121,6 +121,7 @@ public class Player extends Entity{
 	
 	public void update() { 
 
+
 		if(keyH.attackPressed) {
 			playerAttacking();
 		}
@@ -293,6 +294,15 @@ public class Player extends Entity{
 				hitCooldownCounter = 0;
 			}
 		}
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		if(mana > maxMana) {
+			mana = maxMana;
+		}
+		if(life <= 0) {
+			gp.gameState = gp.gameOverState;
+		}
 	}
 	
 	public void playerAttacking() {
@@ -364,8 +374,10 @@ public class Player extends Entity{
 		}
 	}
 	public void interactNPC(int i) {
+
 		if(i != 999) { 
-			if (keyH.talkPressed == true) {
+			if (keyH.talkPressed == true) { 
+				gp.ui.talkNPC = true;
 		        gp.gameState = gp.dialogueState;
 		        currentSpeaker = gp.npc[i];
 		        gp.npc[i].speak(); // Initial dialogue trigger

@@ -35,6 +35,8 @@ public class UI extends JFrame implements MouseListener{
 	ArrayList<Integer> messageCounter = new ArrayList<>();
 	public boolean gameFinished = false;
 	public String currentDialogue;
+	public boolean talkNPC;
+	public boolean talkWorld;
 	public int commandNum = 0;
 	public int titleSubState = 0;
 	public int playSubState = 0;
@@ -54,6 +56,7 @@ public class UI extends JFrame implements MouseListener{
 	double playTime;
 	DecimalFormat dFormat = new DecimalFormat("#0.00"); 
 	public UI(GamePanel gp) {
+
 		this.gp = gp;
 		
 
@@ -90,12 +93,18 @@ public class UI extends JFrame implements MouseListener{
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setColor(Color.white); 
 		
+		// TITLE STATE - includes: 
+						// CONTROLS
 		if(gp.gameState == gp.titleState) {
 			if(titleSubState == 0)
 				drawOpeningScreen();
 			else if(titleSubState == 1) 
 				drawControlScreen();
 		}
+		
+		// PLAY STATE - includes: 
+						// INVENTORY
+						// CHARACTER INFO
 		
 		if(gp.gameState == gp.playState) {
 			drawPlayerLife();
@@ -107,13 +116,24 @@ public class UI extends JFrame implements MouseListener{
 				drawInventory();
 			}
 		}
+		// PAUSE STATE - includes: 
+						// ITEM DESCRIPTION
+						// OPTIONS - includes: 
+									// FULLSCREEN CONFIRMATION
 		if(gp.gameState == gp.pauseState) {
 			drawPauseScreen();
 			drawPlayerLife();
 		}
+		// DIALOGUE STATE - includes;
+							// TALKING TO NPCS
+							// WORLD EVENTS (example: taking damage in some cases will open dialogue)
 		if(gp.gameState == gp.dialogueState) {
 			 drawDialogueScreen();
 		}
+		// GAME OVER STATE
+		if(gp.gameState == gp.gameOverState) {
+			 gameOverScreen();
+		} 
 
 	}
 	public void drawPlayerLife() {
@@ -739,13 +759,8 @@ public class UI extends JFrame implements MouseListener{
 		}
 	
 	}
-	public void options_control(int frameX, int frameY) {
-		int textX;
-		int textY;
-		
-		
-	}
 	public void drawDialogueScreen() {
+
 		
 		int x = gp.tileSize * 2;
 		int y = gp.tileSize/2;
@@ -758,21 +773,20 @@ public class UI extends JFrame implements MouseListener{
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 		x += gp.tileSize;
 		y +=  gp.tileSize;
-		currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+		if(talkNPC) {
+			currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+		}
 		for(String line: currentDialogue.split("\n")) {
 			g2.drawString(line, x, y);
 			y+= 40;
 		}
-		// PRESS ENTER TO CONTINUE CONVERSATION 
-		if(gp.keyH.continueConversation == true) {
-			Entity.dialogueIndex++;
-		}
-		if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
-			Entity.dialogueIndex = 0;
-			gp.gameState = gp.playState;
-		}
-		gp.keyH.continueConversation = false;
-
+		System.out.println("in prgoress");
+		
+		
+	}
+	
+	public void gameOverScreen() {
+		
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		

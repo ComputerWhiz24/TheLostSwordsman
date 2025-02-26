@@ -6,8 +6,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import entity.Entity;
+
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,continueConversation,attackPressed,showDesc,shootSpell, enterPressed;
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,attackPressed,showDesc,shootSpell, enterPressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -225,7 +227,20 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			gp.gameState = gp.playState;
 		}
 		if(code == KeyEvent.VK_ENTER) {
-			continueConversation = true;
+			// PRESS ENTER TO CONTINUE CONVERSATION 
+			if(gp.ui.talkWorld){
+				gp.gameState = gp.playState;
+				gp.ui.talkWorld = false;
+				gp.ui.talkNPC = false;
+			} else {
+				Entity.dialogueIndex++;
+				if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
+					Entity.dialogueIndex = 0;
+					gp.gameState = gp.playState;
+					gp.ui.talkWorld = false;
+					gp.ui.talkNPC = false;
+				}
+			}
 		}
 	}
 
