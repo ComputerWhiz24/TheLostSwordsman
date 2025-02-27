@@ -16,19 +16,20 @@ public class TileManager {
 
 	GamePanel gp;
 	public Tile[] tile;
-	public int mapTileNum[] [];
+	public int mapTileNum[][][];
 	
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		
-		tile = new Tile[10];
-		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+		tile = new Tile[100];
+		mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/GivenWorld01.txt");
+		loadMap("/maps/worldV3.txt",0);
+		loadMap("/maps/interior01.txt",1);
 	}
 	
-	public void getTileImage() {
+	public void getTileImage() { 
 		
 			setup(0,"Grass2", false);
 			setup(1,"wall", true);
@@ -37,6 +38,44 @@ public class TileManager {
 			setup(4,"tree", true);
 			setup(5,"sand", false);
 		
+			setup(10,"Grass", false);
+			setup(11,"Grass2", false);
+			setup(12,"water00", true);
+			setup(13,"water01", true);
+			setup(14,"water02", true);
+			setup(15,"water03", true);
+			setup(16,"water04", true);
+			setup(17,"water05", true);
+			setup(18,"water06", true);
+			setup(19,"water07", true);
+			setup(20,"water08", true);
+			setup(21,"water09", true);
+			setup(22,"water10", true);
+			setup(23,"water11", true);
+			setup(24,"water12", true);
+			setup(25,"water13", true);
+
+			setup(26,"road00", false);
+			setup(27,"road01", false);
+			setup(28,"road02", false);
+			setup(29,"road03", false);
+			setup(30,"road04", false);
+			setup(31,"road05", false);
+			setup(32,"road06", false);
+			setup(33,"road07", false);
+			setup(34,"road08", false);
+			setup(35,"road09", false);
+			setup(36,"road10", false);
+			setup(37,"road11", false);
+			setup(38,"road12", false);
+			
+			setup(39,"earth", false);
+			setup(40,"wall", true);
+			setup(41 ,"tree", true);
+			setup(42,"hut", false);
+			setup(43,"floor01", false);
+			setup(44 ,"table01 ", true);
+			
 	}
 	
 	public void setup(int index, String imageName, boolean collision) {
@@ -55,7 +94,7 @@ public class TileManager {
 	}
 	
 	
-	public void loadMap(String filePath) {
+	public void loadMap(String filePath, int map) {
 		
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
@@ -96,7 +135,7 @@ public class TileManager {
 		
 		while(worldCol<gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			
-			int tileNum = mapTileNum[worldCol][worldRow];
+			int tileNum = mapTileNum[gp.currentMap ][worldCol][worldRow];
 			
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;

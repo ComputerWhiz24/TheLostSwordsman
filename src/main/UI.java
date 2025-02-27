@@ -833,6 +833,14 @@ public class UI extends JFrame implements MouseListener{
 			g2.setColor(Color.yellow);
 			g2.drawString(text, x, y);
 		}
+		else if(commandNum == -1) {
+			g2.drawString(text, x, y);
+			// BACK TO TITLE SCREEN
+			text = "Back to title screen";
+			x = getXForCenteredText(text);
+			y += gp.tileSize*1.5;
+			g2.drawString(text, x, y);
+		}
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		
