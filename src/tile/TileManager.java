@@ -25,7 +25,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/worldV3.txt",0);
+		loadMap("/maps/world02txt.txt",0);
 		loadMap("/maps/interior01.txt",1);
 	}
 	
@@ -74,7 +74,7 @@ public class TileManager {
 			setup(41 ,"tree", true);
 			setup(42,"hut", false);
 			setup(43,"floor01", false);
-			setup(44 ,"table01 ", true);
+			setup(44 ,"table01", true);
 			
 	}
 	
@@ -112,7 +112,7 @@ public class TileManager {
 					
 					int num = Integer.parseInt(numbers[col]);
 					
-					mapTileNum[col][row] = num;
+					mapTileNum[map][col][row] = num;
 					col++;	
 				}
 			
@@ -135,7 +135,7 @@ public class TileManager {
 		
 		while(worldCol<gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			
-			int tileNum = mapTileNum[gp.currentMap ][worldCol][worldRow];
+			int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
 			
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
