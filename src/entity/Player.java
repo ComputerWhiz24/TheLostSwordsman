@@ -370,14 +370,14 @@ public class Player extends Entity{
 
 		if(i != 999) { 
 			//	COLLECTIBLE ITEMS
-			if(gp.obj[i].type == type_collectible) {
-				 gp.obj[i].use(this);
-				 gp.obj[i] = null; 
+			if(gp.obj[gp.currentMap][i].type == type_collectible) {
+				 gp.obj[gp.currentMap][i].use(this);
+				 gp.obj[gp.currentMap][i] = null; 
 			} else {
 				// INVENTORY ITEMS
 				String text;
 				if(inventory.size() != inventorySize) {
-					inventory.add(gp.obj[i]);
+					inventory.add(gp.obj[gp.currentMap][i]);
 					gp.playSE(1);
 					
 				}
@@ -385,7 +385,7 @@ public class Player extends Entity{
 					text = "Inventory full";
 					gp.ui.addMessage(text);
 				}
-				gp.obj[i] = null;
+				gp.obj[gp.currentMap][i] = null;
 			}
 		}
 	}
@@ -395,25 +395,25 @@ public class Player extends Entity{
 			if (keyH.talkPressed == true) { 
 				gp.ui.talkNPC = true;
 		        gp.gameState = gp.dialogueState;
-		        currentSpeaker = gp.npc[i];
-		        gp.npc[i].speak(); // Initial dialogue trigger
+		        currentSpeaker = gp.npc[gp.currentMap] [i];
+		        gp.npc[gp.currentMap][i].speak(); // Initial dialogue trigger
 			}
 			keyH.talkPressed = false;
 			}
 	} 
 	public void hitByMonster(int idx) {
-		if(hitCooldown == false &&  gp.monster[idx].dying == false) {
+		if(hitCooldown == false &&  gp.monster[gp.currentMap][idx].dying == false) {
 			gp.playSE(6);
-			double monDmg = gp.monster[idx].damage - 0.05*defense; //Defense shields damage from monster
+			double monDmg = gp.monster[gp.currentMap][idx].damage - 0.05*defense; //Defense shields damage from monster
 			life -= monDmg;
 			hitCooldown = true;
 		}
 	}
 	public void damageMonster(int idx, double attack) {
 
-		if(swinging == false && gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
+		if(swinging == false && gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
-			Entity mon = gp.monster[idx];
+			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
 			mon.hpBarOn = true;
@@ -438,11 +438,11 @@ public class Player extends Entity{
 	}
 	public void damageTile(int tileIdx) {
 		// IF TILE IS DESTRUCTIBLE AND THE WEAPON TYPE IS COMPATIBLE, DECREASE LIFE BY 1
-			if(tileIdx != 999 && gp.iTile[tileIdx].destructible && gp.iTile[tileIdx].isCorrectItem(this)) {
+			if(tileIdx != 999 && gp.iTile[gp.currentMap][tileIdx].destructible && gp.iTile[gp.currentMap][tileIdx].isCorrectItem(this)) {
 				if(!swinging) {
-					System.out.println(gp.iTile[tileIdx].life);
-					gp.iTile[tileIdx].life--;
-					generateParticle(gp.iTile[tileIdx], gp.iTile[tileIdx]);
+					System.out.println(gp.iTile[gp.currentMap][tileIdx].life);
+					gp.iTile[gp.currentMap][tileIdx].life--;
+					generateParticle(gp.iTile[gp.currentMap][tileIdx], gp.iTile[gp.currentMap][tileIdx]);
 					gp.playSE(10);
 					damageTileHelper(tileIdx);
 				}
@@ -451,20 +451,20 @@ public class Player extends Entity{
 			}
 	}
 	public void damageTileHelper(int tileIdx) {
-		if(gp.iTile[tileIdx].life == 2) {
-			gp.iTile[tileIdx].image = down1;
+		if(gp.iTile[gp.currentMap][tileIdx].life == 2) {
+			gp.iTile[gp.currentMap][tileIdx].image = down1;
 		}
-		else if(gp.iTile[tileIdx].life == 1) {
-			gp.iTile[tileIdx].image = down2;
-		}else if(gp.iTile[tileIdx].life == 0) {
-			gp.iTile[tileIdx]= null;
+		else if(gp.iTile[gp.currentMap][tileIdx].life == 1) {
+			gp.iTile[gp.currentMap][tileIdx].image = down2;
+		}else if(gp.iTile[gp.currentMap][tileIdx].life == 0) {
+			gp.iTile[gp.currentMap][tileIdx]= null;
 		}
 	}
 	public void shootMonster(int idx, double attack) {
 		
-		if(gp.monster[idx].life > 0) { // If not already swinging and monster is alive 
+		if(gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
-			Entity mon = gp.monster[idx];
+			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
 			mon.hpBarOn = true;

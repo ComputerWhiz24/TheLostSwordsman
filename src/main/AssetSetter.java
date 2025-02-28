@@ -25,79 +25,87 @@ public class AssetSetter {
 	}
 	
 	public void setObject() {
+		int mapNum = 0;
 		int i = 0;
-		gp.obj[i] = new OBJ_Coin_Bronze(gp);
-		gp.obj[i].worldX = gp.tileSize*20;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*20;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
-		gp.obj[i].worldX = gp.tileSize*21;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_Key(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*21;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
-		gp.obj[i].worldX = gp.tileSize*22;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_Key(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*22;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
-		gp.obj[i] = new OBJ_Axe(gp);
-		gp.obj[i].worldX = gp.tileSize*33;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_Axe(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*33;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
-		gp.obj[i] = new OBJ_BlueShield(gp);
-		gp.obj[i].worldX = gp.tileSize*35;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_BlueShield(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*35;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
-		gp.obj[i] = new OBJ_RedPotion(gp);
-		gp.obj[i].worldX = gp.tileSize*37;
-		gp.obj[i].worldY  = gp.tileSize*21;
+		gp.obj[mapNum][i] = new OBJ_RedPotion(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*37;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
 	}
 	public void addSlimes(int num) {
-		
+		int mapNum = 0;
 		for(int i = 0; i < num; i++) { // only works if slime is only monster
-			gp.monster[i] = new MON_GreenSlime(gp);
+			gp.monster[mapNum][i] = new MON_GreenSlime(gp);
 			int randX = (int) (Math.random() * 9) + 20;
 			int randY = (int) (Math.random() * 5)+ 37;
-			gp.monster[i].worldX = gp.tileSize*randX;
-			gp.monster[i].worldY  = gp.tileSize*randY;
+			gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+			gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
 		}
 		
 	}
 	public void addSlime(int idx) {
-		
-			gp.monster[idx] = new MON_GreenSlime(gp);
+		int mapNum = 0;
+			gp.monster[mapNum][idx] = new MON_GreenSlime(gp);
 			int randX = (int) (Math.random() * 9) + 20;
 			int randY = (int) (Math.random() * 5)+ 37;
-			gp.monster[idx].worldX = gp.tileSize*randX;
-			gp.monster[idx].worldY  = gp.tileSize*randY;
+			gp.monster[mapNum][idx].worldX = gp.tileSize*randX;
+			gp.monster[mapNum][idx].worldY  = gp.tileSize*randY;
 	}
 	public void setMonster() {
 		addSlimes(5);
 	}
 	public void setNPC() {
-		gp.npc[0] = new NPC_Shopkeeper(gp);
-		gp.npc[0].worldX = gp.tileSize*21;
-		gp.npc[0].worldY  = gp.tileSize*21;
+		int mapNum = 0;
+		gp.npc[mapNum][0] = new NPC_Shopkeeper(gp);
+		gp.npc[mapNum][0].worldX = gp.tileSize*21;
+		gp.npc[mapNum][0].worldY  = gp.tileSize*21;
 		
-		gp.npc[1] = new NPC_Wizard(gp);
-		gp.npc[1].worldX = gp.tileSize*23;
-		gp.npc[1].worldY  = gp.tileSize*21;
+		gp.npc[mapNum][1] = new NPC_Wizard(gp);
+		gp.npc[mapNum][1].worldX = gp.tileSize*23;
+		gp.npc[mapNum][1].worldY  = gp.tileSize*21;
+		
+//		mapNum = 1;
+//		gp.npc[mapNum][1] = new NPC_Wizard(gp);
+//		gp.npc[mapNum][1].worldX = gp.tileSize*23;
+//		gp.npc[mapNum][1].worldY  = gp.tileSize*21;
 	}
 	public void setInteractiveTile() {
+		int mapNum = 0;
 		int i = 0;
 		
-		gp.iTile[i] = new IT_DryTree(gp,26,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,26,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,27,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,27,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,28,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,28,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,29,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,29,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,30,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,30,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,31,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,31,7);
 		i++;
-		gp.iTile[i] = new IT_DryTree(gp,32,7);
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,32,7);
 		i++;
 	}
 }
