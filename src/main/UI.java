@@ -384,7 +384,7 @@ public class UI extends JFrame implements MouseListener{
 		
 			drawPauseScreen();
 		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
-			if (gp.player.inventory.get(getItemIndex()) != null) {
+	
 			    int dFrameX = cursorX + gp.tileSize;
 			    int dFrameY = cursorY;
 			    int dFrameWidth = (int) (gp.tileSize * 2);
@@ -419,7 +419,7 @@ public class UI extends JFrame implements MouseListener{
 			
 		}
 		
-	}
+	
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
 		return itemIndex;

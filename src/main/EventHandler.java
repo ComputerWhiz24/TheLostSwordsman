@@ -1,36 +1,43 @@
 package main;
 
-import java.awt.Rectangle;
+
 
 public class EventHandler {
 
 	GamePanel gp;
-	EventRect eventRect[][];
+	EventRect[][][] eventRect;
 	int previousEventX,previousEventY;
 	boolean inRange;
 	
 	boolean hitCooldown = false;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;  
-		eventRect = new EventRect[gp.maxWorldCol][gp.maxWorldRow];
+		eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
+		
+		int map = 0;
 		int col = 0;
 		int row = 0;
 		
 		
-		while(col < gp.maxWorldCol && row < gp.maxScreenRow) {
+		while(map < gp.maxMap && col < gp.maxWorldCol && row < gp.maxScreenRow) {
 			
-			eventRect[col][row] = new EventRect();
-			eventRect[col][row].x = 23;
-			eventRect[col][row].y = 23;
-			eventRect[col][row].width = 48;
-			eventRect[col][row].height  = 72;
-			eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
-			eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
+			eventRect[map][col][row] = new EventRect();
+			eventRect[map][col][row].x = 23;
+			eventRect[map][col][row].y = 23;
+			eventRect[map][col][row].width = 48;
+			eventRect[map][col][row].height  = 72;
+			eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
+			eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
 			
 			col++;
 			if(col == gp.maxWorldCol) {
 				col = 0;
 				row++;
+				
+				if(row == gp.maxWorldRow) {
+					row = 0;
+					map++;
+				}
 			}
 		}
 
@@ -47,53 +54,55 @@ public class EventHandler {
 			inRange = false;
 		}
 		if(inRange == false) {
-			if(hit(25,13,"right") == true) {
-				loseHalfHeart(25,13,gp.dialogueState);
+			if(hit(0,25,13,"right") == true) {
+				loseHalfHeart(gp.dialogueState);
+			}
+			else if(hit(0,22,6,"up") == true) {
+				fullHP(gp.dialogueState);
+			}
+			else if(hit(0,10,39,"any")) {
+				teleport(1,12,13);
+			}
+			else if(hit(1,12,13,"any")) {
+				teleport(0,10,39);
 			}
 		}
 		// FOR SOME REASON, 25 IS IN THE MIDDLE OF A BLOCK INSTEAD OF THE START
 		
-		if(hit(22,6,"up") == true) {
-			fullHP(22,6, gp.dialogueState);
-		}
-		/*
-		 TELEPORT CHECKER
-		if(hit(2,2,"any") == true){
-			teleport(gp.dialogueState);
-		}
-		 */
+	
 		
 	}
-	public boolean hit(int eventCol, int eventRow, String reqDirection ) {
+	public boolean hit(int map, int eventCol, int eventRow, String reqDirection ) {
 		
 		boolean hit = false;
-		
-		
-		gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;	
-		gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;	
-		
-		eventRect[eventCol][eventRow].x = (int) (eventCol* gp.tileSize + eventRect[eventCol][eventRow].x);
-		eventRect[eventCol][eventRow].y = (int) (eventRow* gp.tileSize + eventRect[eventCol][eventRow].y);
-		
-		 		//CHECK IF EVENT IS ONE TIME ONLY  
-		if(gp.player.solidArea.intersects(eventRect[eventCol][eventRow]) && eventRect[eventCol][eventRow].eventDone == false) {
+		if(map == gp.currentMap) {
 			
-			if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
-				hit = true;
-				previousEventX = gp.player.worldX;
-				previousEventY = gp.player.worldY;
+			gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;	
+			gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;	
+			  
+			eventRect[map][eventCol][eventRow].x = (eventCol* gp.tileSize + eventRect[map][eventCol][eventRow].x);
+			eventRect[map][eventCol][eventRow].y = (eventRow* gp.tileSize + eventRect[map][eventCol][eventRow].y);
+			
+			 		//CHECK IF EVENT IS ONE TIME ONLY  
+			if(gp.player.solidArea.intersects(eventRect[map][eventCol][eventRow]) && eventRect[map][eventCol][eventRow].eventDone == false) {
+				
+				if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+					hit = true;
+					previousEventX = gp.player.worldX;
+					previousEventY = gp.player.worldY;
+				}
 			}
+			
+			gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+			gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+			eventRect[map][eventCol][eventRow].x = eventRect[map][eventCol][eventRow].eventRectDefaultX;
+			eventRect[map][eventCol][eventRow].y = eventRect[map][eventCol][eventRow].eventRectDefaultY;
+			
 		}
-		
-		gp.player.solidArea.x = gp.player.solidAreaDefaultX;
-		gp.player.solidArea.y = gp.player.solidAreaDefaultY;
-		eventRect[eventCol][eventRow].x = eventRect[eventCol][eventRow].eventRectDefaultX;
-		eventRect[eventCol][eventRow].y = eventRect[eventCol][eventRow].eventRectDefaultY;
-		
 		return hit;
 	}
 	
-	public void loseHalfHeart(int col, int row, int gameState) {
+	public void loseHalfHeart(int gameState) {
 		gp.ui.talkWorld = true;
 		gp.ui.currentDialogue = "OWW, what was that?? Weird?";
 		gp.gameState = gameState;
@@ -102,7 +111,7 @@ public class EventHandler {
 		
 	//	 eventRect[col][row].eventDone = true;  EVENT ONLY HAPPENS ONCE
 	}
-	public void fullHP(int col, int row, int gameState) {
+	public void fullHP(int gameState) {
 		gp.ui.talkWorld = true;
 		gp.ui.talkNPC = false;
 		gp.gameState = gameState;
@@ -113,14 +122,15 @@ public class EventHandler {
 	public void heal() {
 		gp.player.life += 0.5;
 	}
-	/*
-	 	TELEPORT METHOD:
+	
+	 // TELEPORT METHOD:
 	 	
-	 public void teleport(int gameState){
-	 	gp.gameState = gameState;
-	 	gp.ui.currentDialogue = "Woah, where am i?";
-	 	gp.player.worldX = gp.tileSize * 2;
-	 	gp.player.worldY = gp.tileSize * 3;
-	 */
+	 public void teleport(int map, int col, int row){
+		gp.currentMap = map;
+		gp.player.worldX = gp.tileSize * col;
+		gp.player.worldY = gp.tileSize * row;
+		previousEventX = gp.player.worldX;
+		previousEventY = gp.player.worldY;
+		inRange  = false;
+	 }
 }
-

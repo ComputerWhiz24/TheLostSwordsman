@@ -525,7 +525,7 @@ public class Player extends Entity{
 				break;
 			case type_consumable:
 				selectedItem.use(this);
-				inventory.remove(idx-5);
+				inventory.remove(idx-1);
 				break;
 			}
 		}
