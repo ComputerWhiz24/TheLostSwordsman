@@ -49,6 +49,7 @@ public class UI extends JFrame implements MouseListener{
 	public int rows = 11;
 	public int slotXStart;
 	public int slotYStart;
+	int counter = 0;
 	
 	BufferedImage heart_full,heart_half,heart_blank,crystal_full,crystal_blank;
 	
@@ -86,6 +87,7 @@ public class UI extends JFrame implements MouseListener{
 		
 	}
 	public void draw(Graphics2D g2) {
+
 		
 		this.g2 = g2;
 		
@@ -134,6 +136,9 @@ public class UI extends JFrame implements MouseListener{
 		if(gp.gameState == gp.gameOverState) {
 			 gameOverScreen();
 		} 
+		if(gp.gameState == gp.transitionState) {
+			drawTransition();
+		}
 
 	}
 	public void drawPlayerLife() {
@@ -179,6 +184,7 @@ public class UI extends JFrame implements MouseListener{
 			 i++;
 			 x += 35;
 			 }
+		 g2.drawRect(gp.player.screenX, gp.player.screenY, gp.player.solidAreaDefaultX, gp.player.solidAreaDefaultX);
 	}
 	public void drawMessage() {
 		int messageX = gp.tileSize;
@@ -418,8 +424,6 @@ public class UI extends JFrame implements MouseListener{
 			
 			
 		}
-		
-	
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
 		return itemIndex;
@@ -781,7 +785,6 @@ public class UI extends JFrame implements MouseListener{
 			y+= 40;
 		}		
 	}
-	
 	public void gameOverScreen() {
 		g2.setColor(new Color(0,0,0,150));
 		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
@@ -840,6 +843,21 @@ public class UI extends JFrame implements MouseListener{
 			x = getXForCenteredText(text);
 			y += gp.tileSize*1.5;
 			g2.drawString(text, x, y);
+		}
+	}
+	public void drawTransition() {
+		counter++;
+		g2.setColor(new Color(0,0,0,counter*5));
+		g2.fillRect(0, 0,gp.screenWidth,gp.screenHeight);
+		
+		if(counter == 50) {
+			counter = 0;
+			gp.gameState = gp.playState;
+			gp.currentMap = gp.eHandler.tempMap;
+			gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+			gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+			gp.eHandler.previousEventX = gp.player.worldX;
+			gp.eHandler.previousEventY = gp.player.worldY;
 		}
 	}
 	public void drawWindow(int x, int y, int width, int height) {

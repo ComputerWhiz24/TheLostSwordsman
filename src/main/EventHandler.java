@@ -7,8 +7,8 @@ public class EventHandler {
 	GamePanel gp;
 	EventRect[][][] eventRect;
 	int previousEventX,previousEventY;
-	
 	boolean hitDisabled = false;
+	int tempMap, tempCol,tempRow;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;  
 		eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
@@ -64,7 +64,7 @@ public class EventHandler {
 	}
 	public boolean hit(int map, int eventCol, int eventRow, String reqDirection ) {
 
-
+		// HIT METHOD IS DETECTING ONLY HALF THE TILE OF X AND Y
 		
 		boolean hit = false;
 		if(map == gp.currentMap) {
@@ -120,11 +120,11 @@ public class EventHandler {
 	 // TELEPORT METHOD:
 	 	
 	 public void teleport(int map, int col, int row){
-		gp.currentMap = map;
-		gp.player.worldX = gp.tileSize * col;
-		gp.player.worldY = gp.tileSize * row;
-		previousEventX = gp.player.worldX;
-		previousEventY = gp.player.worldY;
+		gp.gameState = gp.transitionState;
+		tempMap = map;
+		tempCol = col;
+		tempRow = row;
+
 		hitDisabled  = true;
 	 }
 }
