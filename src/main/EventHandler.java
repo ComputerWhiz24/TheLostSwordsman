@@ -7,9 +7,8 @@ public class EventHandler {
 	GamePanel gp;
 	EventRect[][][] eventRect;
 	int previousEventX,previousEventY;
-	boolean inRange;
 	
-	boolean hitCooldown = false;
+	boolean hitDisabled = false;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;  
 		eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
@@ -19,7 +18,7 @@ public class EventHandler {
 		int row = 0;
 		
 		
-		while(map < gp.maxMap && col < gp.maxWorldCol && row < gp.maxScreenRow) {
+		while(map < gp.maxMap && col < gp.maxWorldCol && row < gp.maxWorldRow) {
 			
 			eventRect[map][col][row] = new EventRect();
 			eventRect[map][col][row].x = 23;
@@ -50,42 +49,36 @@ public class EventHandler {
 		int distance = Math.max(xDistance, yDistance);
 		
 		
-		if(distance > gp.tileSize * 2) {
-			inRange = false;
+		if(distance > gp.tileSize*1.25) {
+			hitDisabled = false;
 		}
-		if(inRange == false) {
-			if(hit(0,25,13,"right") == true) {
-				loseHalfHeart(gp.dialogueState);
-			}
-			else if(hit(0,22,6,"up") == true) {
-				fullHP(gp.dialogueState);
-			}
-			else if(hit(0,10,39,"any")) {
-				teleport(1,12,13);
-			}
-			else if(hit(1,12,13,"any")) {
-				teleport(0,10,39);
+		if(!hitDisabled) {
+			if(hit(0,25,13,"right") == true) {loseHalfHeart(gp.dialogueState);
+			}else if(hit(0,22,6,"up") == true) {fullHP(gp.dialogueState);
+			}else if(hit(0,9,38,"any")) {teleport(1,12,13);System.out.println("hit");
+			}else if(hit(1,12,13,"any")) {teleport(0,10,39);
 			}
 		}
 		// FOR SOME REASON, 25 IS IN THE MIDDLE OF A BLOCK INSTEAD OF THE START
 		
-	
-		
 	}
 	public boolean hit(int map, int eventCol, int eventRow, String reqDirection ) {
+
+
 		
 		boolean hit = false;
 		if(map == gp.currentMap) {
 			
 			gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;	
 			gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;	
-			  
+			
 			eventRect[map][eventCol][eventRow].x = (eventCol* gp.tileSize + eventRect[map][eventCol][eventRow].x);
 			eventRect[map][eventCol][eventRow].y = (eventRow* gp.tileSize + eventRect[map][eventCol][eventRow].y);
 			
 			 		//CHECK IF EVENT IS ONE TIME ONLY  
-			if(gp.player.solidArea.intersects(eventRect[map][eventCol][eventRow]) && eventRect[map][eventCol][eventRow].eventDone == false) {
-				
+			if(gp.player.solidArea.intersects(eventRect[map][eventCol][eventRow]) && 
+					eventRect[map][eventCol][eventRow].eventDone == false) {
+					// CHECK IF DIRECTION IS CORRECT
 				if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
 					hit = true;
 					previousEventX = gp.player.worldX;
@@ -103,11 +96,12 @@ public class EventHandler {
 	}
 	
 	public void loseHalfHeart(int gameState) {
+
 		gp.ui.talkWorld = true;
 		gp.ui.currentDialogue = "OWW, what was that?? Weird?";
 		gp.gameState = gameState;
 		gp.player.life -= 1;
-		inRange = true;
+		hitDisabled = true;
 		
 	//	 eventRect[col][row].eventDone = true;  EVENT ONLY HAPPENS ONCE
 	}
@@ -131,6 +125,6 @@ public class EventHandler {
 		gp.player.worldY = gp.tileSize * row;
 		previousEventX = gp.player.worldX;
 		previousEventY = gp.player.worldY;
-		inRange  = false;
+		hitDisabled  = true;
 	 }
 }
