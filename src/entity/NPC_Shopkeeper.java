@@ -1,4 +1,4 @@
-package entity;
+ package entity;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -6,6 +6,9 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
+import object.OBJ_Axe;
+import object.OBJ_BlueShield;
+import object.OBJ_RedPotion;
 	
 public class NPC_Shopkeeper extends Entity{
 
@@ -13,12 +16,12 @@ public class NPC_Shopkeeper extends Entity{
 		public NPC_Shopkeeper(GamePanel gp) {
 			super(gp);
 			
-		
+			tradable = true;
 			direction = "down";
 			speed = 1;
 			getImage();
 			setDialogue();
-			
+			setItems();
 		}
 			
 		public void getImage() {
@@ -84,5 +87,14 @@ public class NPC_Shopkeeper extends Entity{
 					break;
 					 
 			}
+			gp.ui.npc = this;
+			tradable = true;
 		}
+		public void setItems() {
+			inventory.add(new OBJ_RedPotion(gp));
+			inventory.add(new OBJ_BlueShield(gp));
+			inventory.add(new OBJ_Axe(gp));
+			
+		}
+		
 	}

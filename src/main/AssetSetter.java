@@ -25,6 +25,9 @@ public class AssetSetter {
 	}
 	
 	public void setObject() {
+		
+		// MAP 0
+		
 		int mapNum = 0;
 		int i = 0;
 		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
@@ -51,8 +54,13 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*37;
 		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
 		i++;
+		
+		// MAP 1
+		i = 0;
+		mapNum = 1;
 	}
 	public void addSlimes(int num) {
+		// MAP 0
 		int mapNum = 0;
 		for(int i = 0; i < num; i++) { // only works if slime is only monster
 			gp.monster[mapNum][i] = new MON_GreenSlime(gp);
@@ -61,29 +69,41 @@ public class AssetSetter {
 			gp.monster[mapNum][i].worldX = gp.tileSize*randX;
 			gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
 		}
+		// MAP 1
+		mapNum = 1;
 		
 	}
 	public void addSlime(int idx) {
+		// MAP 0
 		int mapNum = 0;
-			gp.monster[mapNum][idx] = new MON_GreenSlime(gp);
-			int randX = (int) (Math.random() * 9) + 20;
-			int randY = (int) (Math.random() * 5)+ 37;
-			gp.monster[mapNum][idx].worldX = gp.tileSize*randX;
-			gp.monster[mapNum][idx].worldY  = gp.tileSize*randY;
+		gp.monster[mapNum][idx] = new MON_GreenSlime(gp);
+		int randX = (int) (Math.random() * 9) + 20;
+		int randY = (int) (Math.random() * 5)+ 37;
+		gp.monster[mapNum][idx].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][idx].worldY  = gp.tileSize*randY;
+			
+		// MAP 1
+		mapNum = 1;
 	}
 	public void setMonster() {
 		addSlimes(5);
 	}
 	public void setNPC() {
+		// MAP 0
+		int i = 0;
 		int mapNum = 0;
-		gp.npc[mapNum][0] = new NPC_Shopkeeper(gp);
-		gp.npc[mapNum][0].worldX = gp.tileSize*21;
-		gp.npc[mapNum][0].worldY  = gp.tileSize*21;
+		gp.npc[mapNum][i] = new NPC_Wizard(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*23;
+		gp.npc[mapNum][i].worldY  = gp.tileSize*21;
+		i++;
 		
-		gp.npc[mapNum][1] = new NPC_Wizard(gp);
-		gp.npc[mapNum][1].worldX = gp.tileSize*23;
-		gp.npc[mapNum][1].worldY  = gp.tileSize*21;
-		
+		// MAP 1
+		i = 0;
+		mapNum = 1;
+		gp.npc[mapNum][i] = new NPC_Shopkeeper(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*12;
+		gp.npc[mapNum][i].worldY  = gp.tileSize*7   ;
+		i++;
 //		mapNum = 1;
 //		gp.npc[mapNum][1] = new NPC_Wizard(gp);
 //		gp.npc[mapNum][1].worldX = gp.tileSize*23;

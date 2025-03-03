@@ -42,6 +42,7 @@ public class UI extends JFrame implements MouseListener{
 	public int playSubState = 0;
 	public int pauseSubState = 0;
 	public int optionsSubState = 0;
+	public int tradeSubState = 0;
 	public int slotCol = 0;
 	public int slotRow = 0;
 	
@@ -50,6 +51,8 @@ public class UI extends JFrame implements MouseListener{
 	public int slotXStart;
 	public int slotYStart;
 	int counter = 0;
+	
+	public Entity npc;
 	
 	BufferedImage heart_full,heart_half,heart_blank,crystal_full,crystal_blank;
 	
@@ -138,6 +141,9 @@ public class UI extends JFrame implements MouseListener{
 		} 
 		if(gp.gameState == gp.transitionState) {
 			drawTransition();
+		}
+		if(gp.gameState == gp.tradeState) {
+			drawTradeScreen();
 		}
 
 	}
@@ -642,6 +648,7 @@ public class UI extends JFrame implements MouseListener{
 		}
 	}
 	public void options_top(int frameX, int frameY) {
+
 		int textX;
 		int textY;
 		
@@ -731,6 +738,7 @@ public class UI extends JFrame implements MouseListener{
 		gp.config.saveConfig();
 	}
 	public void options_fullscreenToggle(int frameX, int frameY) {
+
 		int textX = (int) (frameX + gp.tileSize*1.8);
 		int textY = frameY + gp.tileSize*3;
 		
@@ -764,26 +772,56 @@ public class UI extends JFrame implements MouseListener{
 	
 	}
 	public void drawDialogueScreen() {
-
-		
 		int x = gp.tileSize * 2;
 		int y = gp.tileSize/2;
-		int width = gp.screenWidth - (gp.tileSize * 4);
-		int height =  gp.tileSize * 4;
 		
-		drawWindow(x,y,width,height);
-		
-		
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
-		x += gp.tileSize;
-		y +=  gp.tileSize;
-		if(talkNPC) {
-			currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+		if(npc.tradable) {
+
+			int width = gp.screenWidth - (gp.tileSize * 4);
+			int height =  gp.tileSize * 8;
+			
+			drawWindow(x,y,width,height);
+			
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+			y +=  gp.tileSize*2;
+			if(talkNPC) {
+				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+			}
+			x = getXForCenteredText(currentDialogue);
+			for(String line: currentDialogue.split("\n")) {
+				g2.drawString(line, x, y);
+				y+= 40;
+			}	
+			y +=gp.tileSize*2;	
+			g2.drawString("Sell", getXForCenteredText("Sell")-gp.tileSize*2, y);
+			g2.drawString("Buy", getXForCenteredText("Buy")+gp.tileSize*2, y);
+			if(commandNum == 0) {
+				g2.drawString(">", getXForCenteredText("Sell")-gp.tileSize*2-25, y);
+			} else if (commandNum == 1) {
+				g2.drawString(">", getXForCenteredText("Buy")+gp.tileSize*2-25, y);
+			}
 		}
-		for(String line: currentDialogue.split("\n")) {
-			g2.drawString(line, x, y);
-			y+= 40;
-		}		
+		else if (!npc.tradable) {
+			int width = gp.screenWidth - (gp.tileSize * 4);
+			int height =  gp.tileSize * 4;
+			
+			drawWindow(x,y,width,height);
+			
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+			x += gp.tileSize;
+			y +=  gp.tileSize;
+			if(talkNPC) {
+				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+			}
+		
+			for(String line: currentDialogue.split("\n")) {
+				g2.drawString(line, x, y);
+				y+= 40;
+			}	
+		}
+		
 	}
 	public void gameOverScreen() {
 		g2.setColor(new Color(0,0,0,150));
@@ -859,6 +897,19 @@ public class UI extends JFrame implements MouseListener{
 			gp.eHandler.previousEventX = gp.player.worldX;
 			gp.eHandler.previousEventY = gp.player.worldY;
 		}
+	}
+	public void drawTradeScreen() {
+		switch(tradeSubState) {
+		case 0: trade_buy(); break;
+		case 1: trade_sell(); break;
+		}
+		gp.keyH.enterPressed = false;
+	}
+	public void trade_buy() {
+		
+	}
+	public void trade_sell() {
+		
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		

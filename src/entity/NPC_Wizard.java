@@ -89,5 +89,6 @@ public class NPC_Wizard extends Entity{
 					break;
 					 
 			}
+		gp.ui.npc = this;
 		}
 }

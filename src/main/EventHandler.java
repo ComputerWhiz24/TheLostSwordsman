@@ -57,7 +57,11 @@ public class EventHandler {
 			}else if(hit(0,22,6,"up") == true) {fullHP(gp.dialogueState);
 			}else if(hit(0,9,38,"any")) {teleport(1,12,13);System.out.println("hit");
 			}else if(hit(1,12,13,"any")) {teleport(0,10,39);
-			}
+			}else if(hit(1,12,8,"up")) {	gp.ui.talkNPC = true;
+	        gp.gameState = gp.dialogueState;
+	        gp.player.currentSpeaker = gp.npc[1][0];
+	        gp.npc[1][0].speak(); // Initial dialogue trigger
+		}
 		}
 		// FOR SOME REASON, 25 IS IN THE MIDDLE OF A BLOCK INSTEAD OF THE START
 		

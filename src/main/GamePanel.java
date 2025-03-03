@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// MAP
 	public final int maxMap = 10;
-	public int currentMap = 0;
+	public int currentMap = 1;
 	
 	//FPS
 	int FPS= 60;
@@ -77,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int dialogueState = 3;
 	public final int gameOverState = 4;
 	public final int transitionState = 5;
+	public final int tradeState = 6;
 	
 	
 	public GamePanel() {

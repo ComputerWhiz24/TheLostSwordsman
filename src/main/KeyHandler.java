@@ -226,24 +226,49 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void dialogueState(int code) {
+		int maxCommandNum = 1;
+		
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.playState;
 		}
+		if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+			gp.ui.commandNum++;
+			gp.playSE(8);
+			if(gp.ui.commandNum > maxCommandNum) {
+				gp.ui.commandNum = 0;
+			}
+		}
+		if(code == KeyEvent.VK_RIGHT|| code == KeyEvent.VK_D) {
+			gp.ui.commandNum--;
+			gp.playSE(8);
+			if(gp.ui.commandNum < 0) {
+				gp.ui.commandNum = maxCommandNum ;
+			}
+		}
+		
 		if(code == KeyEvent.VK_ENTER) {
-			// PRESS ENTER TO CONTINUE CONVERSATION 
-			if(gp.ui.talkWorld){
-				gp.gameState = gp.playState;
-				gp.ui.talkWorld = false;
-				gp.ui.talkNPC = false;
+			if(gp.ui.npc.tradable) {
+				switch(gp.ui.commandNum) {
+					case 0: gp.ui.tradeSubState = 0; break;
+					case 1: gp.ui.tradeSubState = 1; break;
+				}
+				gp.gameState = gp.tradeState;
 			} else {
-				Entity.dialogueIndex++;
-				if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
-					Entity.dialogueIndex = 0;
+			// PRESS ENTER TO CONTINUE CONVERSATION 
+				if(gp.ui.talkWorld){
 					gp.gameState = gp.playState;
 					gp.ui.talkWorld = false;
 					gp.ui.talkNPC = false;
+				} else {
+					Entity.dialogueIndex++;
+					if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
+						Entity.dialogueIndex = 0;
+						gp.gameState = gp.playState;
+						gp.ui.talkWorld = false;
+						gp.ui.talkNPC = false;
+					}
 				}
-			}
+			}	
 		}
 	}
 	public void gameOverState(int code) {

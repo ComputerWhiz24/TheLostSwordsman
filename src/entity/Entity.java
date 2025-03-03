@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -24,8 +25,12 @@ public class Entity {
 	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collision = false;  
+	
+	// NPC
 	public static Entity currentSpeaker = new Entity(gp);
 	public static String[] currentDialogue = new String[20];
+	public boolean tradable =false;
+	
 		//STATE
 	public int worldX,worldY;
 	public String direction = "down";
@@ -34,7 +39,7 @@ public class Entity {
 	public boolean collisionOn = false;
 	boolean attacking = false; 
 	public boolean alive = true; 
-	public boolean dying = false;
+ 	public boolean dying = false;
 	public boolean hitCooldown = false;
 	public boolean hpBarOn = false;
 		//COUNTERS 
@@ -44,10 +49,14 @@ public class Entity {
 	int dyingCounter = 0; 
 	public int hpBarCounter = 0;  
 	public int projectileCooldown;
+	
+		// INVENTORY
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public int inventorySize = 222;
+	
 		//ATTRIBUTES
 	public int speed;
 	public String name;
-
 	public double damage;
 	public double maxLife;
 	public double life;
@@ -63,7 +72,7 @@ public class Entity {
 	public int stamina;
 	public double mana;
 	public int maxMana;
-	
+
 	public int coin;
 	public double attack;
 	public Entity currentWeapon;
