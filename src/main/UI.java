@@ -795,11 +795,14 @@ public class UI extends JFrame implements MouseListener{
 			}	
 			y +=gp.tileSize*2;	
 			g2.drawString("Sell", getXForCenteredText("Sell")-gp.tileSize*2, y);
-			g2.drawString("Buy", getXForCenteredText("Buy")+gp.tileSize*2, y);
+			g2.drawString("Buy", getXForCenteredText("Buy"), y);
+			g2.drawString("Exit", getXForCenteredText("Exit")+gp.tileSize*2, y);
 			if(commandNum == 0) {
 				g2.drawString(">", getXForCenteredText("Sell")-gp.tileSize*2-25, y);
 			} else if (commandNum == 1) {
-				g2.drawString(">", getXForCenteredText("Buy")+gp.tileSize*2-25, y);
+				g2.drawString(">", getXForCenteredText("Buy")-25, y);
+			} else if (commandNum == 2) {
+				g2.drawString(">", getXForCenteredText("Exit")+gp.tileSize*2-25, y);
 			}
 		}
 		else if (!npc.tradable) {
@@ -814,6 +817,7 @@ public class UI extends JFrame implements MouseListener{
 			y +=  gp.tileSize;
 			if(talkNPC) {
 				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+		
 			}
 		
 			for(String line: currentDialogue.split("\n")) {

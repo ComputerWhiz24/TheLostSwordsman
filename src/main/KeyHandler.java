@@ -41,6 +41,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.gameState == gp.gameOverState) {
 			gameOverState(code);
 		}
+		else if(gp.gameState == gp.tradeState) {
+			tradeState(code);
+		}
 	}
 	
 	public void titleState(int code) {
@@ -226,35 +229,36 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void dialogueState(int code) {
-		int maxCommandNum = 1;
-		
+		int maxCommandNum = 2;
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.playState;
 		}
-		if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
-			gp.ui.commandNum++;
-			gp.playSE(8);
-			if(gp.ui.commandNum > maxCommandNum) {
-				gp.ui.commandNum = 0;
-			}
-		}
-		if(code == KeyEvent.VK_RIGHT|| code == KeyEvent.VK_D) {
-			gp.ui.commandNum--;
-			gp.playSE(8);
-			if(gp.ui.commandNum < 0) {
-				gp.ui.commandNum = maxCommandNum ;
-			}
-		}
-		
-		if(code == KeyEvent.VK_ENTER) {
-			if(gp.ui.npc.tradable) {
-				switch(gp.ui.commandNum) {
-					case 0: gp.ui.tradeSubState = 0; break;
-					case 1: gp.ui.tradeSubState = 1; break;
+		if(gp.ui.npc.tradable) {
+			if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+				gp.ui.commandNum--;
+				gp.playSE(8);
+				if(gp.ui.commandNum < 0) {
+					gp.ui.commandNum = maxCommandNum;
 				}
-				gp.gameState = gp.tradeState;
-			} else {
-			// PRESS ENTER TO CONTINUE CONVERSATION 
+			}
+			if(code == KeyEvent.VK_RIGHT|| code == KeyEvent.VK_D) {
+				gp.ui.commandNum++;
+				gp.playSE(8);
+				if(gp.ui.commandNum > 2) {
+					gp.ui.commandNum = 0 ;
+				}
+			}
+			if(code == KeyEvent.VK_ENTER) {
+				enterPressed = true;
+				switch(gp.ui.commandNum) {
+					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; break;
+					case 1: gp.ui.tradeSubState = 1; gp.gameState = gp.tradeState; break;
+					case 2: gp.gameState = gp.playState; break;
+				}
+			} 
+		} else if(!gp.ui.npc.tradable){
+			if(code == KeyEvent.VK_ENTER) {
+				// PRESS ENTER TO CONTINUE CONVERSATION 
 				if(gp.ui.talkWorld){
 					gp.gameState = gp.playState;
 					gp.ui.talkWorld = false;
@@ -268,7 +272,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 						gp.ui.talkNPC = false;
 					}
 				}
-			}	
+			}
 		}
 	}
 	public void gameOverState(int code) {
@@ -297,6 +301,13 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.restart();
 			}
 		}
+	}
+	public void tradeState(int code) {
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
+		}
+		
+		
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

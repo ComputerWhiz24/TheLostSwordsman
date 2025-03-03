@@ -65,10 +65,8 @@ public class NPC_Shopkeeper extends Entity{
 			shopkeeperDialogue[0] = "Looking to buy or sell somethin' little man?";
 		}
 		public void speak() {
-		
-			if(dialogueIndex >= shopkeeperDialogue.length) {
-				dialogueIndex = 0;
-			}
+
+			dialogueIndex = 0;
 			currentDialogue = shopkeeperDialogue;
 			
 	

@@ -69,9 +69,7 @@ public class NPC_Wizard extends Entity{
 	public void speak() {
 	
 	
-		if(dialogueIndex >= wizardDialogue.length) {
-			dialogueIndex = 0;
-		} 
+		dialogueIndex = 0;
 		currentDialogue = wizardDialogue;
 		
 			switch(gp.player.direction) {
