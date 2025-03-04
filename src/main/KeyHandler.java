@@ -112,23 +112,27 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.ui.playSubState == 2) { //Inventory
 			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_TAB) 
 				gp.ui.playSubState = 0;
-			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) {
-				showDesc = false;
-				gp.playSE(8);
-			}
 			if(code == KeyEvent.VK_UP){
 				if(gp.ui.slotRow!=0)
 				gp.ui.slotRow--;
+				showDesc = false;
+				gp.playSE(8);
 			}
 			if(code == KeyEvent.VK_DOWN){
 				if(gp.ui.slotRow!=11)
 				gp.ui.slotRow++;
+				showDesc = false;
+				gp.playSE(8);
 			}
 			if(code == KeyEvent.VK_RIGHT){
 				gp.ui.slotCol++;
+				showDesc = false;
+				gp.playSE(8);
 			}
 			if(code == KeyEvent.VK_LEFT){
 				gp.ui.slotCol--;
+				showDesc = false;
+				gp.playSE(8);
 			}
 			if(code == KeyEvent.VK_E) {
 				gp.player.selectItem();
@@ -235,6 +239,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 		if(gp.ui.npc.tradable) {
 			if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+				System.out.println("left");
 				gp.ui.commandNum--;
 				gp.playSE(8);
 				if(gp.ui.commandNum < 0) {
@@ -242,6 +247,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_RIGHT|| code == KeyEvent.VK_D) {
+				System.out.println("right");
 				gp.ui.commandNum++;
 				gp.playSE(8);
 				if(gp.ui.commandNum > 2) {
@@ -249,9 +255,8 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_ENTER) {
-				enterPressed = true;
 				switch(gp.ui.commandNum) {
-					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; break;
+					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; System.out.println("trade state 0"); break;
 					case 1: gp.ui.tradeSubState = 1; gp.gameState = gp.tradeState; break;
 					case 2: gp.gameState = gp.playState; break;
 				}
@@ -306,9 +311,65 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(code == KeyEvent.VK_ENTER) {
 			enterPressed = true;
 		}
-		
-		
+		if(gp.ui.tradeSubState == 0) { // BUY 
+//			npcInventory(code);
+			if(code == KeyEvent.VK_ESCAPE) {
+				gp.gameState = gp.dialogueState;
+			}
+		}
 	}
+	public void playerInventory(int code) {
+		if(code == KeyEvent.VK_UP){
+			if(gp.ui.slotRow!=0)
+			gp.ui.slotRow--;
+			showDesc = false;
+			gp.playSE(8);
+		}
+		if(code == KeyEvent.VK_DOWN){
+			if(gp.ui.slotRow!=11)
+			gp.ui.slotRow++;
+			showDesc = false;
+			gp.playSE(8);
+		}
+		if(code == KeyEvent.VK_RIGHT){
+			gp.ui.slotCol++;
+			showDesc = false;
+			gp.playSE(8);
+		}
+		if(code == KeyEvent.VK_LEFT){
+			gp.ui.slotCol--;
+			showDesc = false;
+			gp.playSE(8);
+		}
+	}
+	
+//	public void npcInventory(int code) {
+//		if(code == KeyEvent.VK_UP){
+//			if(gp.ui.npcSlotRow!=0) {
+//				gp.ui.npcSlotRow--;
+//				showDesc = false;
+//				gp.playSE(8);
+//			}
+//		}
+//		if(code == KeyEvent.VK_DOWN){
+//			if(gp.ui.npcSlotRow!=11) {
+//				gp.ui.npcSlotRow++;
+//				showDesc = false;
+//				gp.playSE(8);
+//			}
+//		}
+//		if(code == KeyEvent.VK_RIGHT){
+//			gp.ui.npcSlotCol++;
+//			showDesc = false;
+//			gp.playSE(8);
+//		}
+//		if(code == KeyEvent.VK_LEFT){
+//			gp.ui.npcSlotCol--;
+//			showDesc = false;
+//			gp.playSE(8);
+//		}
+//	}
+//	
 	@Override
 	public void keyReleased(KeyEvent e) {
 
@@ -371,20 +432,20 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		int mouseX = e.getX();
-	    int mouseY = e.getY();
-	    updateCursorHighlight(mouseX, mouseY);
+//		int mouseX = e.getX();
+//	    int mouseY = e.getY();
+//	    updateCursorHighlight(mouseX, mouseY);
 	}
-	private void updateCursorHighlight(int mouseX, int mouseY) {
-	    // Logic to move cursor highlight based on mouse position
-	    // Update the cursor's row and column based on the mouse position
-	    int slotCol = (mouseX - gp.ui.slotXStart) / gp.tileSize;
-	    int slotRow = (mouseY - gp.ui.slotYStart) / gp.tileSize;
-
-	    if (slotCol >= 0 && slotCol < gp.ui.cols && slotRow >= 0 && slotRow < gp.ui.rows) {
-	        gp.ui.slotCol = slotCol;
-	        gp.ui.slotRow = slotRow;
-	    }
-	}
+//	private void updateCursorHighlight(int mouseX, int mouseY) {
+//	    // Logic to move cursor highlight based on mouse position
+//	    // Update the cursor's row and column based on the mouse position
+//	    int slotCol = (mouseX - gp.ui.slotXStart) / gp.tileSize;
+//	    int slotRow = (mouseY - gp.ui.slotYStart) / gp.tileSize;
+//
+//	    if (slotCol >= 0 && slotCol < gp.ui.cols && slotRow >= 0 && slotRow < gp.ui.rows) {
+//	        gp.ui.slotCol = slotCol;
+//	        gp.ui.slotRow = slotRow;
+//	    }
+//	}
 
 }

@@ -817,7 +817,6 @@ public class UI extends JFrame implements MouseListener{
 			y +=  gp.tileSize;
 			if(talkNPC) {
 				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
-		
 			}
 		
 			for(String line: currentDialogue.split("\n")) {
@@ -971,3 +970,6 @@ public class UI extends JFrame implements MouseListener{
 		
 	}
 }
+
+
+
