@@ -84,6 +84,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void playState(int code) {
+
 		
 		if(gp.ui.playSubState == 0) {	// PLAYING GAME
 			if(code == KeyEvent.VK_ESCAPE) {
@@ -113,26 +114,32 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_I  || code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_TAB) 
 				gp.ui.playSubState = 0;
 			if(code == KeyEvent.VK_UP){
-				if(gp.ui.slotRow!=0)
+				if(gp.ui.slotRow!=0) {
 				gp.ui.slotRow--;
 				showDesc = false;
 				gp.playSE(8);
+				}
 			}
 			if(code == KeyEvent.VK_DOWN){
-				if(gp.ui.slotRow!=11)
+				if(gp.ui.slotRow!=9) {
 				gp.ui.slotRow++;
 				showDesc = false;
 				gp.playSE(8);
+				}
 			}
 			if(code == KeyEvent.VK_RIGHT){
+				if(gp.ui.slotCol!=20) {
 				gp.ui.slotCol++;
 				showDesc = false;
 				gp.playSE(8);
+				}
 			}
 			if(code == KeyEvent.VK_LEFT){
+				if(gp.ui.slotCol!=0) {
 				gp.ui.slotCol--;
 				showDesc = false;
 				gp.playSE(8);
+				}
 			}
 			if(code == KeyEvent.VK_E) {
 				gp.player.selectItem();

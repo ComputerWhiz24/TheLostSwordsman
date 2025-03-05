@@ -397,7 +397,7 @@ public class UI extends JFrame implements MouseListener{
 		
 			drawPauseScreen();
 		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
-	
+			 if(getItemIndex() < gp.player.inventory.size()) { 
 			    int dFrameX = cursorX + gp.tileSize;
 			    int dFrameY = cursorY;
 			    int dFrameWidth = (int) (gp.tileSize * 2);
@@ -428,8 +428,7 @@ public class UI extends JFrame implements MouseListener{
 			     	g2.drawString("Consume: E\n", textX, textY+30);
 			    }
 			}
-			
-			
+		}
 		}
 	public void drawNpcInventory(Entity entity) {
 		cols = npc.cols;
@@ -439,7 +438,7 @@ public class UI extends JFrame implements MouseListener{
 		int frameWidth = gp.tileSize*cols;
 		int frameHeight = gp.tileSize*rows;
 		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
-		int frameY = (int) gp.screenHeight/3;
+		int frameY = gp.tileSize;
 		drawWindow(frameX,frameY,frameWidth,frameHeight);
 		
 		//SLOT
@@ -470,6 +469,29 @@ public class UI extends JFrame implements MouseListener{
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke(1));
 		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
+	    if(getItemIndex() < npc.inventory.size()) { // IF ITEM IS NOT NULL, EXTRA FRAME AND TEXT
+	    	int dFrameX = cursorX + gp.tileSize;
+		    int dFrameY = cursorY;
+		    int dFrameWidth = (int) (gp.tileSize * 8);
+		    int dFrameHeight = (int) (gp.tileSize*2);
+
+		 
+		    g2.setColor(new Color(0, 0, 0,150)); // Semi-transparent black
+		    g2.fillRect(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+		    // Draw the text inside the rectangle
+		    int textX = dFrameX + 10; // Adjust padding
+		    int textY = dFrameY + 12;
+		    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
+		    g2.setColor(Color.WHITE); // Set text color
+		    
+		    Entity currentItem = npc.inventory.get(getItemIndex());
+		    g2.drawString(currentItem.description, textX, textY);
+		    textY+=30;
+			g2.drawString("Buy: " + currentItem.buyPrice, textX, textY);
+			textY+=30;
+			g2.drawString("Show Details: F", textX, textY);
+		    }
 		
 	}
 	public int getItemIndex() {

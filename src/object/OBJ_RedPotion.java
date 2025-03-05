@@ -14,6 +14,8 @@ public class OBJ_RedPotion extends Entity{
 		type = type_consumable;
 		down1 = setup("/objects/potion_red");
 		description = "[Red Potion]\nA yummy elixir";
+		buyPrice = 20;
+		sellPrice = 0;
 	}
 	public void use(Entity entity) {
 		if(gp.player.life != gp.player.maxLife) {

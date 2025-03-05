@@ -15,5 +15,7 @@ public class OBJ_Sword extends Entity{
 		attackArea.width = 36;
 		attackArea.height = 25;
 		type = type_sword;
+		buyPrice = 5;
+		sellPrice = 1;
 	}
 }

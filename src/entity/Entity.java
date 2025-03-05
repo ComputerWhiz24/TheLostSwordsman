@@ -73,7 +73,8 @@ public class Entity {
 	public int stamina;
 	public double mana;
 	public int maxMana;
-
+	public int buyPrice;
+	public int sellPrice;
 	public int coin;
 	public double attack;
 	public Entity currentWeapon;
