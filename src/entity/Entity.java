@@ -53,7 +53,8 @@ public class Entity {
 		// INVENTORY
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public int inventorySize = 222;
-	
+	public int cols = 5;
+	public int rows = 5;
 		//ATTRIBUTES
 	public int speed;
 	public String name;

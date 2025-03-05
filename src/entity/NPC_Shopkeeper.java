@@ -22,6 +22,9 @@ public class NPC_Shopkeeper extends Entity{
 			getImage();
 			setDialogue();
 			setItems();
+			cols = 5;
+			rows = 5;
+			
 		}
 			
 		public void getImage() {

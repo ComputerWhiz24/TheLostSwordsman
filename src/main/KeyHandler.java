@@ -255,6 +255,8 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_ENTER) {
+				System.out.println("trade state 0");
+				System.out.println(gp.ui.tradeSubState);
 				switch(gp.ui.commandNum) {
 					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; System.out.println("trade state 0"); break;
 					case 1: gp.ui.tradeSubState = 1; gp.gameState = gp.tradeState; break;
@@ -311,36 +313,43 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(code == KeyEvent.VK_ENTER) {
 			enterPressed = true;
 		}
-		if(gp.ui.tradeSubState == 0) { // BUY 
-//			npcInventory(code);
-			if(code == KeyEvent.VK_ESCAPE) {
-				gp.gameState = gp.dialogueState;
-			}
+		if(code == KeyEvent.VK_ESCAPE) {
+			gp.gameState = gp.dialogueState;
 		}
-	}
-	public void playerInventory(int code) {
-		if(code == KeyEvent.VK_UP){
-			if(gp.ui.slotRow!=0)
+		if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+			if(gp.ui.slotRow!=0) {
 			gp.ui.slotRow--;
 			showDesc = false;
 			gp.playSE(8);
+			}
 		}
-		if(code == KeyEvent.VK_DOWN){
-			if(gp.ui.slotRow!=11)
+		if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+			if(gp.ui.slotRow < 3)
 			gp.ui.slotRow++;
 			showDesc = false;
 			gp.playSE(8);
 		}
-		if(code == KeyEvent.VK_RIGHT){
+		if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D){
+			if(gp.ui.slotCol < 3) {
 			gp.ui.slotCol++;
 			showDesc = false;
 			gp.playSE(8);
+			}
 		}
-		if(code == KeyEvent.VK_LEFT){
+		if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A){
+			if(gp.ui.slotCol > 0) {
 			gp.ui.slotCol--;
 			showDesc = false;
 			gp.playSE(8);
+			}
 		}
+		if(gp.ui.tradeSubState == 1) { // BUY 
+//			npcInventory(code);
+		
+		}
+	}
+	public void playerInventory(int code) {
+
 	}
 	
 //	public void npcInventory(int code) {

@@ -91,6 +91,7 @@ public class UI extends JFrame implements MouseListener{
 	}
 	public void draw(Graphics2D g2) {
 
+
 		
 		this.g2 = g2;
 		
@@ -430,6 +431,47 @@ public class UI extends JFrame implements MouseListener{
 			
 			
 		}
+	public void drawNpcInventory(Entity entity) {
+		cols = npc.cols;
+		rows = npc.rows;
+	
+		//FRAME
+		int frameWidth = gp.tileSize*cols;
+		int frameHeight = gp.tileSize*rows;
+		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
+		int frameY = (int) gp.screenHeight/3;
+		drawWindow(frameX,frameY,frameWidth,frameHeight);
+		
+		//SLOT
+		slotXStart = frameX + 20;
+		slotYStart = frameY + 20;
+		
+		int slotX = slotXStart;
+		int slotY = slotYStart;
+		int slotSize = gp.tileSize;
+		//DRAW INVENTORY ITEMS
+		int split = cols - 1;
+		for(int i = 0; i <gp.player.inventory.size(); i++) {
+			
+			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			slotX+=slotSize;
+			
+			if((i + 1) % split == 0) {
+				slotX = slotXStart;
+				slotY+= gp.tileSize;
+			}
+		}
+		
+		int cursorX = slotXStart + slotSize * slotCol;
+		int cursorY = slotYStart + slotSize * slotRow;
+		int cursorWidth = gp.tileSize;
+		int cursorHeight = gp.tileSize;
+		//DRAW CURSOR
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
+		
+	}
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
 		return itemIndex;
@@ -903,13 +945,13 @@ public class UI extends JFrame implements MouseListener{
 	}
 	public void drawTradeScreen() {
 		switch(tradeSubState) {
-		case 0: trade_buy(); break;
-		case 1: trade_sell(); break;
+		case 0: trade_sell(); break;
+		case 1:	trade_buy(); break;
 		}
 		gp.keyH.enterPressed = false;
 	}
 	public void trade_buy() {
-		
+		drawNpcInventory(npc);
 	}
 	public void trade_sell() {
 		
