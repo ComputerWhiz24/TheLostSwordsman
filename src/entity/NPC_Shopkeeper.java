@@ -2,6 +2,7 @@
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import main.GamePanel;
@@ -11,7 +12,6 @@ import object.OBJ_BlueShield;
 import object.OBJ_RedPotion;
 	
 public class NPC_Shopkeeper extends Entity{
-
 	public static String[] shopkeeperDialogue = new String[1];
 		public NPC_Shopkeeper(GamePanel gp) {
 			super(gp);
@@ -24,7 +24,7 @@ public class NPC_Shopkeeper extends Entity{
 			setItems();
 			cols = 5;
 			rows = 5;
-			
+			inventorySize = 16;
 		}
 			
 		public void getImage() {

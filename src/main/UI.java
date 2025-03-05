@@ -451,9 +451,9 @@ public class UI extends JFrame implements MouseListener{
 		int slotSize = gp.tileSize;
 		//DRAW INVENTORY ITEMS
 		int split = cols - 1;
-		for(int i = 0; i <gp.player.inventory.size(); i++) {
+		for(int i = 0; i <entity.inventory.size(); i++) {
 			
-			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			g2.drawImage(entity.inventory.get(i).down1,slotX,slotY,null);
 			slotX+=slotSize;
 			
 			if((i + 1) % split == 0) {
