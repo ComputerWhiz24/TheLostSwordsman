@@ -246,7 +246,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 		if(gp.ui.npc.tradable) {
 			if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
-				System.out.println("left");
 				gp.ui.commandNum--;
 				gp.playSE(8);
 				if(gp.ui.commandNum < 0) {
@@ -254,7 +253,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_RIGHT|| code == KeyEvent.VK_D) {
-				System.out.println("right");
 				gp.ui.commandNum++;
 				gp.playSE(8);
 				if(gp.ui.commandNum > 2) {
@@ -262,10 +260,8 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_ENTER) {
-				System.out.println("trade state 0");
-				System.out.println(gp.ui.tradeSubState);
 				switch(gp.ui.commandNum) {
-					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; System.out.println("trade state 0"); break;
+					case 0: gp.ui.tradeSubState = 0; gp.gameState = gp.tradeState; break;
 					case 1: gp.ui.tradeSubState = 1; gp.gameState = gp.tradeState; break;
 					case 2: gp.gameState = gp.playState; break;
 				}
@@ -317,43 +313,82 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void tradeState(int code) {
-		if(code == KeyEvent.VK_ENTER) {
-			enterPressed = true;
-		}
-		if(code == KeyEvent.VK_ESCAPE) {
-			gp.gameState = gp.dialogueState;
-		}
-		if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
-			if(gp.ui.slotRow!=0) {
-			gp.ui.slotRow--;
-			showDesc = false;
-			gp.playSE(8);
+		if(gp.ui.tradeSubState == 0 || gp.ui.tradeSubState == 1) {
+			if(code == KeyEvent.VK_ESCAPE) {
+				gp.gameState = gp.dialogueState;
 			}
+			
 		}
-		if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
-			if(gp.ui.slotRow < 3)
-			gp.ui.slotRow++;
-			showDesc = false;
-			gp.playSE(8);
-		}
-		if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D){
-			if(gp.ui.slotCol < 3) {
-			gp.ui.slotCol++;
-			showDesc = false;
-			gp.playSE(8);
+		if(gp.ui.tradeSubState == 0) { // SELL
+			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+				if(gp.ui.slotRow!=0) {
+				gp.ui.slotRow--;
+				showDesc = false;
+				gp.playSE(8);
+				}
 			}
-		}
-		if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A){
-			if(gp.ui.slotCol > 0) {
-			gp.ui.slotCol--;
-			showDesc = false;
-			gp.playSE(8);
+			if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+				if(gp.ui.slotRow < 9)
+				gp.ui.slotRow++;
+				showDesc = false;
+				gp.playSE(8);
+			}
+			if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D){
+				if(gp.ui.slotCol < 20) {
+				gp.ui.slotCol++;
+				showDesc = false;
+				gp.playSE(8);
+				}
+			}
+			if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A){
+				if(gp.ui.slotCol > 0) {
+				gp.ui.slotCol--;
+				showDesc = false;
+				gp.playSE(8);
+				}
 			}
 		}
 		if(gp.ui.tradeSubState == 1) { // BUY 
-//			npcInventory(code);
-		
+			if(code == KeyEvent.VK_ENTER) {
+				
+			}
+			if(code == KeyEvent.VK_F) {
+				gp.ui.tradeSubState = 2;
+			}
+			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+				if(gp.ui.slotRow!=0) {
+				gp.ui.slotRow--;
+				showDesc = false;
+				gp.playSE(8);
+				}
+			}
+			if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+				if(gp.ui.slotRow < 3)
+				gp.ui.slotRow++;
+				showDesc = false;
+				gp.playSE(8);
+			}
+			if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D){
+				if(gp.ui.slotCol < 3) {
+				gp.ui.slotCol++;
+				showDesc = false;
+				gp.playSE(8);
+				}
+			}
+			if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A){
+				if(gp.ui.slotCol > 0) {
+				gp.ui.slotCol--;
+				showDesc = false;
+				gp.playSE(8);
+				}
+			}
 		}
+		if(gp.ui.tradeSubState == 2) { // BUY ITEM DESCRIPTION
+			if(code == KeyEvent.VK_ESCAPE) {
+				gp.ui.tradeSubState = 1;
+			}
+		}
+		
 	}
 	public void playerInventory(int code) {
 

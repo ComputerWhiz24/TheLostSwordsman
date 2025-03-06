@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import entity.Entity;
+import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_ManaCrystal;
@@ -54,7 +55,7 @@ public class UI extends JFrame implements MouseListener{
 	
 	public Entity npc;
 	
-	BufferedImage heart_full,heart_half,heart_blank,crystal_full,crystal_blank;
+	BufferedImage heart_full,heart_half,heart_blank,crystal_full,crystal_blank,coin;
 	
 	
 	double playTime;
@@ -81,6 +82,9 @@ public class UI extends JFrame implements MouseListener{
 		Entity crystal = new OBJ_ManaCrystal(gp);
 		crystal_full = crystal.image;
 		crystal_blank = crystal.image2;
+		Entity bronzeCoin = new OBJ_Coin_Bronze(gp);
+		coin = bronzeCoin.down1;
+		
 	}   
 	 
 	public void addMessage(String text) {
@@ -396,7 +400,7 @@ public class UI extends JFrame implements MouseListener{
 		if(gp.keyH.showDesc) {
 		
 			drawPauseScreen();
-		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
+		}else if(!gp.keyH.showDesc && tradeSubState !=0){	//SHOW OPTIONS
 			 if(getItemIndex() < gp.player.inventory.size()) { 
 			    int dFrameX = cursorX + gp.tileSize;
 			    int dFrameY = cursorY;
@@ -428,8 +432,31 @@ public class UI extends JFrame implements MouseListener{
 			     	g2.drawString("Consume: E\n", textX, textY+30);
 			    }
 			}
+		} else if (tradeSubState == 0) {
+			if(getItemIndex() < gp.player.inventory.size()) { 
+			    int dFrameX = cursorX + gp.tileSize;
+			    int dFrameY = cursorY;
+			    int dFrameWidth = (int) (gp.tileSize * 2);
+			    int dFrameHeight = (int) (gp.tileSize);
+
+			 
+			    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
+			    g2.fillRect(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+			    // Draw the text inside the rectangle
+			    int textX = dFrameX + 10; // Adjust padding
+			    int textY = dFrameY + 10;
+			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
+			    g2.setColor(Color.WHITE); // Set text color
+		
+			    Entity currentItem = gp.player.inventory.get(getItemIndex());
+			    textX+=10;textY+=10;
+			    g2.drawString("Sell: ", textX, textY);
+			    g2.drawImage(coin,textX+25,textY-24,32,32,null);
+				g2.drawString(Integer.toString(currentItem.sellPrice),textX+57,textY);
+			}
 		}
-		}
+	}
 	public void drawNpcInventory(Entity entity) {
 		cols = npc.cols;
 		rows = npc.rows;
@@ -481,18 +508,27 @@ public class UI extends JFrame implements MouseListener{
 
 		    // Draw the text inside the rectangle
 		    int textX = dFrameX + 10; // Adjust padding
-		    int textY = dFrameY + 12;
+		    int textY = dFrameY + 15;
 		    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
 		    g2.setColor(Color.WHITE); // Set text color
 		    
 		    Entity currentItem = npc.inventory.get(getItemIndex());
 		    g2.drawString(currentItem.description, textX, textY);
 		    textY+=30;
-			g2.drawString("Buy: " + currentItem.buyPrice, textX, textY);
+			g2.drawString("Buy: ", textX, textY);
+		    g2.drawImage(coin,textX+25,textY-24,32,32,null);
+			g2.drawString(Integer.toString(currentItem.buyPrice),textX+57,textY);
 			textY+=30;
 			g2.drawString("Show Details: F", textX, textY);
 		    }
 		
+	}
+	public void showBuyItemDetails() {
+		int frameWidth = gp.tileSize*cols;
+		int frameHeight = gp.tileSize*rows;
+		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
+		int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+		drawWindow(frameX,frameY,frameWidth,frameHeight);
 	}
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
@@ -969,6 +1005,7 @@ public class UI extends JFrame implements MouseListener{
 		switch(tradeSubState) {
 		case 0: trade_sell(); break;
 		case 1:	trade_buy(); break;
+		case 2: showBuyItemDetails();
 		}
 		gp.keyH.enterPressed = false;
 	}
@@ -976,7 +1013,7 @@ public class UI extends JFrame implements MouseListener{
 		drawNpcInventory(npc);
 	}
 	public void trade_sell() {
-		
+		drawInventory();
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		
