@@ -520,8 +520,16 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(Integer.toString(currentItem.buyPrice),textX+57,textY);
 			textY+=30;
 			g2.drawString("Show Details: F", textX, textY);
-		    }
-		
+			 if(gp.keyH.enterPressed) {
+			    if(gp.player.coin >= currentItem.buyPrice) {
+			    	gp.player.inventory.add(npc.inventory.get(getItemIndex()));
+			    	gp.player.coin -= currentItem.buyPrice;
+			    	npc.inventory.set(getItemIndex(), null);
+			    } else {
+			    	drawMessage();
+			    }
+			 }
+	    }	
 	}
 	public void showBuyItemDetails() {
 		int frameWidth = gp.tileSize*cols;
@@ -704,6 +712,7 @@ public class UI extends JFrame implements MouseListener{
 			int slotSize = gp.tileSize;
 			JLabel label = new JLabel();
 			label.setBounds(getBounds());
+			
 			//DRAW INVENTORY ITEMS
 			int split = cols - 1;
 			for(int i = 0; i <gp.player.inventory.size(); i++) {
@@ -834,7 +843,6 @@ public class UI extends JFrame implements MouseListener{
 				System.exit(0); 
 			}
 		}
-		
 		gp.config.saveConfig();
 	}
 	public void options_fullscreenToggle(int frameX, int frameY) {
@@ -924,7 +932,6 @@ public class UI extends JFrame implements MouseListener{
 				y+= 40;
 			}	
 		}
-		
 	}
 	public void gameOverScreen() {
 		g2.setColor(new Color(0,0,0,150));
@@ -1003,9 +1010,9 @@ public class UI extends JFrame implements MouseListener{
 	}
 	public void drawTradeScreen() {
 		switch(tradeSubState) {
-		case 0: trade_sell(); break;
-		case 1:	trade_buy(); break;
-		case 2: showBuyItemDetails();
+			case 0: trade_sell(); break;
+			case 1:	trade_buy(); break;
+			case 2: showBuyItemDetails(); break;
 		}
 		gp.keyH.enterPressed = false;
 	}

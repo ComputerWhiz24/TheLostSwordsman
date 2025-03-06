@@ -313,6 +313,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void tradeState(int code) {
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
+		}
 		if(gp.ui.tradeSubState == 0 || gp.ui.tradeSubState == 1) {
 			if(code == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.dialogueState;
@@ -349,9 +352,6 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			}
 		}
 		if(gp.ui.tradeSubState == 1) { // BUY 
-			if(code == KeyEvent.VK_ENTER) {
-				
-			}
 			if(code == KeyEvent.VK_F) {
 				gp.ui.tradeSubState = 2;
 			}
