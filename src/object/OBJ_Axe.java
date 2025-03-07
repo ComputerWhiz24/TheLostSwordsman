@@ -16,6 +16,7 @@ public class OBJ_Axe extends Entity{
 		type = type_axe;
 		buyPrice = 50;
 		sellPrice = 25;
+		hand = 1;
 	}
 
 	

@@ -73,8 +73,6 @@ public class Entity {
 	public int stamina;
 	public double mana;
 	public int maxMana;
-	public int buyPrice;
-	public int sellPrice;
 	public int coin;
 	public double attack;
 	public Entity currentWeapon;
@@ -84,11 +82,14 @@ public class Entity {
 	
 	// ITEM ATTRIBUTES
 	public int value;
+	public int buyPrice;
+	public int sellPrice;
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
 	public int spellCost;
 	public int type; // 0 = player, 1 = NPC, 2 = Monster
+	public int hand;
 	public final int type_player = 0;
 	public final int type_npc = 1;
 	public final int type_monster = 2;

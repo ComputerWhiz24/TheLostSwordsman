@@ -15,5 +15,6 @@ public class OBJ_BlueShield extends Entity{
 		type = type_shield;
 		buyPrice = 100;
 		sellPrice = 50;
+		hand = 1;
 	}
 }

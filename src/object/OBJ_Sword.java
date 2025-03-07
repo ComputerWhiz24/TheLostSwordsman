@@ -17,5 +17,6 @@ public class OBJ_Sword extends Entity{
 		type = type_sword;
 		buyPrice = 5;
 		sellPrice = 1;
+		hand = 1;
 	}
 }

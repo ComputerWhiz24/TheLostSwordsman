@@ -432,7 +432,7 @@ public class UI extends JFrame implements MouseListener{
 			     	g2.drawString("Consume: E\n", textX, textY+30);
 			    }
 			}
-		} else if (tradeSubState == 0) {
+		} else if (tradeSubState == 0) { // SELLING TO NPC
 			if(getItemIndex() < gp.player.inventory.size()) { 
 			    int dFrameX = cursorX + gp.tileSize;
 			    int dFrameY = cursorY;
@@ -454,6 +454,12 @@ public class UI extends JFrame implements MouseListener{
 			    g2.drawString("Sell: ", textX, textY);
 			    g2.drawImage(coin,textX+25,textY-24,32,32,null);
 				g2.drawString(Integer.toString(currentItem.sellPrice),textX+57,textY);
+				
+				if(gp.keyH.enterPressed) {
+				    gp.player.coin = currentItem.sellPrice;
+				    gp.player.inventory.remove(getItemIndex());
+				    gp.playSE(12);
+				}
 			}
 		}
 	}
@@ -520,23 +526,59 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString(Integer.toString(currentItem.buyPrice),textX+57,textY);
 			textY+=30;
 			g2.drawString("Show Details: F", textX, textY);
+			boolean enoughGold = true;
 			 if(gp.keyH.enterPressed) {
 			    if(gp.player.coin >= currentItem.buyPrice) {
 			    	gp.player.inventory.add(npc.inventory.get(getItemIndex()));
 			    	gp.player.coin -= currentItem.buyPrice;
 			    	npc.inventory.set(getItemIndex(), null);
 			    } else {
-			    	drawMessage();
+			    	enoughGold = false;
 			    }
+			 }
+			 if(!enoughGold) {
+					g2.setColor(Color.red);
+			    	textY+= 30;
+					g2.drawString("Not enough gold", textX, textY);
 			 }
 	    }	
 	}
 	public void showBuyItemDetails() {
-		int frameWidth = gp.tileSize*cols;
-		int frameHeight = gp.tileSize*rows;
-		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
-		int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+		Entity currentItem = npc.inventory.get(getItemIndex());
+		final int frameWidth = gp.tileSize*7;
+		final int frameHeight = gp.tileSize * 14;
+		final int frameX = (int) gp.screenWidth/2;
+		final int frameY = (int) (gp.tileSize*1.5);
+		
 		drawWindow(frameX,frameY,frameWidth,frameHeight);
+
+		//WRITING TEXT
+	
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(32F));
+		
+		int textX = frameX + gp.tileSize;
+		int textY = frameY + gp.tileSize + (int) frameHeight/6;
+		final float lineHeight = (40);
+		
+		//STATS
+		if(currentItem.type == currentItem.type_sword || currentItem.type == currentItem.type_axe) {
+		g2.drawString("Attack: " + currentItem.attack ,textX,textY);
+		textY += lineHeight;
+		}
+		if(currentItem.type == currentItem.type_shield) {
+			g2.drawString("Defense: " + currentItem.defense,textX,textY);
+			textY += lineHeight;
+		}
+		if(currentItem.type!=currentItem.type_consumable && currentItem.type!=currentItem.type_collectible) {
+			g2.drawString("Hand: " + currentItem.hand + " Handed",textX,textY);
+			textY += lineHeight;
+		}
+		if(currentItem.type==currentItem.type_consumable) {
+			g2.drawString("Healing power: " + currentItem.value,textX,textY);
+			textY += lineHeight;
+		}
+
 	}
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
