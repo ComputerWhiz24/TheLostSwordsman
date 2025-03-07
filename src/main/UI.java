@@ -400,7 +400,7 @@ public class UI extends JFrame implements MouseListener{
 		if(gp.keyH.showDesc) {
 		
 			drawPauseScreen();
-		}else if(!gp.keyH.showDesc && tradeSubState !=0){	//SHOW OPTIONS
+		}else if(!gp.keyH.showDesc){	//SHOW OPTIONS
 			 if(getItemIndex() < gp.player.inventory.size()) { 
 			    int dFrameX = cursorX + gp.tileSize;
 			    int dFrameY = cursorY;
@@ -431,35 +431,6 @@ public class UI extends JFrame implements MouseListener{
 			    } else if (currentItem.type == gp.player.type_consumable) {
 			     	g2.drawString("Consume: E\n", textX, textY+30);
 			    }
-			}
-		} else if (tradeSubState == 0) { // SELLING TO NPC
-			if(getItemIndex() < gp.player.inventory.size()) { 
-			    int dFrameX = cursorX + gp.tileSize;
-			    int dFrameY = cursorY;
-			    int dFrameWidth = (int) (gp.tileSize * 2);
-			    int dFrameHeight = (int) (gp.tileSize);
-
-			 
-			    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
-			    g2.fillRect(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
-
-			    // Draw the text inside the rectangle
-			    int textX = dFrameX + 10; // Adjust padding
-			    int textY = dFrameY + 10;
-			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
-			    g2.setColor(Color.WHITE); // Set text color
-		
-			    Entity currentItem = gp.player.inventory.get(getItemIndex());
-			    textX+=10;textY+=10;
-			    g2.drawString("Sell: ", textX, textY);
-			    g2.drawImage(coin,textX+25,textY-24,32,32,null);
-				g2.drawString(Integer.toString(currentItem.sellPrice),textX+57,textY);
-				
-				if(gp.keyH.enterPressed) {
-				    gp.player.coin = currentItem.sellPrice;
-				    gp.player.inventory.remove(getItemIndex());
-				    gp.playSE(12);
-				}
 			}
 		}
 	}
@@ -527,16 +498,24 @@ public class UI extends JFrame implements MouseListener{
 			textY+=30;
 			g2.drawString("Show Details: F", textX, textY);
 			boolean enoughGold = true;
+			boolean inventoryFull = false;
 			 if(gp.keyH.enterPressed) {
 			    if(gp.player.coin >= currentItem.buyPrice) {
 			    	gp.player.inventory.add(npc.inventory.get(getItemIndex()));
 			    	gp.player.coin -= currentItem.buyPrice;
 			    	npc.inventory.set(getItemIndex(), null);
+			    } else if(gp.player.inventory.size() == gp.player.inventorySize){
+			    	inventoryFull = true;
 			    } else {
 			    	enoughGold = false;
 			    }
 			 }
 			 if(!enoughGold) {
+					g2.setColor(Color.red);
+			    	textY+= 30;
+					g2.drawString("Not enough gold", textX, textY);
+			 }
+			 if(inventoryFull) {
 					g2.setColor(Color.red);
 			    	textY+= 30;
 					g2.drawString("Not enough gold", textX, textY);
@@ -580,6 +559,84 @@ public class UI extends JFrame implements MouseListener{
 		}
 
 	}
+	public void sellingInventory() {
+		cols = 22;
+		rows = 11;
+	
+		//FRAME
+		int frameWidth = gp.tileSize*cols;
+		int frameHeight = gp.tileSize*rows;
+		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
+		int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+		drawWindow(frameX,frameY,frameWidth,frameHeight);
+		
+		//SLOT
+		slotXStart = frameX + 20;
+		slotYStart = frameY + 20;
+		
+		int slotX = slotXStart;
+		int slotY = slotYStart;
+		int slotSize = gp.tileSize;
+		JLabel label = new JLabel();
+		label.setBounds(getBounds());
+		//DRAW INVENTORY ITEMS
+		int split = cols - 1;
+		for(int i = 0; i <gp.player.inventory.size(); i++) {
+			
+			//EQUIP CURSOR
+			if(gp.player.inventory.get(i) == gp.player.currentWeapon ||
+					gp.player.inventory.get(i) == gp.player.currentShield) {
+				g2.setColor(new Color(240,190,90));
+				g2.fillRoundRect(slotX, slotY, gp.tileSize,gp.tileSize,10,10);
+			}
+			
+			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			slotX+=slotSize;
+			
+			if((i + 1) % split == 0) {
+				slotX = slotXStart;
+				slotY+= gp.tileSize;
+			}
+		}
+		
+		int cursorX = slotXStart + slotSize * slotCol;
+		int cursorY = slotYStart + slotSize * slotRow;
+		int cursorWidth = gp.tileSize;
+		int cursorHeight = gp.tileSize;
+		//DRAW CURSOR
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
+		
+			if(getItemIndex() < gp.player.inventory.size()) { 
+			    int dFrameX = cursorX + gp.tileSize;
+			    int dFrameY = cursorY;
+			    int dFrameWidth = (int) (gp.tileSize * 2);
+			    int dFrameHeight = (int) (gp.tileSize);
+
+			 
+			    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
+			    g2.fillRect(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+			    // Draw the text inside the rectangle
+			    int textX = dFrameX + 10; // Adjust padding
+			    int textY = dFrameY + 10;
+			    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 18F));
+			    g2.setColor(Color.WHITE); // Set text color
+		
+			    Entity currentItem = gp.player.inventory.get(getItemIndex());
+			    textX+=10;textY+=10;
+			    g2.drawString("Sell: ", textX, textY);
+			    g2.drawImage(coin,textX+25,textY-24,32,32,null);
+				g2.drawString(Integer.toString(currentItem.sellPrice),textX+57,textY);
+				
+				if(gp.keyH.enterPressed) {
+				    gp.player.coin += currentItem.sellPrice;
+				    gp.player.inventory.remove(getItemIndex());
+				    gp.playSE(12);
+				}
+			}
+		}
 	public int getItemIndex() {
 		int itemIndex = slotCol + (slotRow * 21);
 		return itemIndex;
@@ -1062,7 +1119,7 @@ public class UI extends JFrame implements MouseListener{
 		drawNpcInventory(npc);
 	}
 	public void trade_sell() {
-		drawInventory();
+		sellingInventory();
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		
