@@ -981,8 +981,28 @@ public class UI extends JFrame implements MouseListener{
 	public void drawDialogueScreen() {
 		int x = gp.tileSize * 2;
 		int y = gp.tileSize/2;
+			int width = gp.screenWidth - (gp.tileSize * 4);
+			int height =  gp.tileSize * 4;
+			
+			drawWindow(x,y,width,height);
+			
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+			x += gp.tileSize;
+			y +=  gp.tileSize;
+			if(talkNPC) {
+				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+			}
 		
-		if(npc.tradable) {
+			for(String line: currentDialogue.split("\n")) {
+				g2.drawString(line, x, y);
+				y+= 40;
+			}	
+	}
+	public void trade_npc() {
+		int x = gp.tileSize * 2;
+		int y = gp.tileSize/2;
+		
 
 			int width = gp.screenWidth - (gp.tileSize * 4);
 			int height =  gp.tileSize * 8;
@@ -1012,26 +1032,7 @@ public class UI extends JFrame implements MouseListener{
 				g2.drawString(">", getXForCenteredText("Exit")+gp.tileSize*2-25, y);
 			}
 		}
-		else if (!npc.tradable) {
-			int width = gp.screenWidth - (gp.tileSize * 4);
-			int height =  gp.tileSize * 4;
-			
-			drawWindow(x,y,width,height);
-			
-			
-			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
-			x += gp.tileSize;
-			y +=  gp.tileSize;
-			if(talkNPC) {
-				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
-			}
 		
-			for(String line: currentDialogue.split("\n")) {
-				g2.drawString(line, x, y);
-				y+= 40;
-			}	
-		}
-	}
 	public void gameOverScreen() {
 		g2.setColor(new Color(0,0,0,150));
 		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
@@ -1109,9 +1110,10 @@ public class UI extends JFrame implements MouseListener{
 	}
 	public void drawTradeScreen() {
 		switch(tradeSubState) {
-			case 0: trade_sell(); break;
-			case 1:	trade_buy(); break;
-			case 2: showBuyItemDetails(); break;
+			case 0: trade_npc(); break;
+			case 1: trade_sell(); break;
+			case 2:	trade_buy(); break;
+			case 3: showBuyItemDetails(); break;
 		}
 		gp.keyH.enterPressed = false;
 	}
