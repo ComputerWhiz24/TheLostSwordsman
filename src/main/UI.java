@@ -455,7 +455,6 @@ public class UI extends JFrame implements MouseListener{
 		//DRAW INVENTORY ITEMS
 		int split = cols - 1;
 		for(int i = 0; i <entity.inventory.size(); i++) {
-			
 			g2.drawImage(entity.inventory.get(i).down1,slotX,slotY,null);
 			slotX+=slotSize;
 			
@@ -503,11 +502,16 @@ public class UI extends JFrame implements MouseListener{
 			    if(gp.player.coin >= currentItem.buyPrice) {
 			    	gp.player.inventory.add(npc.inventory.get(getItemIndex()));
 			    	gp.player.coin -= currentItem.buyPrice;
-			    	npc.inventory.set(getItemIndex(), null);
+			    	npc.inventory.remove(getItemIndex());
+			    	gp.playSE(1);
 			    } else if(gp.player.inventory.size() == gp.player.inventorySize){
 			    	inventoryFull = true;
 			    } else {
-			    	enoughGold = false;
+			    	talkNPC = false;
+			    	talkWorld = true;
+			    	currentDialogue = "You cant afford that item";
+			    	gp.gameState = gp.dialogueState;
+			    	tradeSubState = 0;
 			    }
 			 }
 			 if(!enoughGold) {
@@ -562,12 +566,21 @@ public class UI extends JFrame implements MouseListener{
 	public void sellingInventory() {
 		cols = 22;
 		rows = 11;
-	
+		// PLAYER GOLD
+		int frameWidth = gp.tileSize*3;
+		int frameHeight = gp.tileSize;
+		int frameX = gp.screenWidth/2 -70; 
+		int	frameY = gp.tileSize*2+25;
+		drawWindow(frameX,frameY,frameWidth,frameHeight);
+		g2.drawString("Gold: " + gp.player.coin,frameX+10,frameY+10);
+		frameX+=30;
+	    g2.drawImage(coin,frameX+15,frameY+5,32,32,null);
+
 		//FRAME
-		int frameWidth = gp.tileSize*cols;
-		int frameHeight = gp.tileSize*rows;
-		int frameX = (int) gp.screenWidth/2 - frameWidth/2; 
-		int frameY = (int) gp.screenHeight/2 - frameHeight/2;
+		frameWidth = gp.tileSize*cols;
+		frameHeight = gp.tileSize*rows;
+		frameX = (int) gp.screenWidth/2 - frameWidth/2; 
+		frameY = (int) gp.screenHeight/2 - frameHeight/2;
 		drawWindow(frameX,frameY,frameWidth,frameHeight);
 		
 		//SLOT
@@ -633,7 +646,7 @@ public class UI extends JFrame implements MouseListener{
 				if(gp.keyH.enterPressed) {
 				    gp.player.coin += currentItem.sellPrice;
 				    gp.player.inventory.remove(getItemIndex());
-				    gp.playSE(12);
+				    gp.playSE(1);
 				}
 			}
 		}

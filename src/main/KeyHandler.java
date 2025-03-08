@@ -240,6 +240,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 	}
 	public void dialogueState(int code) {
+		if(code == KeyEvent.VK_ESCAPE) {
+			gp.gameState = gp.playState;
+		}
 			if(code == KeyEvent.VK_ENTER) {
 				// PRESS ENTER TO CONTINUE CONVERSATION 
 				if(gp.ui.talkWorld){
