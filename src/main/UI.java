@@ -572,9 +572,13 @@ public class UI extends JFrame implements MouseListener{
 		int frameX = gp.screenWidth/2 -70; 
 		int	frameY = gp.tileSize*2+25;
 		drawWindow(frameX,frameY,frameWidth,frameHeight);
-		g2.drawString("Gold: " + gp.player.coin,frameX+10,frameY+10);
-		frameX+=30;
-	    g2.drawImage(coin,frameX+15,frameY+5,32,32,null);
+		frameX+=6;
+		frameY+=2;
+	    g2.drawImage(coin,frameX,frameY,42,42,null);
+	    frameX+=50;
+	    frameY += 35;
+	    g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 38F));
+		g2.drawString(Integer.toString(gp.player.coin),frameX,frameY);
 
 		//FRAME
 		frameWidth = gp.tileSize*cols;
