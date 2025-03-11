@@ -426,11 +426,17 @@ public class Entity {
 				}
 			}
 			else if(enTopY < nextY && enLeftX < nextX) { // DOWN OR RIGHT
-				direction = "right";
+				direction = "down";
 				checkCollision();
 				if(collisionOn) {
-					direction = "left";
+					direction = "right";
 				}
+			}
+			// WHEN REACHES GOAL, STOPS NPC FROM MOVING
+			int nextCol = gp.pFinder.pathList.get(0).col;
+			int nextRow = gp.pFinder.pathList.get(0).row;
+			if(nextCol == goalCol && nextRow == goalRow) {
+				onPath = false;
 			}
 		}
 	}
