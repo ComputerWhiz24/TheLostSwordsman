@@ -42,6 +42,7 @@ public class Entity {
  	public boolean dying = false;
 	public boolean hitCooldown = false;
 	public boolean hpBarOn = false;
+	public boolean onPath = false;
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -154,10 +155,7 @@ public class Entity {
 		gp.particleList.add(p3);
 		gp.particleList.add(p4);
 	}
-	public void update() {
-
-
-		setAction();
+	public void checkCollision() {
 		
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
@@ -170,6 +168,13 @@ public class Entity {
 		if(this.type == type_monster && hitPlayer == true) {
 			damagePlayer(this);
 		}
+	}
+	public void update() {
+
+
+		setAction();
+		checkCollision();
+
 		if(collisionOn == false) { 
 			switch(direction) {
 			case "up":
@@ -366,5 +371,67 @@ public class Entity {
 		}
 		return image;
 	}
-
+	public void searchPath(int goalCol, int goalRow) {
+		
+		int startCol = (worldX + solidArea.x) / gp.tileSize;
+		int startRow = (worldY + solidArea.y) / gp.tileSize;
+		
+		gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow,  this);
+		
+		if(gp.pFinder.search()) {
+			
+			// NEXT WORLD X AND WORLD Y
+			int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+			int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+			
+			// ENTITY'S SOLID AREA POSITION
+			int enLeftX = worldX + solidArea.x;
+			int enRightX =  worldX + solidArea.x + solidArea.width;
+			int enTopY = worldY + solidArea.y;
+			int enBottomY = worldY + solidArea.y + solidArea.height;
+			
+			if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) { // GO UP
+				direction = "up";
+			} 
+			else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) { // DOWN
+				direction = "down";
+			} 
+			else if(enTopY >= nextY && enBottomY < nextX + gp.tileSize) { // LEFT OR RIGHT
+				if(enLeftX > nextX) {
+					direction = "left";
+				} 
+				if (enLeftX < nextX) {
+					direction = "right";
+				}
+			}
+			else if (enTopY > nextY && enLeftX > nextX) { // UP OR LEFT
+				direction = "up";
+				checkCollision();
+				if(collisionOn) {
+					direction = "left";
+				}
+			}
+			else if (enTopY > nextY && enLeftX < nextX) { // UP OR RIGHT
+				direction = "up";
+				checkCollision();
+				if(collisionOn) {
+					direction = "right";
+				}
+			}
+			else if(enTopY < nextY && enLeftX > nextX) { // DOWN OR LEFT
+				direction = "down";
+				checkCollision();
+				if(collisionOn) {
+					direction = "left";
+				}
+			}
+			else if(enTopY < nextY && enLeftX < nextX) { // DOWN OR RIGHT
+				direction = "right";
+				checkCollision();
+				if(collisionOn) {
+					direction = "left";
+				}
+			}
+		}
+	}
 }
