@@ -58,8 +58,8 @@ public class PathFinder {
 		goalReached = false;
 		step = 0;
 	}
-	public void setNodes(int startCol, int startRow, int goalCol, int goalRow, Entity entity) {
-		resetNodes();
+	public void setNodes(int startCol, int startRow, int goalCol, int goalRow, Entity entity)   {
+		resetNodes( ); 
 			
 		// SET START AND GOAL NODE
 		startNode = node[startCol][startRow];
@@ -105,7 +105,7 @@ public class PathFinder {
 		node.hCost = xDistance + yDistance;
 		
 		// F COST
-		 node.fCost = node.gCost+node.fCost;
+		node.fCost = node.gCost+node.hCost;
 		 
 		 
 	}
@@ -127,15 +127,16 @@ public class PathFinder {
 			if(col - 1 >= 0) {
 				openNode(node[col-1][row]);
 			}
-			// OPEN RIGHT NODE 
-			if(col + 1 <= gp.maxWorldCol) {
-				openNode(node[col+1][row]);
-			}
 			// OPEN DOWN NODE
-			if(row + 1 <= gp.maxWorldRow) {
+			if(row + 1 < gp.maxWorldRow) {
 				openNode(node[col][row+1]);
 			}
+			// OPEN RIGHT NODE 
+			if(col + 1 < gp.maxWorldCol) {
+				openNode(node[col+1][row]);
+			}
 			
+			// FIND BEST NODE 
 			int bestNodeIndex = 0;
 			int bestNodefCost = 999;
 			
@@ -144,7 +145,8 @@ public class PathFinder {
 				if(openList.get(i).fCost < bestNodefCost) {
 					bestNodeIndex = i;
 					bestNodefCost = openList.get(i).fCost;
-				} else if (openList.get(i).fCost == bestNodefCost) {
+				} 
+				else if (openList.get(i).fCost == bestNodefCost) {
 					if(openList.get(i).gCost < openList.get(bestNodeIndex).gCost) {
 						bestNodeIndex = i;
 					}
@@ -155,7 +157,8 @@ public class PathFinder {
 			if(openList.size() == 0) {
 				break;
 			}
-			currentNode = openList.get(bestNodeIndex);
+			// NEXT STEP 
+			 currentNode = openList.get(bestNodeIndex);
 			
 			if(currentNode == goalNode) {
 				 goalReached = true;

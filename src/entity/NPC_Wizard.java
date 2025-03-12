@@ -25,14 +25,14 @@ public class NPC_Wizard extends Entity{
 		
 	public void getImage() {
 			try {
-			up1 = setupAlternate("/npc/wizard_up1",1.5,1.5);
-			up2 = setupAlternate("/npc/wizard_up2",1.5,1.5);
-			down1 = setupAlternate("/npc/wizard_down1",1.5,1.5);
-			down2 = setupAlternate("/npc/wizard_down2",1.5,1.5);
-			left1 = setupAlternate("/npc/wizard_left1",1.5,1.5);
-			left2 = setupAlternate("/npc/wizard_left2",1.5,1.5);
-			right1 = setupAlternate("/npc/wizard_right1",1.5,1.5);
-			right2  = setupAlternate("/npc/wizard_right2",1.5,1.5);
+			up1 = setupAlternate("/npc/wizard_up1",1,1);
+			up2 = setupAlternate("/npc/wizard_up2",1,1);
+			down1 = setupAlternate("/npc/wizard_down1",1,1);
+			down2 = setupAlternate("/npc/wizard_down2",1,1);
+			left1 = setupAlternate("/npc/wizard_left1",1,1);
+			left2 = setupAlternate("/npc/wizard_left2",1,1);
+			right1 = setupAlternate("/npc/wizard_right1",1,1);
+			right2  = setupAlternate("/npc/wizard_right2",1,1);
 			}catch(Exception e) {
 				e.printStackTrace();
 		

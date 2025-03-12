@@ -396,7 +396,7 @@ public class Entity {
 			else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) { // DOWN
 				direction = "down";
 			} 
-			else if(enTopY >= nextY && enBottomY < nextX + gp.tileSize) { // LEFT OR RIGHT
+			else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize) { // LEFT OR RIGHT
 				if(enLeftX > nextX) {
 					direction = "left";
 				} 
@@ -431,7 +431,7 @@ public class Entity {
 				if(collisionOn) {
 					direction = "right";
 				}
-			}
+			 }
 			// WHEN REACHES GOAL, STOPS NPC FROM MOVING
 			int nextCol = gp.pFinder.pathList.get(0).col;
 			int nextRow = gp.pFinder.pathList.get(0).row;
