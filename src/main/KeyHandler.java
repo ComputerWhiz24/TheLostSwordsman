@@ -59,7 +59,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				if(gp.ui.commandNum == -1)
 					gp.ui.commandNum = 3;
 			}
-			if(code == KeyEvent.VK_ENTER) {
+			if(code == KeyEvent.VK_ENTER || code == MouseEvent.BUTTON1) {
 				switch(gp.ui.commandNum) {
 				case 0:
 					gp.gameState = gp.playState;
@@ -448,6 +448,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(gp.gameState == gp.playState) {
 			if (e.getButton() == MouseEvent.BUTTON1)
 				attackPressed = true;
+		}
+		if(gp.gameState == gp.titleState) {
+			titleState(e.getButton());
 		}
 	}
 
