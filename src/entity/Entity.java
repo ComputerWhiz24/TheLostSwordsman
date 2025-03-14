@@ -384,54 +384,69 @@ public class Entity {
 			int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
 			int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
 			
+			System.out.println(nextX / gp.tileSize);
+			System.out.println(nextY / gp.tileSize);
 			// ENTITY'S SOLID AREA POSITION
 			int enLeftX = worldX + solidArea.x;
-			int enRightX =  worldX + solidArea.x + solidArea.width;
+			int enRightX = worldX + solidArea.x + solidArea.width;
 			int enTopY = worldY + solidArea.y;
 			int enBottomY = worldY + solidArea.y + solidArea.height;
 			
 			if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) { // GO UP
 				direction = "up";
+				System.out.println(1);
 			} 
 			else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) { // DOWN
 				direction = "down";
+				System.out.println(2);
 			} 
 			else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize) { // LEFT OR RIGHT
 				if(enLeftX > nextX) {
 					direction = "left";
+					System.out.println(3);
 				} 
 				if (enLeftX < nextX) {
 					direction = "right";
+					System.out.println(4);
 				}
 			}
 			else if (enTopY > nextY && enLeftX > nextX) { // UP OR LEFT
+				System.out.println(5);
 				direction = "up";
 				checkCollision();
 				if(collisionOn) {
+					System.out.println(6);
 					direction = "left";
 				}
 			}
 			else if (enTopY > nextY && enLeftX < nextX) { // UP OR RIGHT
 				direction = "up";
+				System.out.println(7);
 				checkCollision();
 				if(collisionOn) {
+					System.out.println(8);
 					direction = "right";
 				}
 			}
 			else if(enTopY < nextY && enLeftX > nextX) { // DOWN OR LEFT
 				direction = "down";
+				System.out.println(9);
 				checkCollision();
 				if(collisionOn) {
 					direction = "left";
+					System.out.println(10);
 				}
 			}
 			else if(enTopY < nextY && enLeftX < nextX) { // DOWN OR RIGHT
 				direction = "down";
+				System.out.println(11);
 				checkCollision();
 				if(collisionOn) {
 					direction = "right";
+					System.out.println(12);
 				}
 			 }
+		
 			// WHEN REACHES GOAL, STOPS NPC FROM MOVING
 			int nextCol = gp.pFinder.pathList.get(0).col;
 			int nextRow = gp.pFinder.pathList.get(0).row;

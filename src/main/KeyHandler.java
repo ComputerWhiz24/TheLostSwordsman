@@ -93,6 +93,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_T) {
 		 		talkPressed = true;
 			}
+			if(code == KeyEvent.VK_ENTER || code == MouseEvent.BUTTON1) {
+				attackPressed = true;
+			}
 			if(code == KeyEvent.VK_C) {
 				gp.gameState = gp.ui.playSubState = 1;
 			}
@@ -178,7 +181,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				gp.ui.optionsSubState = 0;
 				gp.ui.commandNum = 0;
 			}
-			if(code == KeyEvent.VK_ENTER) {
+			if(code == KeyEvent.VK_ENTER || code == MouseEvent.BUTTON1) {
 				enterPressed = true;
 			}
 			int maxCommandNum = 4;
@@ -445,12 +448,23 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(gp.gameState == gp.playState) {
-			if (e.getButton() == MouseEvent.BUTTON1)
-				attackPressed = true;
-		}
 		if(gp.gameState == gp.titleState) {
 			titleState(e.getButton());
+		}
+		else if(gp.gameState == gp.playState) {
+			playState(e.getButton());
+		}
+		else if(gp.gameState == gp.pauseState) {
+			pauseState(e.getButton());
+		}
+		else if(gp.gameState == gp.dialogueState) {
+			dialogueState(e.getButton());
+		}
+		else if(gp.gameState == gp.gameOverState) {
+			gameOverState(e.getButton());
+		}
+		else if(gp.gameState == gp.tradeState) {
+			tradeState(e.getButton());
 		}
 	}
 

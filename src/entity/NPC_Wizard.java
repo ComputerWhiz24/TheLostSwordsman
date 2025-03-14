@@ -48,7 +48,7 @@ public class NPC_Wizard extends Entity{
 				int goalRow = 9;
 				
 				searchPath(goalCol, goalRow);
-				
+
 				
 			} else {
 				actionLockCounter++;
