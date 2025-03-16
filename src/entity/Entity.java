@@ -43,6 +43,7 @@ public class Entity {
 	public boolean hitCooldown = false;
 	public boolean hpBarOn = false;
 	public boolean onPath = false;
+	public boolean knockback = false;
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -50,13 +51,14 @@ public class Entity {
 	int dyingCounter = 0; 
 	public int hpBarCounter = 0;  
 	public int projectileCooldown;
-	
+	int knockbackCounter;
 		// INVENTORY
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public int inventorySize = 222;
 	public int cols = 5;
 	public int rows = 5;
 		//ATTRIBUTES
+	public int defaultSpeed; 
 	public int speed;
 	public String name;
 	public double damage;
@@ -171,22 +173,62 @@ public class Entity {
 	}
 	public void update() {
 
+		if(knockback) {
+			checkCollision();
+			if(collisionOn) { // IF ENTITY HITS SOMETHING, STOP KNOCKBACK EFFECT
+				knockbackCounter = 0;
+				knockback = false;
+				speed = defaultSpeed;
+			} else {
+				switch(gp.player.direction) {
+				case "up":
+					worldY -= speed; break;
+				case"down": 
+					worldY += speed; break;
+				case"left":
+					worldX -= speed; break;
+				case"right":
+					worldX += speed; break;	
+				case"upLeft":
+					worldX -= speed; 
+					break;
+				case"upRight":
+					worldX += speed; 
+					break;
+				case"downLeft":
+					worldX -= speed; 
+					break;
+				case"downRight":
+					worldX += speed; 
+					break;	
+				}
+				knockbackCounter++;
+				if(knockbackCounter == 10) { // BIG NUMBER IS MORE KNOCKBACK 
+					knockbackCounter = 0;
+					knockback = false;
+					speed = defaultSpeed;
+				}
+			}
+		}
+		else {
+			if(collisionOn == false) { 
+				switch(direction) {
+				case "up":
+					worldY -= speed; break;
+				case"down": 
+					worldY += speed; break;
+				case"left":
+					worldX -= speed; break;
+				case"right":
+					worldX += speed; break;	
+				}
+			}
+		}
 
 		setAction();
 		checkCollision();
 
-		if(collisionOn == false) { 
-			switch(direction) {
-			case "up":
-				worldY -= speed; break;
-			case"down": 
-				worldY += speed; break;
-			case"left":
-				worldX -= speed; break;
-			case"right":
-				worldX += speed; break;	
-			}
-		}
+		
 		spriteCounter++;
 		if(spriteCounter > 11) {
 			if(spriteNum==1)

@@ -61,7 +61,8 @@ public class Player extends Entity{
 //		worldY = gp.tileSize*24;
 		worldX = gp.tileSize*12;
 		worldY = gp.tileSize*13;
-		speed = 4;
+		defaultSpeed = 4;
+		speed = defaultSpeed;
 		direction = "down";
 		
 	//PLAYER STATUS
@@ -283,7 +284,7 @@ public class Player extends Entity{
 			// ADD TO PROJECTILE LIST 
 			for(int i = 0; i < gp.projectileList.length; i++) {
 				if(gp.projectileList[gp.currentMap][i] == null) {
-					gp. [gp.currentMap][i] = projectile;
+					gp.projectileList[gp.currentMap][i] = projectile;
 					break;
 				}
 			}
@@ -421,6 +422,7 @@ public class Player extends Entity{
 
 		if(swinging == false && gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
+			knockback(gp.monster[gp.currentMap][idx]);
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
@@ -443,6 +445,12 @@ public class Player extends Entity{
 			}
 			swinging = true;
 			}
+	}
+	public void knockback(Entity entity) {
+		
+		entity.direction = this.direction;
+		entity.speed += 10;
+		entity.knockback = true;
 	}
 	public void damageProjectile(int idx){
 		if(idx != 999) {
