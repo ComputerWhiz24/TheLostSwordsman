@@ -412,6 +412,7 @@ public class Entity {
 			}
 			else if (enTopY > nextY && enLeftX > nextX) { // UP OR LEFT
 				System.out.println(5);
+				System.out.println("Collision Detected: " + collisionOn);
 				direction = "up";
 				checkCollision();
 				if(collisionOn) {
@@ -445,6 +446,10 @@ public class Entity {
 					direction = "right";
 					System.out.println(12);
 				}
+			 } else {
+					System.out.println("Collision Detected: " + collisionOn);
+				 System.out.println("BUG");
+				 
 			 }
 		
 			// WHEN REACHES GOAL, STOPS NPC FROM MOVING
