@@ -280,8 +280,13 @@ public class Player extends Entity{
 			//SUBTRACT MAMA
 			projectile.subtractMana(this);
 			
-			// ADD TO LIST
-			gp.projectileList.add(projectile);
+			// ADD TO PROJECTILE LIST 
+			for(int i = 0; i < gp.projectileList.length; i++) {
+				if(gp.projectileList[gp.currentMap][i] == null) {
+					gp. [gp.currentMap][i] = projectile;
+					break;
+				}
+			}
 			projectileCooldown = 30; 
 			gp.playSE(9);
 		}
@@ -352,6 +357,8 @@ public class Player extends Entity{
 			int iTileIdx = gp.cChecker.checkEntity(this,gp.iTile);
 			damageTile(iTileIdx);
 			
+			int projectileIndex = gp.cChecker.checkEntity(this,gp.projectileList);
+			damageProjectile(projectileIndex);
 			worldX = currentWorldX;
 			worldY =  currentWorldY;
 			solidArea.width = solidAreaWidth;
@@ -436,6 +443,13 @@ public class Player extends Entity{
 			}
 			swinging = true;
 			}
+	}
+	public void damageProjectile(int idx){
+		if(idx != 999) {
+			Entity projectile = gp.projectileList[gp.currentMap][idx];
+			projectile.alive = false;
+			generateParticle(projectile,projectile);
+		}
 	}
 	public void damageTile(int tileIdx) {
 		// IF TILE IS DESTRUCTIBLE AND THE WEAPON TYPE IS COMPATIBLE, DECREASE LIFE BY 1

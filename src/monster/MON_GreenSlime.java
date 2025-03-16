@@ -73,7 +73,14 @@ public class MON_GreenSlime extends Entity{
 		int i = new Random().nextInt(100)+1;
 		if(i >99 && projectile.alive == false && projectileCooldown > 30) {
 			projectile.set(worldX,worldY,direction,true,this);
-			gp.projectileList.add(projectile);
+			
+			// ADD PROJECTILE TO END OF ARRAY
+			for(int idx = 0; idx < gp.projectileList.length; idx++) {
+				if(gp.projectileList[gp.currentMap][idx] == null) {
+					gp.projectileList[gp.currentMap][idx] = projectile;
+					break; 
+				}
+			}
 			projectileCooldown = 0;
 		}
 	}
