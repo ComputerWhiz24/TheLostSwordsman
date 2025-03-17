@@ -353,7 +353,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) {
-				damageMonster(monsterIndex,attack);
+				damageMonster(monsterIndex,attack,currentWeapon.knockbackPower);
 			}
 			int iTileIdx = gp.cChecker.checkEntity(this,gp.iTile);
 			damageTile(iTileIdx);
@@ -418,7 +418,7 @@ public class Player extends Entity{
 			hitCooldown = true;
 		}
 	}
-	public void damageMonster(int idx, double attack) {
+	public void damageMonster(int idx, double attack, int knockbackPower) {
 
 		if(swinging == false && gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
@@ -440,8 +440,6 @@ public class Player extends Entity{
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();	
-			}else {
-				System.out.println(mon.life);
 			}
 			swinging = true;
 			}
@@ -483,10 +481,11 @@ public class Player extends Entity{
 			gp.iTile[gp.currentMap][tileIdx]= null;
 		}
 	}
-	public void shootMonster(int idx, double attack) {
+	public void shootMonster(int idx, double attack, int knockbackPower) {
 		
 		if(gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
+			knockback(gp.monster[gp.currentMap][idx]);
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage

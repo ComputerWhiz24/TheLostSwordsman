@@ -22,7 +22,7 @@ public class Projectile extends Entity{
 			int monsterIdx = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIdx != 999) {
 				generateParticle(user.projectile,gp.monster[gp.currentMap][monsterIdx]);
-				gp.player.shootMonster(monsterIdx,attack);
+				gp.player.shootMonster(monsterIdx,attack,knockbackPower);
 				alive = false;
 			}
 		} else {

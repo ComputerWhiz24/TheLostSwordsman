@@ -93,6 +93,7 @@ public class Entity {
 	public int spellCost;
 	public int type; // 0 = player, 1 = NPC, 2 = Monster
 	public int hand;
+	public int knockbackPower = 0;
 	public final int type_player = 0;
 	public final int type_npc = 1;
 	public final int type_monster = 2;

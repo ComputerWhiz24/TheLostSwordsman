@@ -18,5 +18,6 @@ public class OBJ_Sword extends Entity{
 		buyPrice = 5;
 		sellPrice = 1;
 		hand = 1;
+		knockbackPower = 5;
 	}
 }

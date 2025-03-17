@@ -17,6 +17,7 @@ public class OBJ_Axe extends Entity{
 		buyPrice = 50;
 		sellPrice = 25;
 		hand = 1;
+		knockbackPower = 0;
 	}
 
 	
