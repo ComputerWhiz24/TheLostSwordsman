@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import entity.Entity;
 
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,attackPressed,showDesc,shootSpell, enterPressed;
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,attackPressed,showDesc,shootSpell, enterPressed,openPressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -93,8 +93,14 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_T) {
 		 		talkPressed = true;
 			}
-			if(code == KeyEvent.VK_ENTER || code == MouseEvent.BUTTON1) {
+			if(code == KeyEvent.VK_E) {
+				openPressed = true;
+			}
+			if(code == MouseEvent.BUTTON1) {
 				attackPressed = true;
+			}
+			if(code == KeyEvent.VK_ENTER) {
+				enterPressed = true;
 			}
 			if(code == KeyEvent.VK_C) {
 				gp.gameState = gp.ui.playSubState = 1;
@@ -246,12 +252,12 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.playState;
 		}
-			if(code == KeyEvent.VK_ENTER) {
+		if(code == KeyEvent.VK_ENTER) {
 				// PRESS ENTER TO CONTINUE CONVERSATION 
-				if(gp.ui.talkWorld){
-					gp.gameState = gp.playState;
-					gp.ui.talkWorld = false;
-					gp.ui.talkNPC = false;
+			if(gp.ui.talkWorld){
+				gp.gameState = gp.playState;
+				gp.ui.talkWorld = false;
+				gp.ui.talkNPC = false;
 				} else {
 					Entity.dialogueIndex++;
 					if(Entity.dialogueIndex >= Entity.currentDialogue.length) {

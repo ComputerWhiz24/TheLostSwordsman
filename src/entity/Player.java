@@ -382,7 +382,13 @@ public class Player extends Entity{
 			if(gp.obj[gp.currentMap][i].type == type_collectible) {
 				 gp.obj[gp.currentMap][i].use(this);
 				 gp.obj[gp.currentMap][i] = null; 
-			} else {
+			}
+			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
+				if(keyH.openPressed) {
+					gp.obj[gp.currentMap][i].interact();
+				}
+			}
+			else {
 				// INVENTORY ITEMS
 				String text;
 				if(inventory.size() != inventorySize) {
@@ -422,7 +428,9 @@ public class Player extends Entity{
 
 		if(swinging == false && gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
-			knockback(gp.monster[gp.currentMap][idx]);
+			if(knockbackPower > 0) {
+				knockback(gp.monster[gp.currentMap][idx], knockbackPower);
+			}
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
@@ -444,10 +452,10 @@ public class Player extends Entity{
 			swinging = true;
 			}
 	}
-	public void knockback(Entity entity) {
+	public void knockback(Entity entity, int knockbackPower) {
 		
 		entity.direction = this.direction;
-		entity.speed += 10;
+		entity.speed += knockbackPower;
 		entity.knockback = true;
 	}
 	public void damageProjectile(int idx){
@@ -485,7 +493,9 @@ public class Player extends Entity{
 		
 		if(gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
-			knockback(gp.monster[gp.currentMap][idx]);
+			if(knockbackPower > 0) {
+			knockback(gp.monster[gp.currentMap][idx], knockbackPower);
+			}
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = attack - 1.0*mon.defenseMult;
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
