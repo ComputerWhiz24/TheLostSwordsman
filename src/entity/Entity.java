@@ -134,7 +134,7 @@ public class Entity {
 	public void setAction() {}
 	public void damageReaction() {}
 	public void speak() {} // Will override in NPC subclasses
-	public void interact() {
+	public void interact(int i) {
 		
 	}
 	public void use(Entity entity) {} // Will override in player class

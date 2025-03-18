@@ -385,7 +385,8 @@ public class Player extends Entity{
 			}
 			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
 				if(keyH.openPressed) {
-					gp.obj[gp.currentMap][i].interact();
+					gp.obj[gp.currentMap][i].interact(i);
+					keyH.openPressed = false;
 				}
 			}
 			else {

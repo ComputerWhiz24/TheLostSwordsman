@@ -27,6 +27,8 @@ public class OBJ_Key extends Entity{
 			gp.ui.currentDialogue = "You use a key to open the door";
 			gp.playSE(3);
 			gp.obj[gp.currentMap][gp.player.inventory.indexOf(new OBJ_Key(gp))] = null;
+		} else {
+			
 		}
 	}
 }
