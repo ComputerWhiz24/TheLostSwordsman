@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Chest;
+import object.OBJ_Door;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield;
@@ -385,7 +387,12 @@ public class Player extends Entity{
 			}
 			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
 				if(keyH.openPressed) {
-					gp.obj[gp.currentMap][i].interact(i);
+					if(gp.obj[gp.currentMap][i] instanceof OBJ_Door) {
+						gp.obj[gp.currentMap][i].interact(i);
+					} else {
+						gp.obj[gp.currentMap][i].interact();
+					}
+				
 					keyH.openPressed = false;
 				}
 			}

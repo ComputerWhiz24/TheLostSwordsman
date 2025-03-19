@@ -28,8 +28,8 @@ public class OBJ_Chest extends Entity{
 		solidAreaDefaultY = solidArea.y;
 		
 		name = "chest";
-		image =  setup("/objects/chest.png");
-		image2 = setup("/objects/chest_opened.png");
+		image =  setup("/objects/chest");
+		image2 = setup("/objects/chest_opened");
 		
 		down1 = image;
 		down2 = image;
@@ -51,7 +51,12 @@ public class OBJ_Chest extends Entity{
 			else {
 				gp.player.inventory.add(loot);
 				down1 = image2;
+				opened = true;
 			}
+			gp.ui.currentDialogue = sb.toString();
+		}
+		else {
+			gp.ui.currentDialogue = "Chest already opened!";
 		}
 	}
 	

@@ -70,6 +70,11 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldY  = gp.tileSize*12;
 		i++;
 		
+		gp.obj[mapNum][i] = new OBJ_Chest(gp,new OBJ_Axe(gp));
+		gp.obj[mapNum][i].worldX = gp.tileSize*13;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*21;
+		i++;
+		
 		// MAP 1
 		i = 0;
 		mapNum = 1;
