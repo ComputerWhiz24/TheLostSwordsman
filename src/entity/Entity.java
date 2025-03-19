@@ -137,6 +137,9 @@ public class Entity {
 	public void interact(int i) {
 		
 	}
+	public void interact() {
+		
+	}
 	public void use(Entity entity) {} // Will override in player class
 	public void checkDrop() {}
 	public void dropItem(Entity droppedItem) {

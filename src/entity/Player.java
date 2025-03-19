@@ -482,10 +482,10 @@ public class Player extends Entity{
 	}
 	public void damageTileHelper(int tileIdx) {
 		if(gp.iTile[gp.currentMap][tileIdx].life == 2) {
-			gp.iTile[gp.currentMap][tileIdx].image = down1;
+			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image;
 		}
 		else if(gp.iTile[gp.currentMap][tileIdx].life == 1) {
-			gp.iTile[gp.currentMap][tileIdx].image = down2;
+			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image2;
 		}else if(gp.iTile[gp.currentMap][tileIdx].life == 0) {
 			gp.iTile[gp.currentMap][tileIdx]= null;
 		}
