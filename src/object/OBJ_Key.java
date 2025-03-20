@@ -16,7 +16,6 @@ public class OBJ_Key extends Entity{
 		this.gp = gp;
 		collision = false;
 		name = "key";
-		type = type_consumable;
 		stackable = true;
 		down1 = setup("/objects/key");
 		description = "[" + name + "]\nA weird, random key..\nI wonder what\nit's used for.";

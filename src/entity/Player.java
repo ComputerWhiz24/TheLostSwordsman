@@ -563,8 +563,15 @@ public class Player extends Entity{
 				}
 				break;
 			case type_consumable:
-				selectedItem.use(this);
-				inventory.remove(idx-1);
+				if(selectedItem.amount > 1) {
+					selectedItem.amount--;
+					System.out.println("amount -");
+				}
+				else {
+					selectedItem.use(this);
+					inventory.remove(idx);
+					System.out.println("item used");
+				}
 				break;
 			}
 		}
@@ -586,19 +593,16 @@ public class Player extends Entity{
 			int index = searchItemInInventory(item.name);
 			
 			if(index != 999) { // IF ALREADY HAVE ITEM IN INVENTORY
-				inventory.get(index).amount++;
 				canObtain = true;
 			}
-			else { // IF NOT ALREADY IN VENTORY
+			else { // IF NOT ALREADY IN IVENTORY
 				if(inventory.size() != inventorySize) { // CHECK IF INVENTORY IS FULL
-				inventory.add(item);
 				canObtain = true;
 				}
 			}
 		}
 		else { // NOT STACKABLE, SO CHECK INVENTORY
 			if(inventory.size() != inventorySize) { // CHECK IF INVENTORY IS FULL
-				inventory.add(item);
 				canObtain = true;
 			}
 		}

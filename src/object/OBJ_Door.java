@@ -41,8 +41,13 @@ public class OBJ_Door extends Entity{
 		if (hasKey) {
 		    gp.ui.currentDialogue = "You use a key to open the door";
 		    gp.obj[gp.currentMap][doorIdx] = null;
-		    // Find and remove the first key
-		    gp.player.inventory.remove(keyIndex); 
+//		    // Find and remove the first key
+		    if(gp.player.inventory.get(keyIndex).amount > 1) {
+	        	gp.player.inventory.get(keyIndex).amount--;
+	        }
+		    else {
+		    	gp.player.inventory.remove(keyIndex); 
+		    }
 		}
 		else {
 			gp.ui.currentDialogue = "you need a key to open this";

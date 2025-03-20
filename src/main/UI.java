@@ -384,6 +384,18 @@ public class UI extends JFrame implements MouseListener{
 				g2.setFont(g2.getFont().deriveFont(32f));
 				int amountX;
 				int amountY;
+			
+				String s = Integer.toString(gp.player.inventory.get(i).amount);
+				amountX = getXForAlignRight(s,slotX+44);
+				amountY = slotY+gp.tileSize;
+				
+				// SHADOW
+				g2.setColor(new Color(60,60,60));
+				g2.drawString(s, amountX, amountY);
+				
+				// NUMBER
+				g2.setColor(Color.white);
+				g2.drawString(s, amountX-3, amountY-3);
 			}
 			
 			slotX+=slotSize;
