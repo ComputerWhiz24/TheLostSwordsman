@@ -387,20 +387,19 @@ public class Player extends Entity{
 			}
 			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
 				if(keyH.openPressed) {
-					if(gp.obj[gp.currentMap][i] instanceof OBJ_Door) {
+					if(gp.obj[gp.currentMap][i] instanceof OBJ_Door) { // IF OBJECT IS A DOOR
 						gp.obj[gp.currentMap][i].interact(i);
-					} else {
+					} else { // IF OBJECT IS NOT A DOOR
 						gp.obj[gp.currentMap][i].interact();
 					}
-				
 					keyH.openPressed = false;
 				}
 			}
 			else {
 				// INVENTORY ITEMS
 				String text;
-				if(inventory.size() != inventorySize) {
-					inventory.add(gp.obj[gp.currentMap][i]);
+				if(canObtainItem(gp.obj[gp.currentMap][i])) {
+					obtainItem(gp.obj[gp.currentMap][i]);
 					gp.playSE(1);
 					
 				}
@@ -570,6 +569,49 @@ public class Player extends Entity{
 			}
 		}
 		
+	}
+	public int searchItemInInventory(String itenName) {
+		
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i).name.equalsIgnoreCase(itenName)) {
+				return i;
+			}
+		}
+		return 999; 
+	}
+	public boolean canObtainItem(Entity item) {
+		boolean canObtain = false;
+		if(item.stackable) { // CHECK IF ITEM IS STACKABLE
+			
+			int index = searchItemInInventory(item.name);
+			
+			if(index != 999) { // IF ALREADY HAVE ITEM IN INVENTORY
+				inventory.get(index).amount++;
+				canObtain = true;
+			}
+			else { // IF NOT ALREADY IN VENTORY
+				if(inventory.size() != inventorySize) { // CHECK IF INVENTORY IS FULL
+				inventory.add(item);
+				canObtain = true;
+				}
+			}
+		}
+		else { // NOT STACKABLE, SO CHECK INVENTORY
+			if(inventory.size() != inventorySize) { // CHECK IF INVENTORY IS FULL
+				inventory.add(item);
+				canObtain = true;
+			}
+		}
+		return canObtain;
+	}
+	public void obtainItem(Entity item) {
+		int index = searchItemInInventory(item.name);
+		if(item.stackable) { // CHECK IF ITEM IS STACKABLE		
+			inventory.get(index).amount++;
+		}
+		else { // NOT STACKABLE, SO ADD TO A SLOT
+			inventory.add(item);
+		}
 	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
 

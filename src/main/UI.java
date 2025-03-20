@@ -378,6 +378,14 @@ public class UI extends JFrame implements MouseListener{
 			}
 			
 			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			
+			//DISPLAY AMOUNT
+			if(gp.player.inventory.get(i).amount > 1) {
+				g2.setFont(g2.getFont().deriveFont(32f));
+				int amountX;
+				int amountY;
+			}
+			
 			slotX+=slotSize;
 			
 			if((i + 1) % split == 0) {
