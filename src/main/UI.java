@@ -476,6 +476,26 @@ public class UI extends JFrame implements MouseListener{
 		int split = cols - 1;
 		for(int i = 0; i <entity.inventory.size(); i++) {
 			g2.drawImage(entity.inventory.get(i).down1,slotX,slotY,null);
+			
+			// DISPLAY AMOUNT
+			if(entity.inventory.get(i).amount > 1) {
+				g2.setFont(g2.getFont().deriveFont(32f));
+				int amountX;
+				int amountY;
+			
+				String s = Integer.toString(entity.inventory.get(i).amount);
+				amountX = getXForAlignRight(s,slotX+44);
+				amountY = slotY+gp.tileSize;
+				
+				// SHADOW
+				g2.setColor(new Color(60,60,60));
+				g2.drawString(s, amountX, amountY);
+				
+				// NUMBER
+				g2.setColor(Color.white);
+				g2.drawString(s, amountX-3, amountY-3);
+			}
+			
 			slotX+=slotSize;
 			
 			if((i + 1) % split == 0) {
@@ -518,13 +538,18 @@ public class UI extends JFrame implements MouseListener{
 			g2.drawString("Show Details: F", textX, textY);
 			boolean enoughGold = true;
 			boolean inventoryFull = false;
-			 if(gp.keyH.enterPressed) {
+			 if(gp.keyH.enterPressed) { // BUY ITEM
 			    if(gp.player.coin >= currentItem.buyPrice) {
-			    	gp.player.inventory.add(npc.inventory.get(getItemIndex()));
+			    	gp.player.obtainItem(currentItem);
 			    	gp.player.coin -= currentItem.buyPrice;
+			    	if(currentItem.amount > 1) {
+			    		currentItem.amount--;
+			    	}
+			    	else {
 			    	npc.inventory.remove(getItemIndex());
+			    	}
 			    	gp.playSE(1);
-			    } else if(gp.player.inventory.size() == gp.player.inventorySize){
+			    } else if(!gp.player.canObtainItem(currentItem)){
 			    	inventoryFull = true;
 			    } else {
 			    	talkNPC = false;
@@ -628,6 +653,26 @@ public class UI extends JFrame implements MouseListener{
 			}
 			
 			g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+			
+			//DISPLAY AMOUNT
+			if(gp.player.inventory.get(i).amount > 1) {
+				g2.setFont(g2.getFont().deriveFont(32f));
+				int amountX;
+				int amountY;
+			
+				String s = Integer.toString(gp.player.inventory.get(i).amount);
+				amountX = getXForAlignRight(s,slotX+44);
+				amountY = slotY+gp.tileSize;
+				
+				// SHADOW
+				g2.setColor(new Color(60,60,60));
+				g2.drawString(s, amountX, amountY);
+				
+				// NUMBER
+				g2.setColor(Color.white);
+				g2.drawString(s, amountX-3, amountY-3);
+			}
+			
 			slotX+=slotSize;
 			
 			if((i + 1) % split == 0) {
@@ -669,7 +714,12 @@ public class UI extends JFrame implements MouseListener{
 				
 				if(gp.keyH.enterPressed) {
 				    gp.player.coin += currentItem.sellPrice;
-				    gp.player.inventory.remove(getItemIndex());
+				    if(currentItem.amount > 1) {
+				    	currentItem.amount--;
+				    } 
+				    else {
+				    	gp.player.inventory.remove(getItemIndex());
+				    }
 				    gp.playSE(1);
 				}
 			}
