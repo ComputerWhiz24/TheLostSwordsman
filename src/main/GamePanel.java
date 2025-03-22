@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import AI.PathFinder;
 import entity.Entity;
 import entity.Player;
+import environment.EnvironmentManager;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
@@ -70,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	public Config config = new Config(this);
 	public PathFinder pFinder = new PathFinder(this);
+	EnvironmentManager eManager = new EnvironmentManager(this);
 	 
 	
 	// GAME STATE 
@@ -97,6 +99,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setNPC();
 		aSetter.addSlimes(5);
 		aSetter.setInteractiveTile();
+		eManager.setup();
 		gameState = titleState;
 		tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
@@ -268,6 +271,8 @@ public class GamePanel extends JPanel implements Runnable{
 					//EMPTY LIST 
 					entityList.clear();
 						
+					eManager.draw(g2);
+					
 					ui.draw(g2);
 					
 				}
@@ -353,7 +358,9 @@ public class GamePanel extends JPanel implements Runnable{
 			
 			//EMPTY LIST 
 			entityList.clear();
-				
+			
+			eManager.draw(g2);
+			
 			ui.draw(g2);
 			
 		}
