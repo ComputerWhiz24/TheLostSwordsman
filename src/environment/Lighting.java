@@ -2,6 +2,7 @@ package environment;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
@@ -42,7 +43,32 @@ public class Lighting {
 		// SUBTRACT LIGHT AREA FROM SCREEN RECTANGLE
 		screenArea.subtract(lightArea);
 		
-		g2.setColor(new Color(0,0,0,0.95f));
+		// CREATE A GRADATION EFFECT WITHIN THE LIGHT CIRCLE
+		Color color[] = new Color[5];
+		float fraction[] = new float[5];
+		
+		color[0] = new Color(0,0,0,0f);
+		color[1] = new Color(0,0,0,0.25f);
+		color[2] = new Color(0,0,0,0.5f);
+		color[3] = new Color(0,0,0,0.75f);
+		color[4] = new Color(0,0,0,0.98f);
+		
+		fraction[0] = 0f;
+		fraction[1] = 0.25f;
+		fraction[2] = 0.5f;
+		fraction[3] = 0.75f;
+		fraction[4] = 1f;
+		
+		// CREATE GRADATION PAINT SETTINGS FOR LIGHT CIRCLE
+		RadialGradientPaint gPaint = new RadialGradientPaint(centerX,centerY,circleSize/2,fraction,color);
+		
+		// SET GRADIENT DATA ON G2
+		g2.setPaint(gPaint);
+		
+		// DRAW THE LIGHT CIRCLE
+		g2.fill(lightArea);
+		
+//		g2.setColor(new Color(0,0,0,0.95f));
 		g2.fill(screenArea);
 		
 		g2.dispose();
