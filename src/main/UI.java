@@ -445,7 +445,8 @@ public class UI extends JFrame implements MouseListener{
 			    		currentItem.type == gp.player.type_axe ||
 			    				currentItem.type == gp.player.type_shield || currentItem.type == gp.player.type_light) {
 				    if(currentItem == gp.player.currentWeapon ||
-				    		currentItem == gp.player.currentShield) {
+				    		currentItem == gp.player.currentShield ||
+				    		currentItem == gp.player.currentLight) {
 				    	g2.drawString("Unequip: E\n", textX, textY+30);
 				    } else {
 				    	g2.drawString("Equip: E\n", textX, textY+30);

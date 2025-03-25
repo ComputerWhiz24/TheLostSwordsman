@@ -199,6 +199,7 @@ public class GamePanel extends JPanel implements Runnable{
 					iTile[currentMap][i].update();
 				}
 			}
+			eManager.update();
 		}
 		if(gameState == pauseState) {
 			 
@@ -359,7 +360,7 @@ public class GamePanel extends JPanel implements Runnable{
 			//EMPTY LIST 
 			entityList.clear();
 			
-//			eManager.draw(g2);
+			eManager.draw(g2);
 			
 			ui.draw(g2);
 			

@@ -1,3 +1,3 @@
-Fullscreen off
+Fullscreen on
 1
 3
