@@ -29,6 +29,7 @@ public class Player extends Entity{
 	public final int screenX,screenY;
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public int inventorySize = 222;
+	public boolean lightUpdated = false; 
 	
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -388,7 +389,7 @@ public class Player extends Entity{
 			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
 				if(keyH.openPressed) {
 					if(gp.obj[gp.currentMap][i] instanceof OBJ_Door) { // IF OBJECT IS A DOOR
-						gp.obj[gp.currentMap][i].interact(i);
+						gp.obj[gp.currentMap][i].interact(i); 
 					} else { // IF OBJECT IS NOT A DOOR
 						gp.obj[gp.currentMap][i].interact();
 					}
@@ -561,6 +562,14 @@ public class Player extends Entity{
 				currentShield = selectedItem;
 				defense = getDefense();
 				}
+				break;
+			case type_light:
+				if(currentLight == selectedItem) {
+					currentLight = null;
+				} else {
+					currentLight = selectedItem;
+				}	
+				lightUpdated = true;
 				break;
 			case type_consumable:
 				if(selectedItem.amount > 1) {

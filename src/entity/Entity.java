@@ -82,6 +82,7 @@ public class Entity {
 	public Entity currentShield;
 	public Entity currentSpell;
 	public Projectile projectile;
+	public Entity currentLight;
 	
 	// ITEM ATTRIBUTES
 	public int value;
@@ -96,6 +97,9 @@ public class Entity {
 	public int knockbackPower = 0;
 	public boolean stackable = false;
 	public int amount = 1;
+	public int lightRadius;
+	
+	// ITEM TYPE
 	public final int type_player = 0;
 	public final int type_npc = 1;
 	public final int type_monster = 2;
@@ -105,6 +109,7 @@ public class Entity {
 	public final int type_consumable = 6;
 	public final int type_collectible = 7;
 	public final int type_obstacle = 8;
+	public final int type_light = 9;
 
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;

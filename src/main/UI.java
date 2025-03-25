@@ -372,7 +372,9 @@ public class UI extends JFrame implements MouseListener{
 			
 			//EQUIP CURSOR
 			if(gp.player.inventory.get(i) == gp.player.currentWeapon ||
-					gp.player.inventory.get(i) == gp.player.currentShield) {
+					gp.player.inventory.get(i) == gp.player.currentShield ||
+					gp.player.inventory.get(i) == gp.player.currentLight)
+			{
 				g2.setColor(new Color(240,190,90));
 				g2.fillRoundRect(slotX, slotY, gp.tileSize,gp.tileSize,10,10);
 			}
@@ -441,7 +443,7 @@ public class UI extends JFrame implements MouseListener{
 			    // if a sword,axe, or shield, display press e to equip
 			    if(currentItem.type == gp.player.type_sword ||
 			    		currentItem.type == gp.player.type_axe ||
-			    				currentItem.type == gp.player.type_shield) {
+			    				currentItem.type == gp.player.type_shield || currentItem.type == gp.player.type_light) {
 				    if(currentItem == gp.player.currentWeapon ||
 				    		currentItem == gp.player.currentShield) {
 				    	g2.drawString("Unequip: E\n", textX, textY+30);

@@ -22,26 +22,11 @@ public class Lighting {
 		// CREATE BUFFERED IMAGE
 		darknessFilter = new BufferedImage(gp.screenWidth,gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D)darknessFilter.getGraphics();
-		
-		// SCREEN SIZED RECTANGLE
-		Area screenArea = new Area(new Rectangle2D.Double(0,0,gp.screenWidth, gp.screenHeight)); 
+		 
 		
 		// GET CENTER X AND Y OF THE CIRCLE OF LIGHT
 		int centerX = gp.player.screenX + (gp.tileSize / 2);
 		int centerY = gp.player.screenY + (gp.tileSize / 2);
-		
-		// GET TOP LEFT X AND Y OF CIRCLE OF LIGHT
-		double x = centerX - (circleSize / 2);
-		double y = centerY - (circleSize / 2);
-		
-		// CIRCLE SHAPE
-		Shape circleShape = new Ellipse2D.Double(x,y,circleSize,circleSize);
-		
-		// CREATE CIRCLE OF LIGHT AREA
-		Area lightArea = new Area(circleShape);
-		
-		// SUBTRACT LIGHT AREA FROM SCREEN RECTANGLE
-		screenArea.subtract(lightArea);
 		
 		// CREATE A GRADATION EFFECT WITHIN THE LIGHT CIRCLE
 		Color color[] = new Color[12];
@@ -82,11 +67,7 @@ public class Lighting {
 		// SET GRADIENT DATA ON G2
 		g2.setPaint(gPaint);
 		
-		// DRAW THE LIGHT CIRCLE
-		g2.fill(lightArea);
-		
-//		g2.setColor(new Color(0,0,0,0.95f));
-		g2.fill(screenArea);
+		g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
 		
 		g2.dispose();
 	}
