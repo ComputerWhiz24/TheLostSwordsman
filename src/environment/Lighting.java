@@ -134,5 +134,18 @@ public class Lighting {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
 		g2.drawImage(darknessFilter, 0, 0, null);
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+		
+		String timeOfDay = "";
+		
+		switch(dayState) {
+		case day: timeOfDay = "day"; break;
+		case dusk: timeOfDay = "dusk"; break;
+		case night: timeOfDay = "night"; break;
+		case dawn: timeOfDay = "dawn"; break;
+		}
+		
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(50f));
+		g2.drawString(timeOfDay, gp.screenWidth - gp.tileSize *4 , gp.screenHeight - gp.tileSize *4);
 	}
 }
