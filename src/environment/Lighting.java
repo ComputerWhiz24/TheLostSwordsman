@@ -1,5 +1,6 @@
 package environment;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
@@ -15,15 +16,18 @@ public class Lighting {
 
 	GamePanel gp;
 	BufferedImage darknessFilter;
+	int dayCounter;
+	float filterAlpha = 0f;
+	final int day = 0;
+	final int dusk = 1;
+	final int night = 2;
+	final int dawn = 3;
+	int dayState;
 	
 	public Lighting(GamePanel gp) {
 		this.gp = gp;
 		setLightSource();
 
-	}
-	public void draw(Graphics2D g2) {
-		
-		g2.drawImage(darknessFilter, 0, 0, null);
 	}
 	public void setLightSource() {
 		// CREATE BUFFERED IMAGE
@@ -88,5 +92,47 @@ public class Lighting {
 			setLightSource();
 			gp.player.lightUpdated = false;
 		}
+		
+		// Check the state of the day]
+		if(dayState == day){
+			dayCounter++;
+			
+			if(dayCounter == 600) {
+				dayState = dusk;
+				dayCounter = 0;
+			}
+		}
+		if(dayState == dusk) {
+			filterAlpha += 0.001f;
+			
+			if(filterAlpha > 1f) {
+				filterAlpha = 1f;
+				dayState = night;
+			}
+		}
+		if(dayState == night) {
+			
+			dayCounter++;
+			
+			if(dayCounter == 600) {
+				dayState = dawn;
+				dayCounter = 0;
+			}
+		}
+		if(dayState == dawn) {
+			
+			filterAlpha-= 0.001f;
+			
+			if(filterAlpha < 0) {
+				filterAlpha = 0;
+				dayState = day;
+			}
+		}
+	}
+	public void draw(Graphics2D g2) {
+		
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+		g2.drawImage(darknessFilter, 0, 0, null);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
 }
