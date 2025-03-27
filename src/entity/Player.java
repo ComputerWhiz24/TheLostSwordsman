@@ -87,56 +87,7 @@ public class Player extends Entity{
 		getAttack();
 		getDefense();
 		
-	}
-	public void setDefaultPosition() {
-		worldX = gp.tileSize*24;
-		worldY = gp.tileSize*24;
-		direction = "down";
-	}
-	public void restoreHealthAndMana() {
-		mana = maxMana;
-		life = maxLife;
-	}
-	public void setItems() {
-		inventory.clear();
-		inventory.add(currentWeapon);
-		inventory.add(currentShield);
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-	}
-	public double getAttack() {
-
-		attackArea = currentWeapon.attackArea;
-		return attack = damage * currentWeapon.attackValue;
-	}
-	public int getDefense() {
-		return defense = vitality * currentShield.defenseValue;
-	}
-	
-	public void getPlayerAttackImage() {
-		if(currentWeapon.type == type_sword) {
-			attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);
-			attackUp2 = setupAlternate("/player/boy_attack_up_2",1,2);
-			attackDown1 = setupAlternate("/player/boy_attack_down_1",1,2);
-			attackDown2 = setupAlternate("/player/boy_attack_down_2",1,2);
-			attackLeft1 = setupAlternate("/player/boy_attack_left_1",2,1);
-			attackLeft2 = setupAlternate("/player/boy_attack_left_2",2,1);
-			attackRight1 = setupAlternate("/player/boy_attack_right_1",2,1);
-			attackRight2 = setupAlternate("/player/boy_attack_right_2",2,1);
-		}else if(currentWeapon.type == type_axe) {
-			attackUp1 = setupAlternate("/player/boy_axe_up_1",1,2);
-			attackUp2 = setupAlternate("/player/boy_axe_up_2",1,2);
-			attackDown1 = setupAlternate("/player/boy_axe_down_1",1,2);
-			attackDown2 = setupAlternate("/player/boy_axe_down_2",1,2);
-			attackLeft1 = setupAlternate("/player/boy_axe_left_1",2,1);
-			attackLeft2 = setupAlternate("/player/boy_axe_left_2",2,1);
-			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
-			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
-		}
-	}
-	
+	}	
 	public void update() { 
 
 
@@ -378,7 +329,7 @@ public class Player extends Entity{
 		}
 	} 
 	
-	public void pickUpObject(int i) {
+	public void pickUpObject(int i) { 
 
 		if(i != 999) { 
 			//	COLLECTIBLE ITEMS
@@ -389,7 +340,7 @@ public class Player extends Entity{
 			else if(gp.obj[gp.currentMap][i].type == type_obstacle) { // OBSTACLE
 				if(keyH.openPressed) {
 					if(gp.obj[gp.currentMap][i] instanceof OBJ_Door) { // IF OBJECT IS A DOOR
-						gp.obj[gp.currentMap][i].interact(i); 
+						gp.obj[gp.currentMap][i].interact(i);  // INTERACT IS EQUIVALENT TO USE BASED ON TYPE
 					} else { // IF OBJECT IS NOT A DOOR
 						gp.obj[gp.currentMap][i].interact();
 					}
@@ -539,7 +490,7 @@ public class Player extends Entity{
 			gp.playSE(4);
 		}
 	}
-	public void selectItem() {
+	public void selectItem() { // USE ITEMS IN INVENTORY
 
 		int idx = gp.ui.getItemIndex();
 		if(idx < inventory.size()) {
@@ -712,6 +663,54 @@ public class Player extends Entity{
 		g2.drawImage(image,tempScreenX,tempScreenY, null);
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
+	public void setDefaultPosition() {
+		worldX = gp.tileSize*24;
+		worldY = gp.tileSize*24;
+		direction = "down";
+	}
+	public void restoreHealthAndMana() {
+		mana = maxMana;
+		life = maxLife;
+	}
+	public void setItems() {
+		inventory.clear();
+		inventory.add(currentWeapon);
+		inventory.add(currentShield);
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+	}
+	public double getAttack() {
+
+		attackArea = currentWeapon.attackArea;
+		return attack = damage * currentWeapon.attackValue;
+	}
+	public int getDefense() {
+		return defense = vitality * currentShield.defenseValue;
+	}
+	
+	public void getPlayerAttackImage() {
+		if(currentWeapon.type == type_sword) {
+			attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);
+			attackUp2 = setupAlternate("/player/boy_attack_up_2",1,2);
+			attackDown1 = setupAlternate("/player/boy_attack_down_1",1,2);
+			attackDown2 = setupAlternate("/player/boy_attack_down_2",1,2);
+			attackLeft1 = setupAlternate("/player/boy_attack_left_1",2,1);
+			attackLeft2 = setupAlternate("/player/boy_attack_left_2",2,1);
+			attackRight1 = setupAlternate("/player/boy_attack_right_1",2,1);
+			attackRight2 = setupAlternate("/player/boy_attack_right_2",2,1);
+		}else if(currentWeapon.type == type_axe) {
+			attackUp1 = setupAlternate("/player/boy_axe_up_1",1,2);
+			attackUp2 = setupAlternate("/player/boy_axe_up_2",1,2);
+			attackDown1 = setupAlternate("/player/boy_axe_down_1",1,2);
+			attackDown2 = setupAlternate("/player/boy_axe_down_2",1,2);
+			attackLeft1 = setupAlternate("/player/boy_axe_left_1",2,1);
+			attackLeft2 = setupAlternate("/player/boy_axe_left_2",2,1);
+			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
+			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
+		}
+	}
 	public void getPlayerImage() {
 		up1 = setup("/player/boy_up_1");
 		up2 = setup("/player/boy_up_2");
@@ -721,5 +720,16 @@ public class Player extends Entity{
 		left2 = setup("/player/boy_left_2");
 		right1 = setup("/player/boy_right_1");
 		right2  = setup("/player/boy_right_2");
+	}
+	public void getSleepingImage(BufferedImage image) {
+
+		up1 = image;
+		up2 = image;
+		down1 = image;
+		down2 = image;
+		left1 = image;
+		left2 = image;
+		right1 = image;
+		right2  = image;
 	}
 }

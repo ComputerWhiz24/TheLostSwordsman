@@ -21,7 +21,7 @@ public class OBJ_Tent extends Entity{
 	public void use(Entity entity) {
 		
 		gp.gameState = gp.sleepState;
-		gp.player.mana = gp.player.maxMana;
+		gp.player.mana = gp.player.maxMana; 
 		gp.playSE(12);
 	}
 
