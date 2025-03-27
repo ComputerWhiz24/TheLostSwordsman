@@ -22,6 +22,7 @@ public class OBJ_Tent extends Entity{
 		
 		gp.gameState = gp.sleepState;
 		gp.player.mana = gp.player.maxMana; 
+		gp.player.getSleepingImage(down1);
 		gp.playSE(12);
 	}
 

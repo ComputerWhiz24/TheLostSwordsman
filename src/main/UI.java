@@ -1238,6 +1238,7 @@ public class UI extends JFrame implements MouseListener{
 				counter = 0;
 				gp.eManager.lighting.dayState = gp.eManager.lighting.day;
 				gp.gameState = gp.playState;
+				gp.player.getPlayerImage();
 			}
 		}
 	}
