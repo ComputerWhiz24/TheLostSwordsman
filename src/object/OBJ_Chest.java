@@ -53,9 +53,13 @@ public class OBJ_Chest extends Entity{
 				down1 = image2;
 				opened = true;
 			}
+			gp.ui.talkWorld = true;
+			gp.ui.talkNPC = false;
 			gp.ui.currentDialogue = sb.toString();
 		}
 		else {
+			gp.ui.talkWorld = true;
+			gp.ui.talkNPC = false;
 			gp.ui.currentDialogue = "Chest already opened!";
 		}
 	}

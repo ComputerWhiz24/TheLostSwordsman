@@ -39,6 +39,8 @@ public class OBJ_Door extends Entity{
 			    }
 		}	
 		if (hasKey) {
+			gp.ui.talkWorld = true;
+			gp.ui.talkNPC = false;
 		    gp.ui.currentDialogue = "You use a key to open the door";
 		    gp.obj[gp.currentMap][doorIdx] = null;
 //		    // Find and remove the first key

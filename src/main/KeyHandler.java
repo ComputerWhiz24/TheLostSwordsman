@@ -450,6 +450,15 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		if(code == KeyEvent.VK_R) {
 			shootSpell = false;
 		}
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = false;
+		}
+		if(code == KeyEvent.VK_R) {
+			openPressed = false;
+		}
+		if(code == KeyEvent.VK_T) {
+			talkPressed = false;
+		}
 	}
 
 	@Override

@@ -116,7 +116,7 @@ public class UI extends JFrame implements MouseListener{
 						// INVENTORY
 						// CHARACTER INFO
 		
-		if(gp.gameState == gp.playState) {
+		else if(gp.gameState == gp.playState) {
 			drawPlayerLife();
 			drawMessage();
 			if(playSubState == 1) {
@@ -130,25 +130,28 @@ public class UI extends JFrame implements MouseListener{
 						// ITEM DESCRIPTION
 						// OPTIONS - includes: 
 									// FULLSCREEN CONFIRMATION
-		if(gp.gameState == gp.pauseState) {
+		else if(gp.gameState == gp.pauseState) {
 			drawPauseScreen();
 			drawPlayerLife();
 		}
 		// DIALOGUE STATE - includes;
 							// TALKING TO NPCS
 							// WORLD EVENTS (example: taking damage in some cases will open dialogue)
-		if(gp.gameState == gp.dialogueState) {
+		else if(gp.gameState == gp.dialogueState) {
 			 drawDialogueScreen();
 		}
 		// GAME OVER STATE
-		if(gp.gameState == gp.gameOverState) {
+		else if(gp.gameState == gp.gameOverState) {
 			 gameOverScreen();
 		} 
-		if(gp.gameState == gp.transitionState) {
+		else if(gp.gameState == gp.transitionState) {
 			drawTransition();
 		}
-		if(gp.gameState == gp.tradeState) {
+		else if(gp.gameState == gp.tradeState) {
 			drawTradeScreen();
+		}
+		else if(gp.gameState == gp.sleepState) {
+//			 drawSleepScreen();
 		}
 
 	}
