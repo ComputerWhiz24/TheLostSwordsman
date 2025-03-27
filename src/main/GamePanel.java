@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
-	public Entity obj[][] = new Entity[maxMap][10];
+	public Entity obj[][] = new Entity[maxMap][20];
 	public Entity npc[][] = new Entity[maxMap][10];
 	public Entity monster[][] = new Entity[maxMap][20];
 	public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];

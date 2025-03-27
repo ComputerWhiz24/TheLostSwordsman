@@ -151,7 +151,7 @@ public class UI extends JFrame implements MouseListener{
 			drawTradeScreen();
 		}
 		else if(gp.gameState == gp.sleepState) {
-//			 drawSleepScreen();
+			 drawSleepScreen();
 		}
 
 	}
@@ -1215,6 +1215,31 @@ public class UI extends JFrame implements MouseListener{
 	}
 	public void trade_sell() {
 		sellingInventory();
+	}
+	public void drawSleepScreen() {
+		
+		g2.setFont(g2.getFont().deriveFont(50f));
+		g2.setColor(Color.white);
+		counter++;
+		String text = "You sleep into the night";
+		if(counter < 120) {
+			g2.drawString(text, getXForCenteredText(text), gp.tileSize * 4);
+			gp.eManager.lighting.filterAlpha += 0.01f;
+			if(gp.eManager.lighting.filterAlpha > 1f) {
+				gp.eManager.lighting.filterAlpha = 1f;
+			}
+		}
+		text = "You wake up and feel rested after a good night's sleep!";
+		if(counter >= 120) {
+			g2.drawString(text, getXForCenteredText(text), gp.tileSize * 4);
+			gp.eManager.lighting.filterAlpha -= 0.01f;
+			if(gp.eManager.lighting.filterAlpha <= 0) {
+				gp.eManager.lighting.filterAlpha = 0;
+				counter = 0;
+				gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+				gp.gameState = gp.playState;
+			}
+		}
 	}
 	public void drawWindow(int x, int y, int width, int height) {
 		

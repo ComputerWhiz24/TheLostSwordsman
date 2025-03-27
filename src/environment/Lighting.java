@@ -17,12 +17,12 @@ public class Lighting {
 	GamePanel gp;
 	BufferedImage darknessFilter;
 	int dayCounter;
-	float filterAlpha = 0f;
-	final int day = 0;
-	final int dusk = 1;
-	final int night = 2;
-	final int dawn = 3;
-	int dayState;
+	public float filterAlpha = 0f;
+	public final int day = 0;
+	public final int dusk = 1;
+	public final int night = 2;
+	public final int dawn = 3;
+	public int dayState;
 	
 	public Lighting(GamePanel gp) {
 		this.gp = gp;

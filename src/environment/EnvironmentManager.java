@@ -7,7 +7,7 @@ import main.GamePanel;
 public class EnvironmentManager { // RAIN, FOG, LIGHTING, ETC
 	
 	GamePanel gp;
-	Lighting lighting;
+	public Lighting lighting;
 	
 	public EnvironmentManager(GamePanel gp) {
 		this.gp = gp;
