@@ -120,6 +120,14 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_M) {
 				gp.gameState = gp.mapState;
 			}
+			if(code == KeyEvent.VK_L) {
+				if(gp.map.miniMapOn) {
+					gp.map.miniMapOn = false;
+				}
+				else {
+					gp.map.miniMapOn = true;
+				}
+			}
 		}
 		else if(gp.ui.playSubState == 1) { //Character info
 			if(code == KeyEvent.VK_C  || code == KeyEvent.VK_ESCAPE) 

@@ -365,10 +365,14 @@ public class GamePanel extends JPanel implements Runnable{
 				entityList.get(i).draw(g2);
 			}
 			
-			//EMPTY LIST 
+			//EMPTY ENTITY LIST 
 			entityList.clear();
 			
+			// ENVIRONEMNT (LIGHT)
 			eManager.draw(g2);
+			
+			// MINI MAP
+			map.drawMiniMap(g2);
 			
 			ui.draw(g2);
 			

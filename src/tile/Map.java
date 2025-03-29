@@ -9,7 +9,7 @@ import main.GamePanel;
 public class Map extends TileManager{
 	GamePanel gp;
 	BufferedImage worldMap[];
-	boolean miniMapOn;
+	public boolean miniMapOn;
 	
 	public Map(GamePanel gp) {
 		super(gp);
@@ -67,5 +67,27 @@ public class Map extends TileManager{
 		int playerSize = (int) (gp.tileSize / scale);
 		g2.drawImage(gp.player.down1, playerX, playerY, playerSize, playerSize, null);
 		
+	}
+	public void drawMiniMap(Graphics2D g2) {
+		
+		if(miniMapOn) {
+			// MAP
+			int width = 200;
+			int height = 200;
+			int x = gp.screenWidth - width - 50;
+			int y = 50;
+			g2.drawImage(worldMap[gp.currentMap], x, y, width, height, null);
+			
+			// PLAYER
+			double scale = (double) gp.tileSize * gp.maxWorldCol / 200 ;
+			
+			int playerX = (int) (x+gp.player.worldX / scale);
+			int playerY = (int) (y+gp.player.worldY / scale);
+			int playerSize = (int) (gp.tileSize / scale);
+			g2.drawImage(gp.player.down1, playerX, playerY, playerSize, playerSize, null);
+		}
+		else {
+			
+		}
 	}
 }
