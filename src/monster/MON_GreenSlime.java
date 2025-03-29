@@ -51,26 +51,47 @@ public class MON_GreenSlime extends Entity{
 	}
 	public void setAction() {
 		
-		actionLockCounter++;
-				
-		if(actionLockCounter == 80) {
-				
-			Random random = new Random();
-			int i = random.nextInt(100)+1; //Random number from 1 to 100
-			
-			if(i<=25)
-				direction = "up";
-			if(i>25 && i <= 50)
-				direction = "down";
-			if(i >50 && i <=75)
-				direction = "left";
-			if(i>75 && i <= 100)
-				direction = "right";
+		int xDistance = Math.abs(worldX - gp.player.worldX);
+		int yDistance = Math.abs(worldY - gp.player.worldY);
+		int tileDistance = (xDistance + yDistance) / gp.tileSize;
 		
-			actionLockCounter = 0;
+		if(onPath) {
 			
-		
+			// CHECK IF IT STOPS CHASING
+			if(tileDistance > 20) {
+				onPath = false;
+			}
+			// ADD MORE LATER
+			int goalCol = getGoalCol(gp.player);
+			int goalRow = getGoalRow(gp.player);
+			searchPath(goalCol, goalRow);
+			
+		} else {
+			if(tileDistance < 5) {
+				int i = new Random().nextInt(100) + 1;
+				if(i > 50) {
+					onPath = true;
+				}
+			}
+			actionLockCounter++;	
+			if(actionLockCounter == 80) {
+					
+				Random random = new Random();
+				int i = random.nextInt(100)+1; //Random number from 1 to 100
+				
+				if(i<=25)
+					direction = "up";
+				if(i>25 && i <= 50)
+					direction = "down";
+				if(i >50 && i <=75)
+					direction = "left";
+				if(i>75 && i <= 100)
+					direction = "right";
+			
+				actionLockCounter = 0;	
+			}
 		}
+		
 		int i = new Random().nextInt(100)+1;
 		if(i >99 && projectile.alive == false && projectileCooldown > 30) {
 			projectile.set(worldX,worldY,direction,true,this);
