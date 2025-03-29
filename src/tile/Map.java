@@ -21,7 +21,7 @@ public class Map extends TileManager{
 		
 		worldMap = new BufferedImage[gp.maxMap];
 		int worldMapWidth = gp.tileSize * gp.maxWorldCol;
-		int worldMapHeight = gp.tileSize * gp.maxWorldRow;
+		int worldMapHeight  = gp.tileSize * gp.maxWorldRow;
 		
 		for(int i = 0; i < gp.maxMap; i++) {
 			
@@ -83,8 +83,9 @@ public class Map extends TileManager{
 			
 			int playerX = (int) (x+gp.player.worldX / scale);
 			int playerY = (int) (y+gp.player.worldY / scale);
-			int playerSize = (int) (gp.tileSize / scale);
-			g2.drawImage(gp.player.down1, playerX, playerY, playerSize, playerSize, null);
+			int playerSize = (int) (gp.tileSize / 3); 
+			int offset = 6;
+			g2.drawImage(gp.player.down1, playerX-offset, playerY-offset, playerSize, playerSize, null);
 		}
 		else {
 			
