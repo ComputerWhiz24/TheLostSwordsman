@@ -44,6 +44,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		else if(gp.gameState == gp.tradeState) {
 			tradeState(code);
 		}
+		else if(gp.gameState == gp.mapState) {
+			mapState(code);
+		}
 	}
 	
 	public void titleState(int code) {
@@ -113,6 +116,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			}
 			if(code == KeyEvent.VK_R) {
 				shootSpell = true;
+			}
+			if(code == KeyEvent.VK_M) {
+				gp.gameState = gp.mapState;
 			}
 		}
 		else if(gp.ui.playSubState == 1) { //Character info
@@ -402,34 +408,13 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 		
 	}
+	public void mapState(int code) {
+		 
+		if(code == KeyEvent.VK_M) {
+			gp.gameState = gp.playState;
+		}
+	}
 	
-//	public void npcInventory(int code) {
-//		if(code == KeyEvent.VK_UP){
-//			if(gp.ui.npcSlotRow!=0) {
-//				gp.ui.npcSlotRow--;
-//				showDesc = false;
-//				gp.playSE(8);
-//			}
-//		}
-//		if(code == KeyEvent.VK_DOWN){
-//			if(gp.ui.npcSlotRow!=11) {
-//				gp.ui.npcSlotRow++;
-//				showDesc = false;
-//				gp.playSE(8);
-//			}
-//		}
-//		if(code == KeyEvent.VK_RIGHT){
-//			gp.ui.npcSlotCol++;
-//			showDesc = false;
-//			gp.playSE(8);
-//		}
-//		if(code == KeyEvent.VK_LEFT){
-//			gp.ui.npcSlotCol--;
-//			showDesc = false;
-//			gp.playSE(8);
-//		}
-//	}
-//	
 	@Override
 	public void keyReleased(KeyEvent e) {
 

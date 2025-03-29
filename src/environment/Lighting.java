@@ -16,7 +16,7 @@ public class Lighting {
 
 	GamePanel gp;
 	BufferedImage darknessFilter;
-	int dayCounter;
+	public int dayCounter;
 	public float filterAlpha = 0f;
 	public final int day = 0;
 	public final int dusk = 1;
