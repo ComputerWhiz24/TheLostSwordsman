@@ -34,6 +34,8 @@ public class MON_GreenSlime extends Entity{
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
+		defaultX = 20;
+		defaultY = 37;
 		getImage();
 		
 	}

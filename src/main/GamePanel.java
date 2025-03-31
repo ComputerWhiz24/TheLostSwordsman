@@ -101,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		aSetter.setObject();
 		aSetter.setNPC();
-		aSetter.addSlimes(5);
+		aSetter.setMonster();
 		aSetter.setInteractiveTile();
 		eManager.setup();
 		gameState = titleState;
@@ -112,7 +112,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.setDefaultPosition();
 		player.restoreHealthAndMana();
 		aSetter.setNPC();
-		aSetter.addSlimes(5);
+		aSetter.setMonster();
 	}
 	public void restart() {
 		player.setDefaultPosition();

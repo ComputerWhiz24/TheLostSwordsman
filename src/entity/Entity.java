@@ -59,8 +59,8 @@ public class Entity {
 	public int cols = 5;
 	public int rows = 5;
 		//ATTRIBUTES
-	public int defaultSpeed; 
-	public int speed;
+	public double defaultSpeed; 
+	public double speed;
 	public String name;
 	public double damage;
 	public double maxLife;
@@ -84,6 +84,8 @@ public class Entity {
 	public Entity currentSpell;
 	public Projectile projectile;
 	public Entity currentLight;
+	public int defaultX;
+	public int defaultY;
 	
 	// ITEM ATTRIBUTES
 	public int value;
@@ -479,9 +481,6 @@ public class Entity {
 			alive = false; 
 		}
 		
-	}
-	public void respawnMonster(int idx) {
-		gp.aSetter.addSlime(idx);
 	}
 	public void changeAlpha(Graphics2D g2, float alphaValue) {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));

@@ -5,6 +5,7 @@ import entity.NPC_OldMan;
 import entity.NPC_Shopkeeper;
 import entity.NPC_Wizard;
 import monster.MON_GreenSlime;
+import monster.MON_Orc;
 import object.OBJ_Axe;
 import object.OBJ_BlueShield;
 import object.OBJ_Boots;
@@ -87,39 +88,67 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldY  = gp.tileSize*20;
 		i++;
 		
-		
 		// MAP 1
 		i = 0;
 		mapNum = 1;
 	}
-	public void addSlimes(int num) {
-		// MAP 0
+	public void setMonster() {
+		int i = 0;
 		int mapNum = 0;
-		for(int i = 0; i < num; i++) { // only works if slime is only monster
-			gp.monster[mapNum][i] = new MON_GreenSlime(gp);
-			int randX = (int) (Math.random() * 9) + 20;
-			int randY = (int) (Math.random() * 5)+ 37;
-			gp.monster[mapNum][i].worldX = gp.tileSize*randX;
-			gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
-		}
-		// MAP 1
-		mapNum = 1;
 		
-	}
-	public void addSlime(int idx) {
-		// MAP 0
-		int mapNum = 0;
-		gp.monster[mapNum][idx] = new MON_GreenSlime(gp);
 		int randX = (int) (Math.random() * 9) + 20;
 		int randY = (int) (Math.random() * 5)+ 37;
-		gp.monster[mapNum][idx].worldX = gp.tileSize*randX;
-		gp.monster[mapNum][idx].worldY  = gp.tileSize*randY;
-			
-		// MAP 1
-		mapNum = 1;
+		
+		gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
+		
+		randX = (int) (Math.random() * 9) + 20;
+		randY = (int) (Math.random() * 5)+ 37;
+		i++;
+		
+		gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
+		
+		randX = (int) (Math.random() * 9) + 20;
+		randY = (int) (Math.random() * 5)+ 37;
+		i++;
+		
+		gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
+		
+		randX = (int) (Math.random() * 9) + 20;
+		randY = (int) (Math.random() * 5)+ 37;
+		i++;
+		
+		gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
+		
+		randX = (int) (Math.random() * 9) + 20;
+		randY = (int) (Math.random() * 5)+ 37;
+		i++;
+		
+		gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*randX;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*randY;
+		
+		randX = (int) (Math.random() * 9) + 20;
+		randY = (int) (Math.random() * 5)+ 37;
+		i++;
+		
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*12;
+		gp.monster[mapNum][i].worldY  = gp.tileSize*33;
+		i++;
 	}
-	public void setMonster() {
-		addSlimes(5);
+	public void respawnMonster(Entity monster, int i, int mapNum, int x, int y) {
+		gp.monster[mapNum][i] = monster;
+		gp.monster[mapNum][i].worldX = x;
+		gp.monster[mapNum][i].worldY  = y;
+		
 	}
 	public void setNPC() {
 		// MAP 0

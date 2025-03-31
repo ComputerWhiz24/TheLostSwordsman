@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import monster.MON_GreenSlime;
+import monster.MON_Orc;
 import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Fireball;
@@ -399,7 +401,14 @@ public class Player extends Entity{
 			if(mon.life <= 0) {
 				mon.dying = true; 
 				mon.checkDrop();
-				respawnMonster(idx);
+				if (mon instanceof MON_Orc) {
+					gp.aSetter.respawnMonster(new MON_Orc(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
+					System.out.println("orc");
+				}
+				else if (mon instanceof MON_GreenSlime) {
+					gp.aSetter.respawnMonster(new MON_GreenSlime(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
+					System.out.println("slime");
+				}
 				int gold = (int) ((Math.random() *5) + 1);
 				this.xp+=mon.xp;
 				this.coin += gold;
@@ -464,7 +473,14 @@ public class Player extends Entity{
 			if(mon.life <= 0) {
 				mon.dying = true; 
 				mon.checkDrop();
-				respawnMonster(idx);
+				if (mon instanceof MON_Orc) {
+					gp.aSetter.respawnMonster(new MON_Orc(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
+					System.out.println("orc");
+				}
+				else if (mon instanceof MON_GreenSlime) {
+					gp.aSetter.respawnMonster(new MON_GreenSlime(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
+					System.out.println("slime");
+				}
 				int gold = (int) ((Math.random() *5) + 1);
 				this.coin += gold;
 				gp.ui.addMessage(gold + " Gold Earned");
