@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -293,6 +294,55 @@ public class Entity {
 		}
 		if(projectileCooldown < 180) {
 			projectileCooldown++;
+		}
+	}
+	public void checkStartChasing(Entity target, int distance, int odds) {
+		
+		if(getTileDistance(target) < distance) {
+			int i = new Random().nextInt(odds);
+			if(i == 0) {
+				onPath = true;
+			}
+		}
+	}
+	public void checkStopChasing(Entity target, int distance, int odds) {
+		
+		if(getTileDistance(target) > distance) {
+			int i = new Random().nextInt(odds);
+			if(i == 0) {
+				onPath = false;
+			}
+		}
+	}
+	public void getRandomDirection() {
+		
+		actionLockCounter++;	
+		if(actionLockCounter == 80) {
+				
+			Random random = new Random();
+			int i = random.nextInt(100)+1; //Random number from 1 to 100
+			
+			if(i<=25) direction = "up";
+			if(i>25 && i <= 50) direction = "down";
+			if(i >50 && i <=75) direction = "left";
+			if(i>75 && i <= 100) direction = "right";
+		
+			actionLockCounter = 0;	
+		}
+	}
+	public void shootOrNot(int odds, int shotInterval) {
+		
+		int i = new Random().nextInt(odds);
+		if(i == 0 && projectile.alive == false && projectileCooldown >= shotInterval) {
+			projectile.set(worldX,worldY,direction,true,this);
+			// ADD PROJECTILE TO END OF ARRAY
+			for(int idx = 0; idx < gp.projectileList.length; idx++) {
+				if(gp.projectileList[gp.currentMap][idx] == null) {
+					gp.projectileList[gp.currentMap][idx] = projectile;
+					break; 
+				}
+			}
+			projectileCooldown = 0;
 		}
 	}
 	public void damagePlayer(Entity mon) {
