@@ -17,7 +17,7 @@ public class MON_Orc extends Entity{
 		type = type_monster;
 		xp = 4;
 		damage = 1.5;
-		defaultSpeed = 0.5;
+		defaultSpeed = 1;
 		speed = defaultSpeed;
 		
 		maxLife = 10;
@@ -43,10 +43,10 @@ public class MON_Orc extends Entity{
 		
 		up1 = setup("/monster/orc_down_1");
 		up2 = setup("/monster/orc_down_2");
-		left1 = setup("/monster/orc_down_1");
-		left2 = setup("/monster/orc_down_2");
-		right1 = setup("/monster/orc_down_1");
-		right2 = setup("/monster/orc_down_2");
+		left1 = setup("/monster/orc_left_1");
+		left2 = setup("/monster/orc_left_2");
+		right1 = setup("/monster/orc_right_1");
+		right2 = setup("/monster/orc_right_2");
 		down1 = setup("/monster/orc_down_1");
 		down2 = setup("/monster/orc_down_2");
 		
@@ -82,13 +82,13 @@ public class MON_Orc extends Entity{
 	public void damageReaction() {
 		
 		actionLockCounter = 0;
-		direction = gp.player.direction;
+		onPath = true;
 	}
 	public void checkDrop() {
 		// RANDOM CHANCE
 		int i = new Random().nextInt(100) + 1;
 		
-		// SET SLIME DROP
+		// SET ORC DROP
 		if(i <= 100) {
 			dropItem(new OBJ_Coin_Bronze(gp));
 		}

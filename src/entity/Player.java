@@ -309,7 +309,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) {
-				damageMonster(monsterIndex,attack,currentWeapon.knockbackPower);
+				damageMonster(monsterIndex,this, attack,currentWeapon.knockbackPower);
 			}
 			int iTileIdx = gp.cChecker.checkEntity(this,gp.iTile);
 			damageTile(iTileIdx);
@@ -385,12 +385,12 @@ public class Player extends Entity{
 			hitCooldown = true;
 		}
 	}
-	public void damageMonster(int idx, double attack, int knockbackPower) {
+	public void damageMonster(int idx, Entity attacker, double attack, int knockbackPower) {
 
 		if(swinging == false && gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			if(knockbackPower > 0) {
-				knockback(gp.monster[gp.currentMap][idx], knockbackPower);
+				knockback(gp.monster[gp.currentMap][idx], attacker, knockbackPower);
 			}
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;
@@ -401,14 +401,9 @@ public class Player extends Entity{
 			if(mon.life <= 0) {
 				mon.dying = true; 
 				mon.checkDrop();
-				if (mon instanceof MON_Orc) {
-					gp.aSetter.respawnMonster(new MON_Orc(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
-					System.out.println("orc");
-				}
-				else if (mon instanceof MON_GreenSlime) {
-					gp.aSetter.respawnMonster(new MON_GreenSlime(gp), idx, gp.currentMap, mon.defaultX, mon.defaultY);
-					System.out.println("slime");
-				}
+			
+				gp.aSetter.respawnMonster(mon, idx, gp.currentMap, mon.defaultX, mon.defaultY);
+
 				int gold = (int) ((Math.random() *5) + 1);
 				this.xp+=mon.xp;
 				this.coin += gold;
@@ -419,12 +414,6 @@ public class Player extends Entity{
 			}
 			swinging = true;
 			}
-	}
-	public void knockback(Entity entity, int knockbackPower) {
-		
-		entity.direction = this.direction;
-		entity.speed += knockbackPower;
-		entity.knockback = true;
 	}
 	public void damageProjectile(int idx){
 		if(idx != 999) {
@@ -457,12 +446,12 @@ public class Player extends Entity{
 			gp.iTile[gp.currentMap][tileIdx]= null;
 		}
 	}
-	public void shootMonster(int idx, double attack, int knockbackPower) {
+	public void shootMonster(int idx, Entity attacker, double attack, int knockbackPower) {
 		
 		if(gp.monster[gp.currentMap][idx].life > 0) { // If not already swinging and monster is alive 
 			gp.playSE(5);
 			if(knockbackPower > 0) {
-			knockback(gp.monster[gp.currentMap][idx], knockbackPower);
+			knockback(gp.monster[gp.currentMap][idx], attacker,knockbackPower);
 			}
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = attack - 1.0*mon.defenseMult;

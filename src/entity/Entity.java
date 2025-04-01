@@ -31,6 +31,7 @@ public class Entity {
 	public static Entity currentSpeaker = new Entity(gp);
 	public static String[] currentDialogue = new String[20];
 	public boolean tradable =false;
+	public Entity attacker;
 	
 		//STATE
 	public int worldX,worldY;
@@ -45,6 +46,7 @@ public class Entity {
 	public boolean hpBarOn = false;
 	public boolean onPath = false;
 	public boolean knockback = false;
+	public String knockbackDirection; 
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -59,8 +61,8 @@ public class Entity {
 	public int cols = 5;
 	public int rows = 5;
 		//ATTRIBUTES
-	public double defaultSpeed; 
-	public double speed;
+	public int defaultSpeed; 
+	public int speed;
 	public String name;
 	public double damage;
 	public double maxLife;
@@ -236,7 +238,7 @@ public class Entity {
 				knockback = false;
 				speed = defaultSpeed;
 			} else {
-				switch(gp.player.direction) {
+				switch(knockbackDirection) {
 				case "up":
 					worldY -= speed; break;
 				case"down": 
@@ -355,6 +357,13 @@ public class Entity {
 			gp.player.life -= monDmg;
 			gp.player.hitCooldown = true;
 		}
+	}
+	public void knockback(Entity target, Entity attacker, int knockbackPower) {
+		
+		this.attacker = attacker;
+		target.knockbackDirection = attacker.direction;
+		target.speed += knockbackPower;
+		target.knockback = true;
 	}
 	public void shootPlayer(double attack) {
 		gp.playSE(6);

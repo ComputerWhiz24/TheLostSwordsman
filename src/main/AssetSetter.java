@@ -145,9 +145,21 @@ public class AssetSetter {
 		i++;
 	}
 	public void respawnMonster(Entity monster, int i, int mapNum, int x, int y) {
-		gp.monster[mapNum][i] = monster;
-		gp.monster[mapNum][i].worldX = x;
-		gp.monster[mapNum][i].worldY  = y;
+		
+		if(monster instanceof MON_Orc) {
+			gp.monster[mapNum][i] = new MON_Orc(gp);
+			gp.monster[mapNum][i].worldX = gp.tileSize * x;
+			gp.monster[mapNum][i].worldY  = gp.tileSize * y;
+		}
+		else if (monster instanceof MON_GreenSlime) {
+	
+			gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+			gp.monster[mapNum][i].worldX = gp.tileSize * x;
+			gp.monster[mapNum][i].worldY  = gp.tileSize * y;
+		}
+//		gp.monster[mapNum][i] = monster;
+//		gp.monster[mapNum][i].worldX = x;
+//		gp.monster[mapNum][i].worldY  = y;
 		
 	}
 	public void setNPC() {
