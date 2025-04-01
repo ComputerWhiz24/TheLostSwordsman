@@ -94,7 +94,7 @@ public class Player extends Entity{
 
 
 		if(keyH.attackPressed) {
-			playerAttacking();
+			attack();
 		}
 		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
 			
@@ -282,55 +282,7 @@ public class Player extends Entity{
 			gp.stopMusic();
 			gp.playSE(11);
 		}
-	}
-	
-	public void playerAttacking() {
-
-		attacking = true;
-		spriteAttackCounter++;
-		if(spriteAttackCounter == 1)
-			gp.playSE(7);
-		if(spriteAttackCounter <= 2) //SHORT BUFFER
-			spriteNum = 1;
-		if(spriteAttackCounter  > 2 && spriteAttackCounter <= 25) { // ATTACK ANIMATION
-			spriteNum = 2;
-			int currentWorldX = worldX;
-			int currentWorldY = worldY;
-			int solidAreaWidth = solidArea.width; 
-			int solidAreaHeight = solidArea.height;
-			
-			switch(direction) {
-			case "up":   worldY-= attackArea.height; break;
-			case "down": worldY+= attackArea.height; break;
-			case "left": case"downLeft": case "upLeft": worldX-= attackArea.width; break;
-			case "right": case"downRight": case "upRight": worldX+= attackArea.width; break;
-			}
-			solidArea.width = attackArea.width;
-			solidArea.height = attackArea.height;
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			if(monsterIndex != 999) {
-				damageMonster(monsterIndex,this, attack,currentWeapon.knockbackPower);
-			}
-			int iTileIdx = gp.cChecker.checkEntity(this,gp.iTile);
-			damageTile(iTileIdx);
-			
-			int projectileIndex = gp.cChecker.checkEntity(this,gp.projectileList);
-			damageProjectile(projectileIndex);
-			worldX = currentWorldX;
-			worldY =  currentWorldY;
-			solidArea.width = solidAreaWidth;
-			solidArea.height = solidAreaHeight;
-		}
-		if(spriteAttackCounter > 25) { //FINISH ANIMATION 
-			spriteNum = 1;
-			spriteAttackCounter = 0;
-			attacking = false;
-			keyH.attackPressed = false;
-			swinging = false; 
-	
-		}
 	} 
-	
 	public void pickUpObject(int i) { 
 
 		if(i != 999) { 
@@ -689,6 +641,8 @@ public class Player extends Entity{
 	public double getAttack() {
 
 		attackArea = currentWeapon.attackArea;
+		motion1_duration = currentWeapon.motion1_duration;
+		motion2_duration = currentWeapon.motion2_duration;
 		return attack = damage * currentWeapon.attackValue;
 	}
 	public int getDefense() {

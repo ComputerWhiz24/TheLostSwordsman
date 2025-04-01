@@ -178,10 +178,6 @@ public class AssetSetter {
 		gp.npc[mapNum][i].worldX = gp.tileSize*12;
 		gp.npc[mapNum][i].worldY  = gp.tileSize*7   ;
 		i++;
-//		mapNum = 1;
-//		gp.npc[mapNum][1] = new NPC_Wizard(gp);
-//		gp.npc[mapNum][1].worldX = gp.tileSize*23;
-//		gp.npc[mapNum][1].worldY  = gp.tileSize*21;
 	}
 	public void setInteractiveTile() {
 		int mapNum = 0;

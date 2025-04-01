@@ -19,7 +19,8 @@ public class MON_Orc extends Entity{
 		damage = 1.5;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		
+		motion1_duration = 40;
+		motion2_duration = 85;
 		maxLife = 10;
 		life = maxLife;
 		attack = 4;
@@ -36,6 +37,7 @@ public class MON_Orc extends Entity{
 		
 		defaultX = 12;
 		defaultY = 33;
+		
 		getImage();
 		getAttackImage();
 	}
@@ -71,6 +73,11 @@ public class MON_Orc extends Entity{
 			
 			// MOVE
 			searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+			
+			// CHECK IF IT ATTACKS
+			if(attacking == false) {
+				checkAttack(30,gp.tileSize * 4, gp.tileSize);
+			}
 			
 		} else {
 			
