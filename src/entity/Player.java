@@ -56,6 +56,7 @@ public class Player extends Entity{
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
+		getPlayerGuardImage();
 		setItems();
 	}
 	
@@ -96,7 +97,10 @@ public class Player extends Entity{
 		if(keyH.attackPressed) {
 			attack();
 		}
-		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
+		else if(keyH.qPressed) {
+			guarding = true;
+		}
+		else if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
 			
 			if(keyH.upPressed == true) {
 				direction = "up";
@@ -219,7 +223,6 @@ public class Player extends Entity{
 						}
 						break;	
 				 }
-							
 				}			//TESTING FOR MOVING ONE DIRECTION IF CAN'T MOVE DIAGNAL
 			}
 		else {
@@ -247,8 +250,9 @@ public class Player extends Entity{
 			projectileCooldown = 30; 
 			gp.playSE(9);
 		}
+		
 		keyH.talkPressed = false; // Talk pressed turns off after checking for collision
-			
+		
 		if(keyH.attackPressed == false) {
 			spriteCounter++;
 			if(spriteCounter > 11) {
@@ -259,11 +263,11 @@ public class Player extends Entity{
 			spriteCounter=0;
 			}
 		}
-		if(projectileCooldown < 180) {
+		if(projectileCooldown < 180) { // CANT SHOOT A SPELL FOR 3 SECONDS
 			projectileCooldown++;
 		}
 		
-		if(hitCooldown == true) {
+		if(hitCooldown == true) { // CANT HIT AGAIN UNTIL 95 FRAMES (AROUND 1.5 SECONDS)
 			hitCooldownCounter++;
 			if(hitCooldownCounter >= 95) {
 				hitCooldown = false;
@@ -553,6 +557,9 @@ public class Player extends Entity{
 				if(spriteNum==1) image = attackUp1;
 				if(spriteNum==2) image= attackUp2;
 			}
+			if(guarding == true) {
+				image = guardUp;
+			}
 			break;
 		case "down":
 			if(attacking == false) {
@@ -562,6 +569,9 @@ public class Player extends Entity{
 			else if(attacking == true) {
 				if(spriteNum==1) image = attackDown1;
 				if(spriteNum==2) image= attackDown2;
+			}
+			if(guarding == true) {
+				image = guardDown;
 			}
 			break;
 		case "left":
@@ -574,6 +584,9 @@ public class Player extends Entity{
 				if(spriteNum==1) image = attackLeft1;
 				if(spriteNum==2) image= attackLeft2;
 			}
+			if(guarding == true) {
+				image = guardLeft;
+			}
 			break;
 		case "right":
 			if(attacking == false) {
@@ -583,6 +596,9 @@ public class Player extends Entity{
 			else if(attacking == true) {
 				if(spriteNum==1) image = attackRight1;
 				if(spriteNum==2) image= attackRight2;
+			}
+			if(guarding == true) {
+				image = guardRight;
 			}
 			break;
 		case"upLeft": case"downLeft":
@@ -669,6 +685,13 @@ public class Player extends Entity{
 			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
 			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
 		}
+	}
+	public void getPlayerGuardImage() {
+		
+		guardUp =  setup("/player/boy_guard_up");
+		guardDown = setup("/player/boy_guard_down");
+		guardLeft = setup("/player/boy_guard_left");
+		guardRight = setup("/player/boy_guard_right");
 	}
 	public void getPlayerImage() {
 		up1 = setup("/player/boy_up_1");

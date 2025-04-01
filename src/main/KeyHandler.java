@@ -9,7 +9,8 @@ import java.awt.event.MouseMotionListener;
 import entity.Entity;
 
 public class KeyHandler implements KeyListener,MouseListener, MouseMotionListener{
-	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,attackPressed,showDesc,shootSpell, enterPressed,openPressed;
+	public boolean upPressed,downPressed,leftPressed,rightPressed,talkPressed,attackPressed,showDesc,shootSpell, enterPressed,openPressed, 
+	qPressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	
@@ -108,10 +109,10 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			if(code == KeyEvent.VK_C) {
 				gp.gameState = gp.ui.playSubState = 1;
 			}
-			if(code == KeyEvent.VK_I || code == KeyEvent.VK_TAB) {
+			if(code == KeyEvent.VK_I || code == KeyEvent.VK_TAB) { //INVENTORY
 				 gp.ui.playSubState = 2;
 			}
-			if(code == KeyEvent.VK_Q) {
+			if(code == KeyEvent.VK_H) {
 				gp.eHandler.heal();
 			}
 			if(code == KeyEvent.VK_R) {
@@ -127,6 +128,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				else {
 					gp.map.miniMapOn = true;
 				}
+			}
+			if(code == KeyEvent.VK_Q) {
+				gp.player.guarding = true;
 			}
 		}
 		else if(gp.ui.playSubState == 1) { //Character info
@@ -451,6 +455,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 		}
 		if(code == KeyEvent.VK_T) {
 			talkPressed = false;
+		}
+		if(code == KeyEvent.VK_Q) {
+			gp.player.guarding = false;
 		}
 	}
 
