@@ -49,6 +49,7 @@ public class Entity {
 	public boolean knockback = false;
 	public String knockbackDirection; 
 	public boolean guarding = false;
+	public boolean transparent = false; 
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -465,10 +466,20 @@ public class Entity {
 		}
 	} 
 	public void damagePlayer(Entity mon) {
-
+		
 		if(gp.player.hitCooldown == false) {
+		double monDmg = mon.damage - 0.05*gp.player.defense; //Defense shields damage from monster with some multiplier
+		
+		 String canGuardDirection = getOppositeDirection(direction);
+		 if(gp.player.guarding && gp.player.direction.equals(canGuardDirection)) {
+			 
+			 monDmg /= 4;
+			 gp.playSE(13);
+		 }
+		 else {
 			gp.playSE(6);
-			double monDmg = mon.damage - 0.05*gp.player.defense; //Defense shields damage from monster with some multiplier
+			transparent = true;
+		 }
 			gp.player.life -= monDmg;
 			gp.player.hitCooldown = true;
 		}
@@ -485,6 +496,11 @@ public class Entity {
 		double monDmg = attack;
 		gp.player.life -= monDmg;
 		gp.player.hitCooldown = true;
+		if(gp.player.guarding) {
+			transparent = false;
+		} else {
+			transparent = true;
+		}
 	}
 	public void draw(Graphics2D g2) {
 		

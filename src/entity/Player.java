@@ -94,13 +94,13 @@ public class Player extends Entity{
 	public void update() { 
 
 
-		if(keyH.attackPressed) {
+		if(keyH.attackPressed && guarding == false) {
 			attack();
 		}
 		else if(keyH.qPressed) {
 			guarding = true;
 		}
-		else if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
+		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
 			
 			if(keyH.upPressed == true) {
 				direction = "up";
@@ -271,6 +271,7 @@ public class Player extends Entity{
 			hitCooldownCounter++;
 			if(hitCooldownCounter >= 95) {
 				hitCooldown = false;
+				transparent = false;
 				hitCooldownCounter = 0;
 			}
 		}
@@ -339,6 +340,11 @@ public class Player extends Entity{
 			double monDmg = gp.monster[gp.currentMap][idx].damage - 0.05*defense; //Defense shields damage from monster
 			life -= monDmg;
 			hitCooldown = true;
+			if(this.guarding) {
+				transparent = false;
+			} else {
+				transparent = true;
+			}
 		}
 	}
 	public void damageMonster(int idx, Entity attacker, double attack, int knockbackPower) {
@@ -625,12 +631,12 @@ public class Player extends Entity{
 		}
 
 		//SET 70% TRANSPARENT IF PLAYER IS HIT
-		if(hitCooldown == true) {
+		if(transparent == true) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 			if(hitCooldownCounter % 30  == 0) 
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		if(hitCooldown == false) {
+		if(transparent == false) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		g2.drawImage(image,tempScreenX,tempScreenY, null);
