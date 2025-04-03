@@ -130,7 +130,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 				}
 			}
 			if(code == KeyEvent.VK_Q) {
-				gp.player.guarding = true;
+				qPressed = true;
 			}
 		}
 		else if(gp.ui.playSubState == 1) { //Character info
@@ -457,7 +457,9 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			talkPressed = false;
 		}
 		if(code == KeyEvent.VK_Q) {
-			gp.player.guarding = false;
+//			gp.player.guarding = false;
+//			gp.player.guardCounter = 0;
+			qPressed = false;
 		}
 	}
 

@@ -472,15 +472,16 @@ public class Entity {
 		
 		 String canGuardDirection = getOppositeDirection(direction);
 		 if(gp.player.guarding && gp.player.direction.equals(canGuardDirection)) {
-			 
 			 monDmg /= 4;
 			 gp.playSE(13);
+			knockback(gp.player,this,this.knockbackPower/2);
 		 }
 		 else {
 			gp.playSE(6);
-			transparent = true;
-		 }
+			gp.player.transparent = true;
 			knockback(gp.player,this,this.knockbackPower);
+		 }
+		
 			gp.player.life -= monDmg;
 			gp.player.hitCooldown = true;
 		}
@@ -497,10 +498,10 @@ public class Entity {
 		double monDmg = attack;
 		gp.player.life -= monDmg;
 		gp.player.hitCooldown = true;
-		if(gp.player.guarding) {
-			transparent = false;
+		if(gp.player.guarding && gp.player.direction.equals(getOppositeDirection(direction))) {
+			gp.player.transparent = false;
 		} else {
-			transparent = true;
+			gp.player.transparent = true;
 		}
 	}
 	public void draw(Graphics2D g2) {

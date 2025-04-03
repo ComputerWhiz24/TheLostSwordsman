@@ -95,7 +95,6 @@ public class Player extends Entity{
 		System.out.println(guardCounter);
 		if(knockback) {
 			
-			
 			// TILE COLLISION
 			collisionOn=false;
 			gp.cChecker.checkTile(this);
@@ -155,7 +154,7 @@ public class Player extends Entity{
 			if(keyH.upPressed == true) {
 				direction = "up";
 				
-				if(!guarding) {
+				if(!guarding) { // DON'T MOVE DIAGANAL WHILE BLOCKING
 					if(keyH.leftPressed == true) 
 						direction = "upLeft";
 					if(keyH.rightPressed == true) 
@@ -245,7 +244,7 @@ public class Player extends Entity{
 					break;	
 				}
 			}
-			else if(collisionOn==true) {
+			else if(collisionOn==true) { 
 				gp.cChecker.checkTile(this);
 				 switch(direction) {
 				 case"upLeft":
@@ -287,6 +286,10 @@ public class Player extends Entity{
 			if(!keyH.attackPressed) { // fixed bug where sprite was always walking even if not moving
 			spriteNum = 1;
 			spriteCounter = 0;
+			}
+			if(!keyH.qPressed) { // IF NOT HOLDING Q, STOP BLOCKING
+				guarding = false;
+				guardCounter = 0;
 			}
 		}
 		if(gp.keyH.shootSpell && projectile.alive == false && projectileCooldown == 180 && projectile.hasMana(this)) { //If shoot spell is true, shoot fireball
