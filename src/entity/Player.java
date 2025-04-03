@@ -89,10 +89,10 @@ public class Player extends Entity{
 		projectile = new OBJ_Fireball(gp);
 		getAttack();
 		getDefense();
-		
+		restoreHealthAndMana();
 	}	
 	public void update() { 
-		System.out.println(guardCounter);
+		
 		if(knockback) {
 			
 			// TILE COLLISION
@@ -287,10 +287,11 @@ public class Player extends Entity{
 			spriteNum = 1;
 			spriteCounter = 0;
 			}
-			if(!keyH.qPressed) { // IF NOT HOLDING Q, STOP BLOCKING
-				guarding = false;
-				guardCounter = 0;
-			}
+		}
+		
+		if(!keyH.qPressed) { // IF NOT HOLDING Q, STOP BLOCKING
+			guarding = false;
+			guardCounter = 0;
 		}
 		if(gp.keyH.shootSpell && projectile.alive == false && projectileCooldown == 180 && projectile.hasMana(this)) { //If shoot spell is true, shoot fireball
 			
@@ -399,6 +400,9 @@ public class Player extends Entity{
 		if(hitCooldown == false &&  gp.monster[gp.currentMap][idx].dying == false) {
 			gp.playSE(6);
 			double monDmg = gp.monster[gp.currentMap][idx].damage - 0.05*defense; //Defense shields damage from monster
+			if(gp.monster[gp.currentMap][idx].offBalance) {
+				monDmg = 0;
+			}
 			life -= monDmg;
 			hitCooldown = true;
 			if(this.guarding) {
@@ -417,6 +421,9 @@ public class Player extends Entity{
 			}
 			Entity mon = gp.monster[gp.currentMap][idx];
 			double playerDmg = this.attack - 1.0*mon.defenseMult;
+			if(mon.offBalance) {
+				playerDmg *= 2;
+			}
 			mon.life -= playerDmg; //Monsters can have armor which decreases player damage
 			mon.hpBarOn = true;
 			mon.hpBarCounter = 0;
@@ -711,6 +718,7 @@ public class Player extends Entity{
 	public void restoreHealthAndMana() {
 		mana = maxMana;
 		life = maxLife;
+		transparent = false;
 	}
 	public void setItems() {
 		inventory.clear();

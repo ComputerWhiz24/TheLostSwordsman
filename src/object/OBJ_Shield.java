@@ -14,6 +14,7 @@ public class OBJ_Shield extends Entity{
 		description = "[" + name + "]\nA basic, yet trusty\nshield.";
 		type = type_shield;
 		hand = 1;
+		knockbackPower = 3;
 	}
 
 }

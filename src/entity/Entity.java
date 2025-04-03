@@ -305,9 +305,17 @@ public class Entity {
 		setAction();
 		checkCollision();
 
-		if(projectileCooldown < 180) {
+		if(projectileCooldown < 180) { // PROJECTILE COOLDOWN 3 MINUTES
 			projectileCooldown++;
 		}
+		if(offBalance) {
+			offBalanceCounter++;
+			if(offBalanceCounter >= 120) { // 2 SECOND WINDOW TO CRITICAL HIT
+				offBalance = false;
+				offBalanceCounter = 0;
+			}
+		} 
+		
 	}
 	public void checkStartChasing(Entity target, int distance, int odds) {
 		
@@ -472,9 +480,20 @@ public class Entity {
 		
 		 String canGuardDirection = getOppositeDirection(direction);
 		 if(gp.player.guarding && gp.player.direction.equals(canGuardDirection)) {
-			 monDmg /= 4;
-			 gp.playSE(13);
-			knockback(gp.player,this,this.knockbackPower/2);
+			 
+			 // PARRY
+			 if(gp.player.guardCounter < 10) { // 10 FRAME WINDOW TO PARRY
+				 monDmg = 0; // DAMAGE IS 0
+				 gp.playSE(14);
+				 knockback(this, gp.player, gp.player.currentShield.knockbackPower); // KNOCK BACK BASED ON SHIELD
+				 offBalance = true;
+				 spriteCounter -= 60; // GIVES FROZEN EFFECT TO MONSTER
+			 } 
+			 else { 
+				monDmg /= 4;
+				gp.playSE(13);
+				knockback(gp.player,this,this.knockbackPower/2);
+			 }
 		 }
 		 else {
 			gp.playSE(6);
