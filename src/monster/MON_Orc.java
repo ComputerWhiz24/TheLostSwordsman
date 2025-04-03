@@ -25,6 +25,7 @@ public class MON_Orc extends Entity{
 		life = maxLife;
 		attack = 4;
 		defenseMult = 0;
+		knockbackPower = 10;
 		
 		solidArea.x = 4;
 		solidArea.y = 4;

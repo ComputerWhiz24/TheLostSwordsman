@@ -50,6 +50,7 @@ public class Entity {
 	public String knockbackDirection; 
 	public boolean guarding = false;
 	public boolean transparent = false; 
+	public boolean offBalance;
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -58,6 +59,8 @@ public class Entity {
 	public int hpBarCounter = 0;  
 	public int projectileCooldown;
 	int knockbackCounter;
+	public int guardCounter;
+	public int offBalanceCounter;
 		// INVENTORY
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public int inventorySize = 222;
@@ -238,6 +241,7 @@ public class Entity {
 
 		if(knockback) {
 			checkCollision();
+			
 			if(collisionOn) { // IF ENTITY HITS SOMETHING, STOP KNOCKBACK EFFECT
 				knockbackCounter = 0;
 				knockback = false;
@@ -253,17 +257,13 @@ public class Entity {
 				case"right":
 					worldX += speed; break;	
 				case"upLeft":
-					worldX -= speed; 
-					break;
+					worldX -= speed; break;
 				case"upRight":
-					worldX += speed; 
-					break;
+					worldX += speed; break;
 				case"downLeft":
-					worldX -= speed; 
-					break;
+					worldX -= speed; break;
 				case"downRight":
-					worldX += speed; 
-					break;	
+					worldX += speed; break;	
 				}
 				knockbackCounter++;
 				if(knockbackCounter == 10) { // BIG NUMBER IS MORE KNOCKBACK 
@@ -480,6 +480,7 @@ public class Entity {
 			gp.playSE(6);
 			transparent = true;
 		 }
+			knockback(gp.player,this,this.knockbackPower);
 			gp.player.life -= monDmg;
 			gp.player.hitCooldown = true;
 		}

@@ -92,47 +92,105 @@ public class Player extends Entity{
 		
 	}	
 	public void update() { 
-
-
-		if(keyH.attackPressed && guarding == false) {
+		System.out.println(guardCounter);
+		if(knockback) {
+			
+			
+			// TILE COLLISION
+			collisionOn=false;
+			gp.cChecker.checkTile(this);
+			
+			//OBJECT COLLISION
+			gp.cChecker.checkObject(this, true);
+			
+			//CHECK NPC COLLISION
+			gp.cChecker.checkEntity(this, gp.npc); 
+			
+			//CHECK MONSTER COLLISION
+			gp.cChecker.checkEntity(this, gp.monster);
+			// CHECK INTERACTIVE TILE COLLISION
+			
+			gp.cChecker.checkEntity(this, gp.iTile);
+			
+			if(collisionOn) { // IF ENTITY HITS SOMETHING, STOP KNOCKBACK EFFECT
+				knockbackCounter = 0;
+				knockback = false;
+				speed = defaultSpeed;
+			} else {
+				switch(knockbackDirection) {
+				case "up":
+					worldY -= speed; break;
+				case"down": 
+					worldY += speed; break;
+				case"left":
+					worldX -= speed; break;
+				case"right":
+					worldX += speed; break;	
+				case"upLeft":
+					worldX -= speed; break;
+				case"upRight":
+					worldX += speed; break;
+				case"downLeft":
+					worldX -= speed; break;
+				case"downRight":
+					worldX += speed; break;	
+				}
+				knockbackCounter++;
+				if(knockbackCounter == 10) { // BIG NUMBER IS MORE KNOCKBACK 
+					knockbackCounter = 0;
+					knockback = false;
+					speed = defaultSpeed;
+				}
+			}
+		}
+		else if(keyH.attackPressed && guarding == false) {
 			attack();
 		}
 		else if(keyH.qPressed) {
 			guarding = true;
+			guardCounter++;
 		}
 		if(keyH.upPressed==true || keyH.downPressed==true || keyH.leftPressed==true || keyH.rightPressed==true || keyH.talkPressed==true) {
 			
 			if(keyH.upPressed == true) {
 				direction = "up";
 				
-				if(keyH.leftPressed == true) 
-					direction = "upLeft";
-				if(keyH.rightPressed == true) 
-					direction = "upRight";
+				if(!guarding) {
+					if(keyH.leftPressed == true) 
+						direction = "upLeft";
+					if(keyH.rightPressed == true) 
+						direction = "upRight";
+				}
 			}
 			else if(keyH.downPressed == true) {
 				direction = "down";
 			
-				if(keyH.leftPressed == true) 
-					direction = "downLeft";
-				if(keyH.rightPressed == true) 
-					direction = "downRight";
+				if(!guarding) {
+					if(keyH.leftPressed == true) 
+						direction = "downLeft";
+					if(keyH.rightPressed == true) 
+						direction = "downRight";
+				}
 			}
 			else if(keyH.leftPressed == true) {
 				direction = "left";
 				
-				if(keyH.upPressed == true) 
-					direction = "upLeft";
-				if(keyH.downPressed == true) 
-					direction = "downLeft";
+				if(!guarding) {
+					if(keyH.upPressed == true) 
+						direction = "upLeft";
+					if(keyH.downPressed == true) 
+						direction = "downLeft";
+				}
 			}
 			else if(keyH.rightPressed == true) {
 				direction = "right";
 				
-				if(keyH.upPressed == true) 
-					direction = "upRight";
-				if(keyH.downPressed == true) 
-					direction = "downRight";	
+				if(!guarding) {
+					if(keyH.upPressed == true) 
+						direction = "upRight";
+					if(keyH.downPressed == true) 
+						direction = "downRight";
+				}
 			}
 			
 			// TILE COLLISION
@@ -152,8 +210,8 @@ public class Player extends Entity{
 			if(monsterIndex != 999) {
 				hitByMonster(monsterIndex);
 			}
-			// CHECK INTERACTIVE TILE COLLISION
 			
+			// CHECK INTERACTIVE TILE COLLISION
 			gp.cChecker.checkEntity(this, gp.iTile);
 			
 			 // CHECK EVENT
