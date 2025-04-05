@@ -90,6 +90,7 @@ public class Player extends Entity{
 		getAttack();
 		getDefense();
 		restoreHealthAndMana();
+		// JUST FOR A COMMIT
 	}	
 	public void update() { 
 		
