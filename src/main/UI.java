@@ -1025,14 +1025,17 @@ public class UI extends JFrame implements MouseListener{
 			}
 		}
 		
-		// GAME
+		// END GAME
 		textY += gp.tileSize*2.5;
-		g2.drawString("End Game", (int) (textX+gp.tileSize*3.2), textY);
+		g2.drawString("Exit to Title Screen", getXForCenteredText("Exit to Title Screen"), textY);
 		
-		if(commandNum == 4) { // CURSOR
-			g2.drawString(">", (int) ((textX+gp.tileSize*3.2)-25), textY);
+		if(commandNum == 4) { // QUIT
+			g2.drawString(">", (int) ((textX+gp.tileSize*1.5)-25), textY);
 			if(gp.keyH.enterPressed) {
-				System.exit(0); 
+				optionsSubState = 0;
+				commandNum = 0;
+				gp.gameState = gp.titleState;
+				gp.resetGame(true);
 			}
 		}
 		gp.config.saveConfig();

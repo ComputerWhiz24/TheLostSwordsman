@@ -52,6 +52,7 @@ public class Player extends Entity{
 		//ATTACK AREA
 //		attackArea.width = 36;
 //		attackArea.height = 20;
+		setDefaultValues();
 	}
 	
 	public void setDefaultValues() {
@@ -70,7 +71,7 @@ public class Player extends Entity{
 		maxMana = 100;
 		mana = maxMana;
 		life = maxLife;
-		damage = 0.25;
+		damage = 1;
 		level = 0;
 		strength = 0;
 		vitality = 0;
@@ -732,7 +733,7 @@ public class Player extends Entity{
 		inventory.add(new OBJ_Key(gp));
 		inventory.add(new OBJ_Key(gp));
 	}
-	public double getAttack() {
+	public int getAttack() {
 
 		attackArea = currentWeapon.attackArea;
 		motion1_duration = currentWeapon.motion1_duration;
