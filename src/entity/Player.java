@@ -52,12 +52,6 @@ public class Player extends Entity{
 		//ATTACK AREA
 //		attackArea.width = 36;
 //		attackArea.height = 20;
-		
-		setDefaultValues();
-		getPlayerImage();
-		getPlayerAttackImage();
-		getPlayerGuardImage();
-		setItems();
 	}
 	
 	public void setDefaultValues() {
@@ -87,10 +81,13 @@ public class Player extends Entity{
 		currentWeapon = new OBJ_Sword(gp);
 		currentShield = new OBJ_Shield(gp);
 		projectile = new OBJ_Fireball(gp);
+		currentLight = null;
 		getAttack();
 		getDefense();
-		restoreHealthAndMana();
-		// JUST FOR A COMMIT
+		getPlayerImage();
+		getPlayerAttackImage();
+		getPlayerGuardImage();
+		setItems();
 	}	
 	public void update() { 
 		
@@ -716,10 +713,15 @@ public class Player extends Entity{
 		worldY = gp.tileSize*24;
 		direction = "down";
 	}
-	public void restoreHealthAndMana() {
+	public void restoreStatus() {
 		mana = maxMana;
 		life = maxLife;
 		transparent = false;
+		attacking = false;
+		guarding = false;
+		knockback = false;
+		hitCooldown = false;
+		lightUpdated = true;
 	}
 	public void setItems() {
 		inventory.clear();

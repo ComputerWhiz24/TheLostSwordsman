@@ -108,21 +108,18 @@ public class GamePanel extends JPanel implements Runnable{
 		tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
 	}
-	public void retry() {
+	public void resetGame(boolean restart) {
+		
 		player.setDefaultPosition();
 		player.restoreHealthAndMana();
 		aSetter.setNPC();
 		aSetter.setMonster();
-	}
-	public void restart() {
-		player.setDefaultPosition();
-		player.setDefaultValues();
-		player.restoreHealthAndMana();
-		player.setItems(); 
-		aSetter.setObject();
-		aSetter.setNPC();
-		aSetter.setMonster();
-		aSetter.setInteractiveTile();   
+		
+		if(restart) {
+			player.setDefaultValues();
+			aSetter.setObject();
+			aSetter.setInteractiveTile();   
+		}
 	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
