@@ -115,7 +115,7 @@ public class EventHandler {
 		 
 	}
 	public void heal() {
-		gp.player.life += 0.5;
+		gp.player.life += 1;
 	}
 	
 	 // TELEPORT METHOD:

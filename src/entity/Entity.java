@@ -27,6 +27,8 @@ public class Entity {
 	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collision = false;  
+
+
 	
 	// NPC
 	public static Entity currentSpeaker = new Entity(gp);
@@ -51,6 +53,7 @@ public class Entity {
 	public boolean guarding = false;
 	public boolean transparent = false; 
 	public boolean offBalance;
+	public boolean opened = false;
 		//COUNTERS 
 	public int actionLockCounter = 0;
 	public int hitCooldownCounter = 0;
@@ -63,6 +66,7 @@ public class Entity {
 	public int offBalanceCounter;
 		// INVENTORY
 	public ArrayList<Entity> inventory = new ArrayList<>();
+	public Entity loot;
 	public int inventorySize = 222;
 	public int cols = 5;
 	public int rows = 5;
@@ -151,6 +155,7 @@ public class Entity {
 	public int getRow() {
 		return (worldY + solidArea.y) / gp.tileSize;
 	}
+	public void setLoot(Entity loot) {}
 	public int getXDistance(Entity target) {
 		int xDistance = Math.abs(worldX - target.worldX);
 		return xDistance;

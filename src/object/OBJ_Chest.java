@@ -10,13 +10,10 @@ import main.GamePanel;
 public class OBJ_Chest extends Entity{
 
 	GamePanel gp;
-	Entity loot;
-	boolean opened = false;
 	
-	public OBJ_Chest (GamePanel gp, Entity loot) {
+	public OBJ_Chest (GamePanel gp) {
 		super(gp);
 		this.gp = gp;
-		this.loot = loot;
 		
 		type = type_obstacle;
 		collision = true;
@@ -34,6 +31,9 @@ public class OBJ_Chest extends Entity{
 		down1 = image;
 		down2 = image;
 		
+	}
+	public void setLoot(Entity loot) {
+		this.loot = loot;
 	}
 	public void interact() {
 		
