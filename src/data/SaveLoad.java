@@ -51,6 +51,18 @@ public class SaveLoad {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
 			
 			DataStorage ds = (DataStorage)ois.readObject();
+			
+			gp.player.level = ds.level;
+			gp.player.maxLife = ds.maxLife;
+			gp.player.life = ds.life;
+			gp.player.mana = ds.mana;
+			gp.player.maxMana = ds.maxMana;
+			gp.player.strength = ds.strength;
+			gp.player.stamina = ds.stamina;
+			gp.player.dexterity = ds.dexterity;
+			gp.player.xp = ds.xp;
+			gp.player.nextLevelXp = ds.nextLevelXp;
+			gp.player.coin = ds.coin;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("error with save");

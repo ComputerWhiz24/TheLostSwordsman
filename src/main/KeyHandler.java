@@ -16,6 +16,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	
 	
 	public KeyHandler(GamePanel gp) {
+
 		 this.gp = gp;
 	}
 	
@@ -51,6 +52,7 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	}
 	
 	public void titleState(int code) {
+
 		
 		if(gp.ui.titleSubState == 0) {
 			if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
@@ -65,17 +67,19 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			}
 			if(code == KeyEvent.VK_ENTER || code == MouseEvent.BUTTON1) { //ADDED MOUSE EVENT
 				switch(gp.ui.commandNum) {
-				case 0:
+				case 0: // NEW GAME
 					gp.gameState = gp.playState;
 					gp.playMusic(0);
 					break;
-				case 1:
-					// add later
+				case 1: // LOAD GAME
+					gp.saveLoad.load();
+					gp.gameState = gp.playState;
+					gp.playMusic(0);
 					break;
-				case 2:
+				case 2: // OPTIONS
 					gp.ui.titleSubState = 1;
 					break;
-				case 3:
+				case 3: // QUIT 
 					System.exit(0); 
 					break;
 				}

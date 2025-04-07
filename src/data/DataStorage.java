@@ -7,9 +7,9 @@ public class DataStorage implements Serializable{
 	// PLAYER STATS
 	
 	int level;
-	double maxLife;
-	double life;
-	double mana;
+	int maxLife;
+	int life;
+	int mana;
 	int maxMana;
 	int strength;
 	int dexterity;

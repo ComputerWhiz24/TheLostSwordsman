@@ -1233,8 +1233,10 @@ public class UI extends JFrame implements MouseListener{
 			}
 		}
 		text = "You wake up and feel rested after a good night's sleep!";
+		String text2 = "Progress has been saved!";
 		if(counter >= 120) {
 			g2.drawString(text, getXForCenteredText(text), gp.tileSize * 4);
+			g2.drawString(text2, getXForCenteredText(text2), gp.tileSize * 6);
 			gp.eManager.lighting.filterAlpha -= 0.01f;
 			if(gp.eManager.lighting.filterAlpha <= 0) {
 				gp.eManager.lighting.filterAlpha = 0;

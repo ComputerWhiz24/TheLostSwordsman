@@ -16,7 +16,7 @@ public class MON_Orc extends Entity{
 		name = "Orc";
 		type = type_monster;
 		xp = 4;
-		damage = 1.5;
+		damage = 2;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
 		motion1_duration = 40;
