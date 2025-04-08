@@ -743,7 +743,25 @@ public class Player extends Entity{
 	public int getDefense() {
 		return defense = vitality * currentShield.defenseValue;
 	}
-	
+	public int getCurrentWeaponSlot() { 
+		int index = 999;
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i) == currentWeapon) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	public int getCurrentShieldSlot() {
+		int index = 999;
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i) == currentShield) {
+				index = i;
+			}
+		}
+
+		return index;
+	}
 	public void getPlayerAttackImage() {
 		if(currentWeapon.type == type_sword) {
 			attackUp1 = setupAlternate("/player/boy_attack_up_1",1,2);

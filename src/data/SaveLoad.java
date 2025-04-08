@@ -73,6 +73,10 @@ public class SaveLoad {
 				ds.itemAmounts.add(gp.player.inventory.get(i).amount);
 			}
 			
+			// SAVE SWORD AND SHIELD SLOT
+			ds.currentWeaponSlot = gp.player.getCurrentWeaponSlot();
+			ds.currentShieldSlot = gp.player.getCurrentShieldSlot();
+			
 			// WRITE DATA TO save.dat
 			
 			oos.writeObject(ds);
@@ -107,6 +111,15 @@ public class SaveLoad {
 				 gp.player.inventory.add(getObject(ds.itemNames.get(i)));
 				 gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
 			}
+			// EQUIPPED WEAPON AND SHIELD
+			gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
+			gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
+			
+			
+			// STATS
+			gp.player.getAttack();
+			gp.player.getDefense();
+			gp.player.getPlayerAttackImage();
 			
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
