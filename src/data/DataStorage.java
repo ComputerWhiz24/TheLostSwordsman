@@ -25,4 +25,11 @@ public class DataStorage implements Serializable{
 	int currentShieldSlot;
 	int currentLightSlot;
 	
+	// MAP OBJECTS
+	String mapObjectNames[][];
+	int mapObjectWorldX[][];
+	int mapObjectWorldY[][];
+	String mapObjectLootNames[][];
+	boolean mapObjectOpened[][];
+	
 }

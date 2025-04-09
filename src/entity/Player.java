@@ -759,7 +759,6 @@ public class Player extends Entity{
 				index = i;
 			}
 		}
-
 		return index;
 	}
 	public void getPlayerAttackImage() {
