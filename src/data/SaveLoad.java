@@ -77,6 +77,30 @@ public class SaveLoad {
 			ds.currentWeaponSlot = gp.player.getCurrentWeaponSlot();
 			ds.currentShieldSlot = gp.player.getCurrentShieldSlot();
 			
+			// OBJECTS ON MAP
+			ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
+			ds.mapObjectWorldX = new int[gp.maxMap][gp.obj[1].length];
+			ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[1].length];
+			ds.mapObjectLootNames = new String[gp.maxMap][gp.obj[1].length];
+			ds.mapObjectOpened = new boolean[gp.maxMap][gp.obj[1].length];
+			
+			for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+				
+				for(int i = 0; i < gp.obj[1].length; i++) {
+					
+					if(gp.obj[mapNum][i] == null) {
+						ds.mapObjectLootNames[mapNum][i] = "NA";
+					} else {
+						ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
+						ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
+						ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
+						if(gp.obj[mapNum][i].loot != null) {
+							ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
+						}
+						ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;   
+					}
+				}
+			}
 			// WRITE DATA TO save.dat
 			
 			oos.writeObject(ds);
@@ -120,6 +144,28 @@ public class SaveLoad {
 			gp.player.getAttack();
 			gp.player.getDefense();
 			gp.player.getPlayerAttackImage();
+			
+			for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+				
+				for(int i = 0; i < gp.obj[1].length; i++) {
+					
+					if(ds.mapObjectNames[mapNum][i].equals("NA")) {
+						gp.obj[mapNum][i] = null;
+					} else {
+						gp.obj[mapNum][i] = getObject(ds.mapObjectNames[mapNum][i]);
+						gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
+						gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
+						if(ds.mapObjectLootNames != null) {
+							gp.obj[mapNum][i].loot = getObject(ds.mapObjectLootNames[mapNum][i]);
+						}
+						gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
+						if(gp.obj[mapNum][i].opened) {
+							gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
+						}
+					}
+				}
+			}
+					
 			
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
