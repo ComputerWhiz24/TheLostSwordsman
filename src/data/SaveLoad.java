@@ -14,6 +14,7 @@ import object.OBJ_Axe;
 import object.OBJ_BlueShield;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
+import object.OBJ_Door;
 import object.OBJ_Key;
 import object.OBJ_Lantern;
 import object.OBJ_RedPotion;
@@ -43,8 +44,10 @@ public class SaveLoad {
 		case "Wood Shield": return new OBJ_Shield(gp);
 		case "Normal Sword": return new OBJ_Sword(gp);
 		case "Tent": return new OBJ_Tent(gp);
+		case "door": return new OBJ_Door(gp);  // replace with correct class
+
 		}
-		System.out.println("error " + itemName + "not found in inventory");
+		System.out.println("error " + itemName + " not found in inventory");
 		return null;
 	}
 	public void save() {
@@ -89,7 +92,7 @@ public class SaveLoad {
 				for(int i = 0; i < gp.obj[1].length; i++) {
 					
 					if(gp.obj[mapNum][i] == null) {
-						ds.mapObjectLootNames[mapNum][i] = "NA";
+						ds.mapObjectNames[mapNum][i] = "NA";
 					} else {
 						ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
 						ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
@@ -155,7 +158,7 @@ public class SaveLoad {
 						gp.obj[mapNum][i] = getObject(ds.mapObjectNames[mapNum][i]);
 						gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
 						gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
-						if(ds.mapObjectLootNames != null) {
+						if(ds.mapObjectLootNames[mapNum][i] != null) {
 							gp.obj[mapNum][i].loot = getObject(ds.mapObjectLootNames[mapNum][i]);
 						}
 						gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
