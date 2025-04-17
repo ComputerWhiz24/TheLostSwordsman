@@ -44,7 +44,7 @@ public class SaveLoad {
 		case "Wood Shield": return new OBJ_Shield(gp);
 		case "Normal Sword": return new OBJ_Sword(gp);
 		case "Tent": return new OBJ_Tent(gp);
-		case "door": return new OBJ_Door(gp);  // replace with correct class
+		case "door": return new OBJ_Door(gp);  // error without this line
 
 		}
 		System.out.println("error " + itemName + " not found in inventory");
@@ -139,8 +139,12 @@ public class SaveLoad {
 				 gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
 			}
 			// EQUIPPED WEAPON AND SHIELD
-			gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
-			gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
+			if(ds.currentWeaponSlot!=999) {
+				gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
+			}
+			if(ds.currentShieldSlot!= 999) {
+				gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
+			}
 			
 			
 			// STATS

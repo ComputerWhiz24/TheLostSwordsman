@@ -604,7 +604,7 @@ public class Player extends Entity{
 	}
 	public void obtainItem(Entity item) {
 		int index = searchItemInInventory(item.name);
-		if(item.stackable) { // CHECK IF ITEM IS STACKABLE		
+		if(item.stackable && index != 999) { // CHECK IF ITEM IS STACKABLE		
 			inventory.get(index).amount++;
 		}
 		else { // NOT STACKABLE, SO ADD TO A SLOT
