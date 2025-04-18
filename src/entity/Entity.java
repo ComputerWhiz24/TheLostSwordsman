@@ -32,7 +32,7 @@ public class Entity {
 	
 	// NPC
 	public static Entity currentSpeaker = new Entity(gp);
-	public static String[] currentDialogue = new String[20];
+	public static String[][] currentDialogue = new String[20][20 ];
 	public boolean tradable =false;
 	public Entity attacker;
 	
@@ -60,10 +60,10 @@ public class Entity {
 	public int spriteCounter = 0;
 	int dyingCounter = 0; 
 	public int hpBarCounter = 0;  
-	public int projectileCooldown;
-	int knockbackCounter;
-	public int guardCounter;
-	public int offBalanceCounter;
+	public int projectileCooldown = 0;
+	int knockbackCounter = 0;
+	public int guardCounter = 0;
+	public int offBalanceCounter = 0;
 		// INVENTORY
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public Entity loot;
@@ -155,6 +155,18 @@ public class Entity {
 	public int getRow() {
 		return (worldY + solidArea.y) / gp.tileSize;
 	}
+	public void resetCounter() {
+		
+		actionLockCounter = 0;
+		hitCooldownCounter = 0;
+		spriteCounter = 0;
+		dyingCounter = 0; 
+		hpBarCounter = 0;  
+		projectileCooldown = 0;
+		knockbackCounter = 0;
+		guardCounter = 0;
+		offBalanceCounter = 0;
+	}
 	public void setLoot(Entity loot) {}
 	public int getXDistance(Entity target) {
 		int xDistance = Math.abs(worldX - target.worldX);
@@ -179,6 +191,26 @@ public class Entity {
 	public void setAction() {}
 	public void damageReaction() {}
 	public void speak() {} // Will override in NPC subclasses
+	public void facePlayer() {
+		
+		switch(gp.player.direction) {
+		case"up":
+			direction = "down";
+			break;
+		case"down":
+			direction = "up";
+			break;
+		case"left":
+			direction = "right";
+			break;
+		case"right":
+			direction = "left";
+			break;
+		}
+	}
+	public void startDialogue(Entity entity) {
+		
+	}
 	public void interact(int i) {
 		
 	}

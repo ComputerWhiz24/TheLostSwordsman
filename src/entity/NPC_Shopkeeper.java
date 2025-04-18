@@ -71,23 +71,7 @@ public class NPC_Shopkeeper extends Entity{
 
 			dialogueIndex = 0;
 			currentDialogue = shopkeeperDialogue;
-			
-	
-			switch(gp.player.direction) {
-				case"up":
-					direction = "down";
-					break;
-				case"down":
-					direction = "up";
-					break;
-				case"left":
-					direction = "right";
-					break;
-				case"right":
-					direction = "left";
-					break;
-					 
-			}
+			facePlayer();			
 			gp.ui.npc = this;
 			tradable = true;
 		}

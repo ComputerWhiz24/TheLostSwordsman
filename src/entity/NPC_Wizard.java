@@ -82,22 +82,7 @@ public class NPC_Wizard extends Entity{
 	
 		dialogueIndex = 0;
 		currentDialogue = wizardDialogue;
-		
-			switch(gp.player.direction) {
-				case"up":
-					direction = "down";
-					break;
-				case"down":
-					direction = "up";
-					break;
-				case"left":
-					direction = "right";
-					break;
-				case"right":
-					direction = "left";
-					break;
-					 
-			}
+		facePlayer();
 		gp.ui.npc = this;
 		onPath = true;
 		}

@@ -715,6 +715,8 @@ public class Player extends Entity{
 		direction = "down";
 	}
 	public void restoreStatus() {
+		
+		speed = defaultSpeed;
 		mana = maxMana;
 		life = maxLife;
 		transparent = false;
