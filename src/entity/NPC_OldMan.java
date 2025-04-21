@@ -57,10 +57,8 @@ public class NPC_OldMan extends Entity{
 	}
 	
 	public void setDialogue() {
-	
-	}
-	public void speak() {
-		super.speak();
 		
+		facePlayer();
+		startDialogue(this, dialogueSet);
 	}
 }

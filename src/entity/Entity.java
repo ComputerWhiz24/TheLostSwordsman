@@ -32,8 +32,8 @@ public class Entity {
 	
 	// NPC
 	public static Entity currentSpeaker = new Entity(gp);
-	public static String[][] currentDialogue = new String[20][20 ];
-	public boolean tradable =false;
+	public static String[][] currentDialogue = new String[20][20];
+	public boolean tradable = false;
 	public Entity attacker;
 	
 		//STATE
@@ -41,6 +41,7 @@ public class Entity {
 	public String direction = "down";
 	public int spriteNum = 1;
 	public static int dialogueIndex = 0;
+	public int dialogueSet = 0;
 	public boolean collisionOn = false;
 	protected boolean attacking = false; 
 	public boolean alive = true; 
@@ -190,7 +191,11 @@ public class Entity {
 	}
 	public void setAction() {}
 	public void damageReaction() {}
-	public void speak() {} // Will override in NPC subclasses
+	public void speak() {
+		
+		facePlayer();
+		startDialogue(this, dialogueSet);
+	} // Will override in NPC subclasses
 	public void facePlayer() {
 		
 		switch(gp.player.direction) {
@@ -208,8 +213,10 @@ public class Entity {
 			break;
 		}
 	}
-	public void startDialogue(Entity entity) {
-		
+	public void startDialogue(Entity entity, int setNum) {
+		gp.gameState = gp.dialogueState;
+		gp.ui.npc = entity;
+		dialogueSet = setNum;
 	}
 	public void interact(int i) {
 		

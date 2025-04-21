@@ -12,7 +12,7 @@ import object.OBJ_BlueShield;
 import object.OBJ_RedPotion;
 	
 public class NPC_Shopkeeper extends Entity{
-	public static String[] shopkeeperDialogue = new String[1];
+	public static String[][] shopkeeperDialogue = new String[1][1];
 		public NPC_Shopkeeper(GamePanel gp) {
 			super(gp);
 			
@@ -65,15 +65,15 @@ public class NPC_Shopkeeper extends Entity{
 			}
 		}
 		public void setDialogue() {
-			shopkeeperDialogue[0] = "Looking to buy or sell somethin' little man?";
+			shopkeeperDialogue[0][0] = "Looking to buy or sell somethin' little man?";
 		}
 		public void speak() {
 
 			dialogueIndex = 0;
 			currentDialogue = shopkeeperDialogue;
 			facePlayer();			
-			gp.ui.npc = this;
 			tradable = true;
+			super.speak();
 		}
 		public void setItems() {
 			inventory.add(new OBJ_RedPotion(gp));

@@ -388,7 +388,6 @@ public class Player extends Entity{
 		if(i != 999) { 
 			if (keyH.talkPressed == true) { 
 				gp.ui.talkNPC = true;
-		        gp.gameState = gp.dialogueState;
 		        currentSpeaker = gp.npc[gp.currentMap] [i];
 		        gp.npc[gp.currentMap][i].speak(); // Initial dialogue trigger
 			}

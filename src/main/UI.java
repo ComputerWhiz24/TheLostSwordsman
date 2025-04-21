@@ -1086,10 +1086,26 @@ public class UI extends JFrame implements MouseListener{
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 			x += gp.tileSize;
 			y +=  gp.tileSize;
-			if(talkNPC) {
-				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+			
+			if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) {
+				
+				currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
+				
+				if(gp.keyH.enterPressed) {
+					if(gp.gameState == gp.dialogueState) {
+						npc.dialogueIndex++; 
+						gp.keyH.enterPressed = false;
+					}
+				}
+			} else { // IF NO TEXT
+				npc.dialogueIndex = 0;
+				if(gp.gameState == gp.dialogueState) {
+					gp.gameState = gp.playState;
+				}
 			}
-		
+//			if(talkNPC) {
+//				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+//			}
 			for(String line: currentDialogue.split("\n")) {
 				g2.drawString(line, x, y);
 				y+= 40;
@@ -1109,7 +1125,7 @@ public class UI extends JFrame implements MouseListener{
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
 			y +=  gp.tileSize*2;
 			if(talkNPC) {
-				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
+				currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
 			}
 			x = getXForCenteredText(currentDialogue);
 			for(String line: currentDialogue.split("\n")) {
