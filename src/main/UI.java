@@ -1095,6 +1095,7 @@ public class UI extends JFrame implements MouseListener{
 					if(gp.gameState == gp.dialogueState) {
 						npc.dialogueIndex++; 
 						gp.keyH.enterPressed = false;
+						
 					}
 				}
 			} else { // IF NO TEXT

@@ -275,20 +275,21 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 			gp.gameState = gp.playState;
 		}
 		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
 				// PRESS ENTER TO CONTINUE CONVERSATION 
-			if(gp.ui.talkWorld){
-				gp.gameState = gp.playState;
-				gp.ui.talkWorld = false;
-				gp.ui.talkNPC = false;
-				} else {
-					Entity.dialogueIndex++;
-					if(Entity.dialogueIndex >= Entity.currentDialogue.length) {
-						Entity.dialogueIndex = 0;
-						gp.gameState = gp.playState;
-						gp.ui.talkWorld = false;
-						gp.ui.talkNPC = false;
-					}
-				}
+//			if(gp.ui.talkWorld){
+//				gp.gameState = gp.playState;
+//				gp.ui.talkWorld = false;
+//				gp.ui.talkNPC = false;
+//				} else {
+//					gp.ui.npc.dialogueIndex++;
+//					if(gp.ui.npc.dialogueIndex >= gp.ui.npc.currentDialogue.length) {
+//						gp.ui.npc.dialogueIndex = 0;
+//						gp.gameState = gp.playState;
+//						gp.ui.talkWorld = false;
+//						gp.ui.talkNPC = false;
+//					}
+//				}
 			}
 	}
 	public void gameOverState(int code) {
