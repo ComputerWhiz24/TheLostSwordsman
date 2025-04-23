@@ -1124,8 +1124,8 @@ public class UI extends JFrame implements MouseListener{
 					}
 				}
 			}
-			else {
-				
+			else{
+				System.out.println("Talking to chest");
 				char characters[] = currentDialogue.toCharArray();
 				if(charIndex < characters.length) {
 					
@@ -1134,9 +1134,16 @@ public class UI extends JFrame implements MouseListener{
 					currentDialogue = combinedText;
 					
 					charIndex++;
+					
+					if(gp.keyH.enterPressed) {
+						charIndex = 0;
+						combinedText = "";
+						if(gp.gameState == gp.dialogueState) {
+							gp.gameState = gp.playState;
+						}
+					}
 				}
 			}
-
 			for(String line: currentDialogue.split("\n")) {
 				g2.drawString(line, x, y);
 				y+= 40;

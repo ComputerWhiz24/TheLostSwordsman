@@ -30,26 +30,6 @@ public class SaveLoad {
 		
 	
 	}
-	public Entity getObject(String itemName) {
-
-		
-		switch(itemName) {
-		case "Woodcutters Axe":return new OBJ_Axe(gp);
-		case "Blue Shield": return new OBJ_BlueShield(gp);
-		case "boots": return new OBJ_Boots(gp);
-		case "chest": return new OBJ_Chest(gp);
-		case "key": return new OBJ_Key(gp);
-		case "Lantern": return new OBJ_Lantern(gp);
-		case "Red Potion": return new OBJ_RedPotion(gp);
-		case "Wood Shield": return new OBJ_Shield(gp);
-		case "Normal Sword": return new OBJ_Sword(gp);
-		case "Tent": return new OBJ_Tent(gp);
-		case "door": return new OBJ_Door(gp);  // error without this line
-
-		}
-		System.out.println("error " + itemName + " not found in inventory");
-		return null;
-	}
 	public void save() {
 		
 		try {

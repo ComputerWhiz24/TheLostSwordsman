@@ -10,12 +10,13 @@ import main.GamePanel;
 public class OBJ_Key extends Entity{
 
 	GamePanel gp;
+	public static final String objName = "key";
 	
 	public OBJ_Key (GamePanel gp ) {
 		super(gp);
 		this.gp = gp;
 		collision = false;
-		name = "key";
+		name = objName;
 		stackable = true;
 		down1 = setup("/objects/key");
 		description = "[" + name + "]\nA weird, random key..\nI wonder what\nit's used for.";

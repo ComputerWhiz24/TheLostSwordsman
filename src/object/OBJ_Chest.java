@@ -10,7 +10,7 @@ import main.GamePanel;
 public class OBJ_Chest extends Entity{
 
 	GamePanel gp;
-	
+	public static final String objName = "chest";
 	public OBJ_Chest (GamePanel gp) {
 		super(gp);
 		this.gp = gp;
@@ -24,7 +24,7 @@ public class OBJ_Chest extends Entity{
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
-		name = "chest";
+		name = objName;
 		image =  setup("/objects/chest");
 		image2 = setup("/objects/chest_opened");
 		
