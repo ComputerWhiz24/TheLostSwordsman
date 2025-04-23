@@ -1087,8 +1087,9 @@ public class UI extends JFrame implements MouseListener{
 			x += gp.tileSize;
 			y +=  gp.tileSize;
 			
-			if(talkNPC) {
-				if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) {
+			if(talkNPC) { // IF NPC, SET TO THE ARRAY BUT IF NOT NOC, SET DIALOGUE IN THE CALLING METHOD
+//				if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) prior solution
+				if(npc.dialogueIndex < npc.currentDialogue[npc.dialogueSet].length) {
 					
 					currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
 					
