@@ -1087,21 +1087,23 @@ public class UI extends JFrame implements MouseListener{
 			x += gp.tileSize;
 			y +=  gp.tileSize;
 			
-			if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) {
-				
-				currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
-				
-				if(gp.keyH.enterPressed) {
-					if(gp.gameState == gp.dialogueState) {
-						npc.dialogueIndex++; 
-						gp.keyH.enterPressed = false;
-						
+			if(talkNPC) {
+				if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) {
+					
+					currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
+					
+					if(gp.keyH.enterPressed) {
+						if(gp.gameState == gp.dialogueState) {
+							npc.dialogueIndex++; 
+							gp.keyH.enterPressed = false;
+							
+						}
 					}
-				}
-			} else { // IF NO TEXT
-				npc.dialogueIndex = 0;
-				if(gp.gameState == gp.dialogueState) {
-					gp.gameState = gp.playState;
+				} else { // IF NO TEXT
+					npc.dialogueIndex = 0;
+					if(gp.gameState == gp.dialogueState) {
+						gp.gameState = gp.playState;
+					}
 				}
 			}
 //			if(talkNPC) {

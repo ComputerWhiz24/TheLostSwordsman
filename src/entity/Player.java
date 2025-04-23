@@ -385,8 +385,8 @@ public class Player extends Entity{
 	}
 	public void interactNPC(int i) {
 
-		if(i != 999) { 
-			if (keyH.talkPressed == true) { 
+		if(i != 999) {
+			if(keyH.talkPressed == true) { 
 				gp.ui.talkNPC = true;
 		        currentSpeaker = gp.npc[gp.currentMap][i];
 		        gp.npc[gp.currentMap][i].speak(); // Initial dialogue trigger
@@ -395,7 +395,7 @@ public class Player extends Entity{
 			}
 	} 
 	public void hitByMonster(int idx) {
-		if(hitCooldown == false &&  gp.monster[gp.currentMap][idx].dying == false) {
+		if(hitCooldown == false && gp.monster[gp.currentMap][idx].dying == false) {
 			gp.playSE(6);
 			double monDmg = gp.monster[gp.currentMap][idx].damage - 0.05*defense; //Defense shields damage from monster
 			if(gp.monster[gp.currentMap][idx].offBalance) {
@@ -429,7 +429,7 @@ public class Player extends Entity{
 			if(mon.life <= 0) {
 				mon.dying = true; 
 				mon.checkDrop();
-			
+
 				gp.aSetter.respawnMonster(mon, idx, gp.currentMap, mon.defaultX, mon.defaultY);
 
 				int gold = (int) ((Math.random() *5) + 1);
@@ -505,7 +505,7 @@ public class Player extends Entity{
 				gp.ui.addMessage(mon.xp + " XP Earned");
 				gp.ui.addMessage("Foe Vanquished");
 				levelUp();
-			}else {
+			} else {
 				System.out.println(mon.life);
 			}
 			swinging = true;
