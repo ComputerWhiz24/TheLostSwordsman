@@ -1100,6 +1100,7 @@ public class UI extends JFrame implements MouseListener{
 						
 						String s = String.valueOf(characters[charIndex]);
 						combinedText = combinedText + s;
+						gp.playSE(15);
 						currentDialogue = combinedText;
 						
 						charIndex++;
