@@ -555,7 +555,7 @@ public class UI extends JFrame implements MouseListener{
 			    		currentItem.amount--;
 			    	}
 			    	else {
-			    	npc.inventory.remove(getItemIndex());
+//			    	npc.inventory.remove(getItemIndex());
 			    	}
 			    	gp.playSE(1);
 			    } else if(!gp.player.canObtainItem(currentItem)){

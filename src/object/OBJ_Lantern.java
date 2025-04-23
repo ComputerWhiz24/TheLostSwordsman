@@ -11,7 +11,7 @@ public class OBJ_Lantern extends Entity{
 		super(gp);
 		
 		type = type_light;
-		name = objName
+		name = objName;
 		down1 = setup("/objects/lantern");
 		description = "Illuminates your \nsurroundings";
 		buyPrice = 200;

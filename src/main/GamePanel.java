@@ -76,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
 	EnvironmentManager eManager = new EnvironmentManager(this);
 	Map map = new Map(this);
 	public SaveLoad saveLoad = new SaveLoad(this);
+	public EntityGenerator eGenerator = new EntityGenerator(this);
 	
 	// GAME STATE 
 	public int gameState;

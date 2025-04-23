@@ -602,12 +602,14 @@ public class Player extends Entity{
 		return canObtain;
 	}
 	public void obtainItem(Entity item) {
+		
+		Entity newItem = gp.eGenerator.getObject(item.name);
 		int index = searchItemInInventory(item.name);
 		if(item.stackable && index != 999) { // CHECK IF ITEM IS STACKABLE		
 			inventory.get(index).amount++;
 		}
 		else { // NOT STACKABLE, SO ADD TO A SLOT
-			inventory.add(item);
+			inventory.add(newItem);
 		}
 	}
 	public void draw(Graphics2D g2) { //DRAWING PLAYER
