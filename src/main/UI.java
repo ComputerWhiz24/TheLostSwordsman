@@ -46,6 +46,9 @@ public class UI extends JFrame implements MouseListener{
 	public int tradeSubState = 0;
 	public int slotCol = 0;
 	public int slotRow = 0;
+	int charIndex = 0;
+	String combinedText = "";
+	
 	
 	public int cols = 22;
 	public int rows = 11;
@@ -1091,9 +1094,22 @@ public class UI extends JFrame implements MouseListener{
 //				if(npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex] != null) prior solution
 				if(npc.dialogueIndex < npc.currentDialogue[npc.dialogueSet].length) {
 					
-					currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
+//					currentDialogue = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex];
+					char characters[] = npc.currentDialogue[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+					if(charIndex < characters.length) {
+						
+						String s = String.valueOf(characters[charIndex]);
+						combinedText = combinedText + s;
+						currentDialogue = combinedText;
+						
+						charIndex++;
+					}
 					
 					if(gp.keyH.enterPressed) {
+						
+						charIndex = 0;
+						combinedText = "";
+						
 						if(gp.gameState == gp.dialogueState) {
 							npc.dialogueIndex++; 
 							gp.keyH.enterPressed = false;
@@ -1107,9 +1123,19 @@ public class UI extends JFrame implements MouseListener{
 					}
 				}
 			}
-//			if(talkNPC) {
-//				currentDialogue = Entity.currentDialogue[Entity.dialogueIndex];
-//			}
+			else {
+				
+				char characters[] = currentDialogue.toCharArray();
+				if(charIndex < characters.length) {
+					
+					String s = String.valueOf(characters[charIndex]);
+					combinedText = combinedText + s;
+					currentDialogue = combinedText;
+					
+					charIndex++;
+				}
+			}
+
 			for(String line: currentDialogue.split("\n")) {
 				g2.drawString(line, x, y);
 				y+= 40;

@@ -273,6 +273,8 @@ public class KeyHandler implements KeyListener,MouseListener, MouseMotionListene
 	public void dialogueState(int code) {
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.playState;
+			gp.ui.charIndex = 0;
+			gp.ui.combinedText = "";
 		}
 		if(code == KeyEvent.VK_ENTER) {
 			enterPressed = true;
