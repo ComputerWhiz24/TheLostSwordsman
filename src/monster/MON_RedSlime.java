@@ -10,9 +10,9 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class MON_GreenSlime extends Entity{
+public class MON_RedSlime extends Entity{
 
-	public MON_GreenSlime(GamePanel gp) {
+	public MON_RedSlime(GamePanel gp) {
 		super(gp);
 		name = "Green Slime";
 		type = type_monster;
@@ -20,7 +20,7 @@ public class MON_GreenSlime extends Entity{
 		damage = 1;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-//		projectile = new OBJ_Rock(gp); 
+		projectile = new OBJ_Rock(gp); 
 		
 		maxLife = 1;
 		life = maxLife;
@@ -62,7 +62,7 @@ public class MON_GreenSlime extends Entity{
 			searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 			
 			// SHOOT PROJECTILE
-//			shootOrNot(200, 30);
+			shootOrNot(200, 30);
 			
 		} else {
 			
@@ -87,3 +87,4 @@ public class MON_GreenSlime extends Entity{
 	}
 
 }
+
