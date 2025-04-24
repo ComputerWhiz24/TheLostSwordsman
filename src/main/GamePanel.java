@@ -90,6 +90,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int sleepState = 7; 
 	public final int mapState = 8;
 	
+	// AREA
+	public int currentArea;
+	public final int outside = 0;
+	public final int indoor = 1;
+	public final int dungeon1 = 2;
+	
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -106,7 +112,10 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setMonster();
 		aSetter.setInteractiveTile();
 		eManager.setup();
+		
 		gameState = titleState;
+		currentArea = outside;
+		
 		tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
 	}
