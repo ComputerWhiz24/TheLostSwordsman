@@ -53,11 +53,15 @@ public class EventHandler {
 			hitDisabled = false;
 		}
 		if(!hitDisabled) {
-			if(hit(0,25,13,"right") == true) {loseHalfHeart(gp.dialogueState);
-			}else if(hit(0,22,6,"up") == true) {fullHP(gp.dialogueState);
-			}else if(hit(0,9,38,"any")) {teleport(1,12,13);System.out.println("hit");
-			}else if(hit(1,12,13,"any")) {teleport(0,10,39);
-			}else if(hit(1,12,8,"up")) {speak(gp.npc[1][0]); gp.gameState = gp.tradeState;}// Initial dialogue trigger
+			if(hit(0,25,13,"right") == true) {loseHalfHeart(gp.dialogueState); // LOSE HALF HEART (DOESNT WORK RIGHT NOW)
+			}else if(hit(0,22,6,"up") == true) {fullHP(gp.dialogueState); // RESTORE HP (DOESNT WORK RIGHT NOW)
+			}else if(hit(0,9,38,"any")) {teleport(1,12,13);System.out.println("hit");  // GO TO MAP 1
+			}else if(hit(1,12,13,"any")) {teleport(0,10,39); // GO TO MAP 0
+			}else if(hit(0,12,9,"any")) {teleport(2,9,41); // GO TO DUNGEON 1
+			}else if(hit(2,9,41,"any")) {teleport(0,12,9); // GO OUTSIDE
+			}else if(hit(2,7,7,"any")) {teleport(3,26,41); // GO TO B1
+			}else if(hit(3,26,41,"any")) {teleport(2,8,7); // GO TO B2
+			}else if(hit(1,12,8,"up")) {speak(gp.npc[1][0]); gp.gameState = gp.tradeState;}// TALK TO MERCHANT
 		}
 		// FOR SOME REASON, 25 IS IN THE MIDDLE OF A BLOCK INSTEAD OF THE START
 		
