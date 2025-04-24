@@ -92,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// AREA
 	public int currentArea;
+	public int nextArea;
 	public final int outside = 0;
 	public final int indoor = 1;
 	public final int dungeon1 = 2;
@@ -404,5 +405,8 @@ public class GamePanel extends JPanel implements Runnable{
 		se.setFile(i);
 		se.play();
 	}
-	
+	public void changeArea() {
+		
+		currentArea = nextArea;
+	}
 }
