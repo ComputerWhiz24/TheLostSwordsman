@@ -17,6 +17,7 @@ import object.OBJ_Lantern;
 import object.OBJ_Pickaxe;
 import object.OBJ_RedPotion;
 import object.OBJ_Tent;
+import tile_interactive.IT_DestructibleWall;
 import tile_interactive.IT_DryTree;
 
 public class AssetSetter {
@@ -209,5 +210,31 @@ public class AssetSetter {
 		i++;
 		gp.iTile[mapNum][i] = new IT_DryTree(gp,32,7);
 		i++;
+		
+		mapNum = 2;
+		i = 0;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,30);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,17,31);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,17,32);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,17,34);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,34);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,33);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,10,22);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,10,24);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,38,18);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,38,19);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,38,20);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,38,21);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,13);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,14);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,22,28);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,30,28);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,32,38);i++;
+		
 	}
 }
