@@ -14,6 +14,7 @@ import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Key;
 import object.OBJ_Lantern;
+import object.OBJ_Pickaxe;
 import object.OBJ_RedPotion;
 import object.OBJ_Tent;
 import tile_interactive.IT_DryTree;
@@ -92,6 +93,16 @@ public class AssetSetter {
 		// MAP 1
 		i = 0;
 		mapNum = 1;
+		
+		
+		i = 0;
+		mapNum = 2;
+		gp.obj[mapNum][i] = new OBJ_Chest(gp);
+		gp.obj[mapNum][i].setLoot(new OBJ_Pickaxe(gp));
+		gp.obj[mapNum][i].worldX = gp.tileSize*40;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*41;
+		i++;
+		
 	}
 	public void setMonster() {
 		int i = 0;

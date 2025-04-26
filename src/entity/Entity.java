@@ -128,6 +128,7 @@ public class Entity {
 	public final int type_collectible = 7;
 	public final int type_obstacle = 8;
 	public final int type_light = 9;
+	public final int type_pickaxe = 10;
 
 	//TESTING NEW MOVEMENT
 	public boolean collisionOnUp = false;

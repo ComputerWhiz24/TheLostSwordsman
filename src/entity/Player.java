@@ -531,6 +531,7 @@ public class Player extends Entity{
 			switch(selectedItem.type) {
 			case type_sword:
 			case type_axe:
+			case type_pickaxe:
 				if(currentWeapon == selectedItem) {
 					currentWeapon = null;
 				} else {
@@ -783,6 +784,15 @@ public class Player extends Entity{
 			attackLeft2 = setupAlternate("/player/boy_axe_left_2",2,1);
 			attackRight1 = setupAlternate("/player/boy_axe_right_1",2,1);
 			attackRight2 = setupAlternate("/player/boy_axe_right_2",2,1);
+		} else if(currentWeapon.type == type_pickaxe) {
+			attackUp1 = setupAlternate("/player/boy_pick_up_1",1,2);
+			attackUp2 = setupAlternate("/player/boy_pick_up_2",1,2);
+			attackDown1 = setupAlternate("/player/boy_pick_down_1",1,2);
+			attackDown2 = setupAlternate("/player/boy_pick_down_2",1,2);
+			attackLeft1 = setupAlternate("/player/boy_pick_left_1",2,1);
+			attackLeft2 = setupAlternate("/player/boy_pick_left_2",2,1);
+			attackRight1 = setupAlternate("/player/boy_pick_right_1",2,1);
+			attackRight2 = setupAlternate("/player/boy_pick_right_2",2,1);
 		}
 	}
 	public void getPlayerGuardImage() {

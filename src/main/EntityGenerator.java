@@ -8,6 +8,7 @@ import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Key;
 import object.OBJ_Lantern;
+import object.OBJ_Pickaxe;
 import object.OBJ_RedPotion;
 import object.OBJ_Shield;
 import object.OBJ_Sword;
@@ -34,6 +35,7 @@ public class EntityGenerator {
 		case OBJ_Sword.objName: return new OBJ_Sword(gp);
 		case OBJ_Tent.objName: return new OBJ_Tent(gp);
 		case OBJ_Door.objName: return new OBJ_Door(gp);  // error without this line
+		case OBJ_Pickaxe.objName: return new OBJ_Pickaxe(gp);
 
 		}
 		System.out.println("error " + itemName + " not found in inventory");
