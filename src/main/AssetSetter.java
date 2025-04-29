@@ -103,6 +103,21 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*40;
 		gp.obj[mapNum][i].worldY  = gp.tileSize*41;
 		i++;
+		gp.obj[mapNum][i] = new OBJ_Chest(gp);
+		gp.obj[mapNum][i].setLoot(new OBJ_RedPotion(gp));
+		gp.obj[mapNum][i].worldX = gp.tileSize*13;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*16;
+		i++;
+		gp.obj[mapNum][i] = new OBJ_Chest(gp);
+		gp.obj[mapNum][i].setLoot(new OBJ_RedPotion(gp));
+		gp.obj[mapNum][i].worldX = gp.tileSize*26;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*34;
+		i++;
+		gp.obj[mapNum][i] = new OBJ_Chest(gp);
+		gp.obj[mapNum][i].setLoot(new OBJ_RedPotion(gp));
+		gp.obj[mapNum][i].worldX = gp.tileSize*27;
+		gp.obj[mapNum][i].worldY  = gp.tileSize*15;
+		i++;
 		
 	}
 	public void setMonster() {
@@ -230,7 +245,7 @@ public class AssetSetter {
 		
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,13);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,18,14);i++;
-		
+		 
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,22,28);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,30,28);i++;
 		

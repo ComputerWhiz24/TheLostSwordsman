@@ -454,25 +454,14 @@ public class Player extends Entity{
 		// IF TILE IS DESTRUCTIBLE AND THE WEAPON TYPE IS COMPATIBLE, DECREASE LIFE BY 1
 			if(tileIdx != 999 && gp.iTile[gp.currentMap][tileIdx].destructible && gp.iTile[gp.currentMap][tileIdx].isCorrectItem(this)) {
 				if(!swinging) {
-					System.out.println(gp.iTile[gp.currentMap][tileIdx].life);
 					gp.iTile[gp.currentMap][tileIdx].life--;
 					generateParticle(gp.iTile[gp.currentMap][tileIdx], gp.iTile[gp.currentMap][tileIdx]);
 					gp.playSE(10);
-					damageTileHelper(tileIdx);
+					gp.iTile[gp.currentMap][tileIdx].damageReaction(tileIdx);
 				}
 				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE
 			swinging = true;
 			}
-	}
-	public void damageTileHelper(int tileIdx) {
-		if(gp.iTile[gp.currentMap][tileIdx].life == 2) {
-			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image;
-		}
-		else if(gp.iTile[gp.currentMap][tileIdx].life == 1) {
-			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image2;
-		}else if(gp.iTile[gp.currentMap][tileIdx].life == 0) {
-			gp.iTile[gp.currentMap][tileIdx]= null;
-		}
 	}
 	public void shootMonster(int idx, Entity attacker, double attack, int knockbackPower) {
 		

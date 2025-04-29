@@ -20,7 +20,17 @@ public class IT_DryTree extends InteractiveTile{
 		down1 = image;
 		destructible = true;
 	}
+	public void damageReaction(int tileIdx) {
+		if(gp.iTile[gp.currentMap][tileIdx].life == 2) {
+			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image;
+		}
+		else if(gp.iTile[gp.currentMap][tileIdx].life == 1) {
+			gp.iTile[gp.currentMap][tileIdx].down1 = gp.iTile[gp.currentMap][tileIdx].image2;
+		}else if(gp.iTile[gp.currentMap][tileIdx].life == 0) {
+			gp.iTile[gp.currentMap][tileIdx]= null;
+		}
 
+	}
 	public boolean isCorrectItem(Entity entity) {
 		 boolean isCorrectItem = false;
 		 if(entity.currentWeapon.type == type_axe) {
