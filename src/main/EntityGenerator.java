@@ -6,6 +6,7 @@ import object.OBJ_BlueShield;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
+import object.OBJ_IronDoor;
 import object.OBJ_Key;
 import object.OBJ_Lantern;
 import object.OBJ_Pickaxe;
@@ -35,6 +36,7 @@ public class EntityGenerator {
 		case OBJ_Sword.objName: return new OBJ_Sword(gp);
 		case OBJ_Tent.objName: return new OBJ_Tent(gp);
 		case OBJ_Door.objName: return new OBJ_Door(gp);  // error without this line
+		case OBJ_IronDoor.objName: return new OBJ_IronDoor(gp);
 		case OBJ_Pickaxe.objName: return new OBJ_Pickaxe(gp);
 
 		}
