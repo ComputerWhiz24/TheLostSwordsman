@@ -1,7 +1,7 @@
 package entity;
 
 import java.awt.Image;
-
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -16,6 +16,14 @@ public class NPC_Wizard extends Entity{
 	public static String[][] wizardDialogue = new String[4][4];
 	public NPC_Wizard(GamePanel gp) {
 		super(gp);
+		
+		solidArea = new Rectangle();
+		solidArea.x = 8;
+		solidArea.y = 16;
+		solidArea.width = 30;
+		solidArea.height = 30;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		
 		direction = "down";
 		speed = 1;
@@ -78,12 +86,10 @@ public class NPC_Wizard extends Entity{
 		wizardDialogue[0][3] = "Well, good luck";
 	}
 	public void speak() {
-	
-	
+		
 		dialogueIndex = 0;
 		currentDialogue = wizardDialogue;
-		facePlayer();
 		onPath = true;
 		super.speak();
-		}
+	}
 }

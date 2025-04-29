@@ -70,8 +70,7 @@ public class NPC_Shopkeeper extends Entity{
 		public void speak() {
 
 			dialogueIndex = 0;
-			currentDialogue = shopkeeperDialogue;
-			facePlayer();			
+			currentDialogue = shopkeeperDialogue;		
 			tradable = true;
 			super.speak();
 		}
