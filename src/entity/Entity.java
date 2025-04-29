@@ -191,6 +191,9 @@ public class Entity {
 		return goalRow;
 	}
 	public void setAction() {}
+	public void push(String direction) {
+		
+	}
 	public void damageReaction() {}
 	public void speak() {
 		

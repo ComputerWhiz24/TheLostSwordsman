@@ -49,6 +49,42 @@ public class NPC_BigRock extends Entity{
 		currentDialogue = rockDialogue;	
 		super.speak();
 	}
+	public void push(String d) {
+		
+		this.direction = d;
+		
+		checkCollision();
+		if(!collisionOn) {
+			switch(direction) {
+			case "up":
+				worldY -= speed; break;
+			case"down": 
+				worldY += speed; break;
+			case"left":
+				worldX -= speed; break;
+			case"right":
+				worldX += speed; break;
+			case"upLeft":
+				worldY -= speed;
+				worldX -= speed; 
+				break;
+			case"upRight":
+				worldY -= speed;
+				worldX += speed; 
+				break;
+			case"downLeft":
+				worldY += speed;
+				worldX -= speed; 
+				break;
+			case"downRight":
+				worldY += speed;
+				worldX += speed; 
+				break;	
+			}
+		}
+	}
+	public void update() {} // NEED TO OVERRIDE SINCE SUPER CLASS MOVES OBJECT BASED ON DIRECTION
+
 //	public void setDialogue() {
 //		
 //		facePlayer();

@@ -392,7 +392,10 @@ public class Player extends Entity{
 		        gp.npc[gp.currentMap][i].speak(); // Initial dialogue trigger
 			}
 			keyH.talkPressed = false;
+			if(gp.npc[gp.currentMap][i] instanceof NPC_BigRock) {
+			 	gp.npc[gp.currentMap][i].push(this.direction);
 			}
+		}
 	} 
 	public void hitByMonster(int idx) {
 		if(hitCooldown == false && gp.monster[gp.currentMap][idx].dying == false) {
