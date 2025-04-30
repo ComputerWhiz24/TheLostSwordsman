@@ -459,7 +459,7 @@ public class Player extends Entity{
 				if(!swinging) {
 					gp.iTile[gp.currentMap][tileIdx].life--;
 					generateParticle(gp.iTile[gp.currentMap][tileIdx], gp.iTile[gp.currentMap][tileIdx]);
-					gp.playSE(10);
+					gp.iTile[gp.currentMap][tileIdx].playSE();
 					gp.iTile[gp.currentMap][tileIdx].damageReaction(tileIdx);
 				}
 				// CHANGE IMAGE BASED ON TILE'S CURRENT LIFE

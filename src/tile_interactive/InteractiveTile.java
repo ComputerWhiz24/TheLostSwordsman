@@ -17,6 +17,7 @@ public class InteractiveTile extends Entity{
 	public void update() {
 		
 	}
+	public void playSE() {}
 	public void damageReaction(int tileIdx) {}
 	
 }

@@ -26,7 +26,8 @@ public class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public boolean collision = false;  
+	public boolean collision = false; 
+	public Entity linkedEntity; 
 
 
 	

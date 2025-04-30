@@ -38,6 +38,9 @@ public class IT_DryTree extends InteractiveTile{
 		 }
 		 return isCorrectItem;
 	}
+	public void playSE() {
+		gp.playSE(10);
+	}
 	public Color getParticleColor() {
 		Color color = new Color(65,50,30);
 		return color;

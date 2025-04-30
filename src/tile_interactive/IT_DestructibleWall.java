@@ -26,6 +26,9 @@ public class IT_DestructibleWall extends InteractiveTile{
 		 }
 		 return isCorrectItem;
 	}
+	public void playSE() {
+		gp.playSE(18);
+	}
 	public Color getParticleColor() {
 		Color color = new Color(65,65,65);
 		return color;
