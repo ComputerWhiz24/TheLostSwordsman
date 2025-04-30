@@ -412,10 +412,11 @@ public class GamePanel extends JPanel implements Runnable{
 			stopMusic();
 			
 			switch(nextArea) {
-			case outside: playMusic(0);
-			case indoor: playMusic(16);
-			case dungeon1: playMusic(17);
+				case outside: playMusic(0);
+				case indoor: playMusic(16);
+				case dungeon1: playMusic(17);
 			}
+			aSetter.setNPC();
 		}
 		currentArea = nextArea;
 	}

@@ -97,7 +97,7 @@ public class NPC_BigRock extends Entity{
 		// PLATE LIST
 		for(int i = 0; i < gp.iTile[1].length; i++) {
 			
-			if(gp.iTile[gp.currentMap][i] != null && gp.iTile[gp.currentMap][i].name.equals(IT_MetalPlate.itName)) {
+			if(gp.iTile[gp.currentMap][i] != null && gp.iTile[gp.currentMap][i].name != null && gp.iTile[gp.currentMap][i].name.equals(IT_MetalPlate.itName) ) {
 				plateList.add(gp.iTile[gp.currentMap][i]);
 			}
 		}

@@ -7,10 +7,11 @@ import main.GamePanel;
 
 public class IT_DestructibleWall extends InteractiveTile{
 		
+	public static final String itName = "Destructible Wall";
 	public IT_DestructibleWall(GamePanel gp, int col, int row) {
 	super(gp,col,row);
 	this.gp = gp;
-	
+	name = itName;
 	this.worldX = gp.tileSize * col;
 	this.worldY = gp.tileSize*row;
 	life = 1;
